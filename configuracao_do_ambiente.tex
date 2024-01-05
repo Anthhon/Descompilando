@@ -1,0 +1,104 @@
+Configurar o ambiente de desenvolvimento para programar em C é crucial para 
+iniciar projetos com eficiência. Abaixo, são fornecidos passos para configurar 
+o ambiente em sistemas Linux e Windows.
+
+\subsubsection{Linux}
+
+Para configurar o ambiente de desenvolvimento C em sistemas Linux, siga estes passos:
+
+\begin{enumerate}
+    \item \textbf{Instalação do compilador C (GCC):} 
+        Em maior parte das distribuições Linux o GCC já está disponível por padrão, 
+        mas caso não esteja, ele pode ser facilmente instalado utilizando o gerenciador 
+        de pacotes da sua distribuição (como apt para Ubuntu/Debian ou yum para Fedora).
+        \\\\
+        Segue abaixo uma lista de comandos para instalar o GCC nas distribuições Linux 
+        mais famosas:
+
+        \begin{verbatim}
+        # Debian
+        sudo apt update
+        sudo apt install build-essential
+        # Red Hat-based (Fedora, CentOS)
+        sudo dnf update
+        sudo dnf install gcc
+        # Arch Linux
+        sudo pacman -Syu
+        sudo pacman -S gcc
+        # openSUSE
+        sudo zypper refresh
+        sudo zypper install gcc
+        # Alpine Linux
+        sudo apk update
+        sudo apk add build-base
+
+        # Para checar se o GCC foi instalado 
+        # corretamente use o comando abaixo
+        gcc --version
+        \end{verbatim}
+\end{enumerate}
+
+\subsubsection{Windows}
+
+Para configurar o ambiente de desenvolvimento C em sistemas Windows, siga 
+estes passos:
+
+\begin{enumerate}
+    \item \textbf{Instalação do compilador C (GCC):} 
+        No Windows a utilização de ferramentas como o GCC acaba por ser 
+        um pouco mais complexa pois é necessária a instalação do MinGW ou 
+        MSYS2. Essas ferramentas fornecem um ambiente similar ao Linux 
+        para compilar código C.
+
+        Para instalar o MinGW, siga os passos abaixo:
+
+        \begin{enumerate}
+            \item Acesse o site oficial do MinGW: \texttt{https://osdn.net/projects/mingw/}
+            \item Baixe o instalador adequado para o seu sistema (32 ou 64 bits).
+            \item Execute o instalador baixado (\texttt{mingw-w64-install.exe}).
+            \item Durante a instalação, selecione os pacotes desejados. O 
+                pacote essencial para o GCC é o \texttt{mingw32-gcc} para 
+                sistemas 32 bits ou \texttt{mingw64-gcc} para sistemas 64 bits.
+            \item Siga as instruções do instalador para concluir a instalação.
+        \end{enumerate}
+
+        Após a instalação, é necessário configurar o ambiente para usar o GCC via linha de comando:
+
+        \begin{enumerate}
+            \item Adicione o diretório bin do MinGW ao caminho do sistema:
+                \begin{itemize}
+                    \item Para Windows 10, pesquise "Editar variáveis de ambiente 
+                        do sistema" na barra de pesquisa e clique em "Variáveis 
+                        de ambiente". Em "Variáveis do sistema", selecione a 
+                        variável PATH e clique em "Editar...". Adicione o caminho 
+                        para o diretório bin do MinGW (exemplo: 
+                        \texttt{C:\textbackslash MinGW\textbackslash bin}) e 
+                        clique em OK.
+                    \item Para versões anteriores do Windows, o processo é 
+                        similar, mas pode variar um pouco, caso você utilize 
+                        uma versão mais antiga do sistema talvez seja necessário 
+                        que você faça uma pesquisa a parte para finalizar o 
+                        processo corretamente.
+                \end{itemize}
+            \item Verifique se a instalação foi bem-sucedida abra o Prompt de Comando (cmd) 
+                e insira o seguinte comando:
+
+                \begin{verbatim}
+                gcc --version
+                \end{verbatim}
+        \end{enumerate}
+
+    \item \textbf{Editor de texto ou IDE:} 
+        Instale um editor de texto ou uma IDE (Ambiente de Desenvolvimento Integrado), 
+        para escrever e compilar código C. Alguns exemplos populares são o Visual 
+        Studio Code, Atom, Sublime Text, ou IDEs como o Code::Blocks ou o Eclipse 
+        com plugins para C/C++.
+
+        {\tiny Eu pessoalmente recomendo a utilização do Neovim que apesar de ser 
+        uma ferramenta de difícil utilização, pode acabar por aumentar muito a sua 
+        produtividade no médio/longo prazo.}
+\end{enumerate}
+
+Se você seguiu os passos acima com sucesso, seu ambiente de desenvolvimento 
+C está configurado e pronto para uso. Agora é o momento de escrever seu 
+primeiro programa!
