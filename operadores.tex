@@ -1,0 +1,176 @@
+Um operador é um símbolo que indica a realização de uma operação entre 
+valores de um programa. Na linguagem C é possível encontrar alguns 
+diferentes tipos de operadores, dentre eles:
+
+\subsubsection{Aritméticos}
+
+Os operadores aritméticos são utilizados para representar 
+operações matemáticas entre valores. Segue abaixo uma lista de todos os 
+operadores aritméticos:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Operador & Descrição & Exemplo & Resultado \\
+        \hline
+        + & soma & 10 + 20 & 30 \\
+        \hline
+        - & subtração & 20 - 10 & 10 \\
+        \hline
+        * & multiplicação & 10 * 2 & 20 \\
+        \hline
+        / & divisão & 20 / 10 & 2 \\
+        \hline
+        \% & módulo & 21 \% 10 & 1 \\
+        \hline
+        ++ & incremento & ++10 é o mesmo que 10 + 1 & 11 \\
+        \hline
+        -- & decremento & --10 é o mesmo que 10 - 1 & 9 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{ps}
+    O operador de módulo realiza uma divisão entre os números e retorna o quociente da operação.
+\end{ps}
+
+\subsubsection{Relacionais}
+
+Os operadores relacionais possuem a finalidade de fazer comparações entre 
+valores, como por exemplo, verificar se um número é maior que outro. O 
+resultado de uma comparação sempre vai ser \textbf{verdadeiro} ou 
+\textbf{falso}.
+\\\\
+Segue abaixo uma lista dos comparadores relacionais:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Operador & Descrição & Exemplo & Resultado \\
+        \hline
+        == & igual & 10 == 10 & verdadeiro \\
+        \hline
+        != & diferente & 10 != 10 & falso \\
+        \hline
+        \textgreater{} & maior que & 10 \textgreater{} 10 & falso \\
+        \hline
+        \textgreater{}= & maior ou igual & 10 \textgreater{}= 10 & verdadeiro \\
+        \hline
+        \textless{} & menor que & 10 \textless{} 10 & falso\\
+        \hline
+        \textless{}= & menor ou igual & 10 \textless{}= 10 & verdadeiro \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\clearpage
+\subsubsection{Lógicos}
+
+Os operadores lógicos são usados em conjunto com os operadores relacionais. 
+Para compreendê-los corretamente, é importante entender que na linguagem C 
+os valores de \textbf{verdadeiro} e \textbf{falso} podem ser representados 
+pelos números 1 e 0, respectivamente.
+\\\\
+Ao utilizar os operadores lógicos, podemos criar verificações de valores 
+mais complexas. Abaixo está a lista dos operadores existentes e como usá-los:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Operador & Descrição & Exemplo & Resultado \\
+        \hline
+        \&\& & AND lógico & 1 \&\& 1 & 1 \\
+        \hline
+        \textbar{}\textbar{} & OR lógico & 1 \textbar{}\textbar{} 0 & 1 \\
+        \hline
+        ! & NOT lógico & !1 & 0 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{ps}
+    Caso tenha ficado um pouco confuso como cada operador atua exatamente, vou tentar 
+    detalhar de maneira mais sucinta e com mais exemplos de como cada operador deve agir 
+    em cada caso.
+
+    \begin{enumerate}
+        \item{\textbf{AND lógico:} Retorna verdadeiro no caso de ambos os 
+            valores serem verdadeiros, caso contrário, retorna falso.}
+
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Exemplo & Resultado \\
+                    \hline
+                    0 \&\& 0 & 0 \\
+                    \hline
+                    0 \&\& 1 & 0 \\
+                    \hline
+                    1 \&\& 0 & 0 \\
+                    \hline
+                    1 \&\& 1 & 1 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+
+        \item{\textbf{OR lógico:} Retorna verdadeiro se pelo menos um dos 
+            valores for verdadeiro, caso contrário, retorna falso.}
+
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Exemplo & Resultado \\
+                    \hline
+                    0 \textbar{}\textbar{} 0 & 0 \\
+                    \hline
+                    0 \textbar{}\textbar{} 1 & 1 \\
+                    \hline
+                    1 \textbar{}\textbar{} 0 & 1 \\
+                    \hline
+                    1 \textbar{}\textbar{} 1 & 1 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+
+        \item{\textbf{NOT lógico:} Inverte o valor lógico, isto é, se for verdadeiro, 
+            torna-se falso, e se for falso, torna-se verdadeiro.}
+
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Exemplo & Resultado \\
+                    \hline
+                    !0 & 1 \\
+                    \hline
+                    !1 & 0 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+    \end{enumerate}
+\end{ps}
+
+\subsubsection{Atribuição}
+
+Os operadores de atribuição tem a função de atribuir valores a variáveis. Por exemplo, 
+utilizando um operador de atribuição poderíamos dizer que A = 10 então toda vez que 
+utilizássemos o valor A no código de um programa, ele seria interpretado como o número 10.
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Operador & Descrição & Exemplo & Equivale \\
+        \hline
+        = & Atribuição de valor a variável & A = 10 & \\
+        \hline
+        += & Atribuição com soma & A += 10 & A = A + 10 \\
+        \hline
+        -= & Atribuição com subtração & A -= 10 & A = A - 10 \\
+        \hline
+        *= & Atribuição com multiplicação & A *= 10 & A = A * 10 \\
+        \hline
+        /= & Atribuição com divisão & A /= 10 & A = A / 10 \\
+        \hline
+        \%= & Atribuição com divisão & A \%= 10 & A = A \% 10 \\
+        \hline
+    \end{tabular}
+\end{center}

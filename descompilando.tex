@@ -3,6 +3,7 @@
 \usepackage{tcolorbox}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage[brazilian]{babel}
 
@@ -71,183 +72,116 @@
 \input{primeiro_programa.tex}
 
 \section{Conceitos Fundamentais}
+
 \subsection{Operadores}
+\input{operadores.tex}
 
-Um operador é um símbolo que indica a realização de uma operação sobre um, 
-ou mais, valores de um programa. Na linguagem C é possível encontrar alguns 
-diferentes tipos de operadores, dentre eles:
+\subsection{Variáveis e tipos de dados}
 
-\subsubsection{Aritméticos}
+\subsubsection{Variáveis}
 
-Os operadores aritméticos são utilizados para representar 
-operações matemáticas entre valores. Segue abaixo uma lista de todos os 
-operadores aritméticos:
+Variáveis podem ser entendidas como objetos de nome personalizado, capazes 
+de guardar valores que podem ser utilizados pelo programa durante sua 
+execução. A declaração de uma variável geralmente vai seguir o seguinte 
+padrão:
 
-\begin{center}
-    \begin{tabular}{|c|c|c|c|}
-        \hline
-        Operador & Descrição & Exemplo & Resultado \\
-        \hline
-        + & soma & 10 + 20 & 30 \\
-        \hline
-        - & subtração & 20 - 10 & 10 \\
-        \hline
-        * & multiplicação & 10 * 2 & 20 \\
-        \hline
-        / & divisão & 20 / 10 & 2 \\
-        \hline
-        \% & módulo & 20 \% 11 & 1 \\
-        \hline
-        ++ & incremento & ++10 é o mesmo que 10 + 1 & 11 \\
-        \hline
-        -- & decremento & --10 é o mesmo que 10 - 1 & 9 \\
-        \hline
-    \end{tabular}
-\end{center}
+\begin{verbatim}
+    <tipo da variável> <nome da variável>;
+\end{verbatim}
 
-\subsubsection{Relacionais}
-
-Os operadores relacionais possuem a finalidade de fazer comparações entre 
-valores, como por exemplo, verificar se um número é maior que outro. O 
-resultado de uma comparação sempre vai ser \textbf{verdadeiro} ou 
-\textbf{falso}.
+O nome das variáveis podem conter letras e números, além de poderem ser 
+iniciadas com um sublinhado. Porém, há algumas regras que devem ser 
+seguidas para se declarar uma variável sem ter problemas.
 \\\\
-Segue abaixo uma lista dos comparadores relacionais:
+Na linguagem C, algumas palavras já estão reservadas para representarem 
+diretivas. Portanto, não podem ser usadas como nomes de variáveis, 
+segue abaixo uma tabela das palavras reservadas que são importantes de 
+serem lembradas:
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{llll}
+    auto      & break     & case      & char      \\
+    const     & continue  & default   & do        \\
+    double    & else      & enum      & extern    \\
+    float     & for       & goto      & if        \\
+    int       & long      & register  & return    \\
+    short     & signed    & sizeof    & static    \\
+    struct    & switch    & typedef   & union     \\
+    unsigned  & void      & volatile  & while
+  \end{tabular}
+\end{table}
+
+Você não precisa necessariamente se preocupar em memorizar todas essas diretivas 
+no momento, isso é algo que você vai absorver e memorizar com bastante prática e 
+um pouco de tempo.
+
+\subsubsection{Tipos de dados}
+
+Um assunto não abordado ainda é sobre a 'tipagem' de variáveis. Apesar de ter nomes 
+definidos para cada variável, o computador não sabe exatamente o que exatamente existe 
+dentro de cada uma delas, portanto, fica a cargo do usuário definir isso.
+\\\\
+A princípio, a linguagem C fornece 4 tipos básicos, sendo eles \textbf{char}, 
+\textbf{int}, \textbf{float} e \textbf{double}. Além dos modificadores \textbf{signed}, 
+\textbf{unsigned}, \textbf{short} e \textbf{long}, que podem ser utilizados em cada um 
+dos tipos.
+\\\\
+Novamente, não é necessário que você decore isso tudo agora, mas a 
+nível de curiosidade, segue abaixo uma lista explicando cada um dos 
+tipos e modificadores que são possíveis de se utilizar, juntamente 
+a algumas informações adicionais:
 
 \begin{center}
-    \begin{tabular}{|c|c|c|c|}
+    \centering
+    \begin{tabular}{|c|p{4cm}|p{2cm}|c|p{4cm}|}
         \hline
-        Operador & Descrição & Exemplo & Resultado \\
+        \textbf{Tipo} & \textbf{Descrição} & \textbf{Tamanho (bits)} & \textbf{Especificador} & \textbf{Alcance} \\
         \hline
-        == & igual & 10 == 10 & verdadeiro \\
+        char & Utilizado para guardar letras. Vale ressaltar que todas as letras são representadas como números. & 8 & \%c & -127 a +127 \\
         \hline
-        != & diferente & 10 != 10 & falso \\
+        int & Capaz de guardar valores numéricos inteiros. & 16 & \%i (ou \%d) & -32.767 a +32.767 \\
         \hline
-        \textgreater{} & maior que & 10 \textgreater{} 10 & falso \\
+        float & Capaz de guardar valores numéricos com suporte a números fracionados e inteiros. & 16 & \%f & \(1.175494 \times 10^{-38}\) a \(3.402823 \times 10^{38}\) \\
         \hline
-        \textgreater{}= & maior ou igual & 10 \textgreater{}= 10 & verdadeiro \\
-        \hline
-        \textless{} & menor que & 10 \textless{} 10 & falso\\
-        \hline
-        \textless{}= & menor ou igual & 10 \textless{}= 10 & verdadeiro \\
+        double & Similar ao tipo float, mas com maior precisão e alcance. & 64 & \%lf & \(2.225074 \times 10^{-308}\) a \(1.797693 \times 10^{308}\) \\
         \hline
     \end{tabular}
 \end{center}
 
 \clearpage
-\subsubsection{Lógicos}
 
-Os operadores lógicos são usados em conjunto com os operadores relacionais. 
-Para compreendê-los corretamente, é importante entender que na linguagem C, 
-os valores de \textbf{verdadeiro} e \textbf{falso} podem ser representados 
-pelos números 1 e 0, respectivamente.
-\\\\
-Ao utilizar os operadores lógicos, podemos criar verificações de valores 
-mais complexas. Abaixo está a lista dos operadores existentes e como usá-los:
+Agora, saindo um pouco da teoria e indo para a prática, vamos tentar aplicar os conceitos aprendidos em um programa bem simples.
 
 \begin{center}
-    \begin{tabular}{|c|c|c|c|}
-        \hline
-        Operador & Descrição & Exemplo & Resultado \\
-        \hline
-        \&\& & AND lógico & 1 \&\& 1 & 1 \\
-        \hline
-        \textbar{}\textbar{} & OR lógico & 1 \textbar{}\textbar{} 0 & 1 \\
-        \hline
-        ! & NOT lógico & !1 & 0 \\
-        \hline
-    \end{tabular}
+    \begin{verbatim}
+    #include <stdio.h>
+
+    int main() {
+        // Declara variáveis para guardar valores
+        // necessários para realizar os cálculos
+        float x;
+        float y;
+        float area;
+
+        // Pede ao usuário por valores de largura e altura
+        printf("Digite a altura do retângulo: ");
+        scanf("%f", &x);
+
+        printf("Digite a largura do retângulo: ");
+        scanf("%f", &y);
+
+        // Calcula a área do triângulo
+        area = x * y;
+
+        // Escreve o resultado no terminal
+        printf("A área do triângulo é: %f\n", area);
+
+        return 0;
+    }
+    \end{verbatim}
 \end{center}
 
-\begin{ps}
-    Caso tenha ficado um pouco confuso como cada operador atua exatamente, vou tentar 
-    detalhar de maneira mais sucinta e com mais exemplos de como cada operador deve agir 
-    em cada caso.
-
-    \begin{enumerate}
-        \item{\textbf{AND lógico:} Retorna \textbf{verdadeiro} no caso de ambos os 
-            valores serem verdadeiros, caso contrário, retorna \textbf{falso}.}
-
-            \begin{center}
-                \begin{tabular}{|c|c|}
-                    \hline
-                    Exemplo & Resultado \\
-                    \hline
-                    0 \&\& 0 & 0 \\
-                    \hline
-                    0 \&\& 1 & 0 \\
-                    \hline
-                    1 \&\& 0 & 0 \\
-                    \hline
-                    1 \&\& 1 & 1 \\
-                    \hline
-                \end{tabular}
-            \end{center}
-
-        \item{\textbf{OR lógico:} Retorna \textbf{verdadeiro} se pelo menos um dos 
-            valores for verdadeiro, caso contrário, retorna \textbf{falso}.}
-
-            \begin{center}
-                \begin{tabular}{|c|c|}
-                    \hline
-                    Exemplo & Resultado \\
-                    \hline
-                    0 \textbar{}\textbar{} 0 & 0 \\
-                    \hline
-                    0 \textbar{}\textbar{} 1 & 1 \\
-                    \hline
-                    1 \textbar{}\textbar{} 0 & 1 \\
-                    \hline
-                    1 \textbar{}\textbar{} 1 & 1 \\
-                    \hline
-                \end{tabular}
-            \end{center}
-
-        \item{\textbf{NOT lógico:} Inverte o valor lógico, isto é, se for verdadeiro, 
-            torna-se falso, e se for falso, torna-se verdadeiro.}
-
-            \begin{center}
-                \begin{tabular}{|c|c|}
-                    \hline
-                    Exemplo & Resultado \\
-                    \hline
-                    !0 & 1 \\
-                    \hline
-                    !1 & 0 \\
-                    \hline
-                \end{tabular}
-            \end{center}
-    \end{enumerate}
-\end{ps}
-
-\subsubsection{Atribuição}
-
-Os operadores de atribuição tem a função de atribuir valores a variáveis. Por exemplo, 
-utilizando um operador de atribuição poderíamos dizer que A = 10 então toda vez que 
-utilizássemos o valor A no código, o programa entenderia que estaríamos nos referindo 
-ao número 10.
-
-\begin{center}
-    \begin{tabular}{|c|c|c|c|}
-        \hline
-        Operador & Descrição & Exemplo & Equivale \\
-        \hline
-        = & Atribuição de valor a variável & A = 10 & \\
-        \hline
-        += & Atribuição com soma & A += 10 & A = A + 10 \\
-        \hline
-        -= & Atribuição com subtração & A -= 10 & A = A - 10 \\
-        \hline
-        *= & Atribuição com multiplicação & A *= 10 & A = A * 10 \\
-        \hline
-        /= & Atribuição com divisão & A /= 10 & A = A / 10 \\
-        \hline
-        \%= & Atribuição com divisão & A \%= 10 & A = A \% 10 \\
-        \hline
-    \end{tabular}
-\end{center}
-
-\subsection{Variáveis e tipos de dados}
 \subsection{Conversão de tipos}
 \subsection{Loops e condicionais}
 \subsection{Funções e bibliotecas}
