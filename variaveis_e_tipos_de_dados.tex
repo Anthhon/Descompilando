@@ -1,0 +1,181 @@
+\subsubsection{Variáveis}
+
+Variáveis podem ser entendidas como objetos com nomes personalizados, 
+capazes de armazenar valores que serão utilizados pelo programa durante 
+sua execução. A declaração de uma variável geralmente segue o seguinte padrão:
+
+\begin{verbatim}
+    <tipo da variável> <nome da variável>;
+\end{verbatim}
+
+Os nomes das variáveis podem conter letras e números, além de poderem 
+ser iniciados com um sublinhado. No entanto, algumas regras devem ser 
+seguidas para declarar uma variável sem problemas.
+\\\\
+Na linguagem C, algumas palavras já são reservadas para representar 
+diretivas e, portanto, não podem ser usadas como nomes de variáveis. 
+Abaixo, segue uma tabela das palavras reservadas:
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{llll}
+    auto      & break     & case      & char      \\
+    const     & continue  & default   & do        \\
+    double    & else      & enum      & extern    \\
+    float     & for       & goto      & if        \\
+    int       & long      & register  & return    \\
+    short     & signed    & sizeof    & static    \\
+    struct    & switch    & typedef   & union     \\
+    unsigned  & void      & volatile  & while
+  \end{tabular}
+\end{table}
+
+Você não precisa necessariamente memorizar todas essas diretivas neste momento; 
+isso é algo que você absorverá e memorizará com bastante prática e um pouco de tempo.
+
+\subsubsection{Tipos de dados}
+
+Um aspecto que ainda não abordamos é a 'tipagem' de variáveis. Embora cada variável 
+tenha um nome definido, o computador não sabe exatamente o que há dentro de cada uma 
+delas. Portanto, cabe ao usuário fazer essa definição.
+\\\\
+A princípio, a linguagem C fornece quatro tipos básicos: \textbf{char}, 
+\textbf{int}, \textbf{float} e \textbf{double}. Além disso, há modificadores 
+como \textbf{signed}, \textbf{unsigned}, \textbf{short} e \textbf{long}, que 
+podem ser usados em conjunto com cada tipo.
+\\\\
+Novamente, não é necessário memorizar tudo isso agora, mas por curiosidade, na 
+próxima página terá uma lista descrevendo os tipos e modificadores, juntamente 
+com algumas informações adicionais:
+
+\newpage
+
+\begin{center}
+    \centering
+    \begin{tabular}{|c|p{4cm}|p{2cm}|c|p{4cm}|}
+        \hline
+        \textbf{Tipo} & \textbf{Descrição} & \textbf{Tamanho (bits)} & \textbf{Formatador} & \textbf{Alcance} \\
+        \hline
+        char & Utilizado para guardar letras em formato numérico. & 8 & \%c & -127 a +127 \\
+        \hline
+        int & Capaz de guardar valores numéricos inteiros. & 32 & \%i (ou \%d) & -32.767 a +32.767 \\
+        \hline
+        float & Capaz de guardar números fracionados e inteiros. & 32 & \%f & \(1.175494 \times 10^{-38}\) a \(3.402823 \times 10^{38}\) \\
+        \hline
+        double & Similar ao tipo float, mas com maior precisão e alcance. & 64 & \%lf & \(2.225074 \times 10^{-308}\) a \(1.797693 \times 10^{308}\) \\
+        \hline
+        signed & Garante que a variável deve suportar valores negativos sem modificar o tamanho da variável. & & & \\
+        \hline
+        unsigned & Garante que a variável deve suportar apenas valores positivos sem modificar o tamanho da variável. & & & \\
+        \hline
+        short & Modifica o tipo int para guardar valores menores, usando metade do espaço na memória. & & & \\
+        \hline
+        long & Modifica o tipo int para guardar valores maiores, usando o dobro de espaço na memória. & & & \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\clearpage
+
+Agora, saindo um pouco da teoria e partindo para a prática, vamos aplicar os 
+conceitos aprendidos em um programa simples.
+
+\begin{verbatim}
+    #include <stdio.h>
+
+    int main(void) {
+        // Declara variáveis para guardar valores
+        // necessários para realizar os cálculos
+        float x;
+        float y;
+        float area;
+
+        // Pede ao usuário por valores de largura e altura
+        printf("Digite a altura do retângulo: ");
+        scanf("%f", &x);
+
+        printf("Digite a comprimento do retângulo: ");
+        scanf("%f", &y);
+
+        // Calcula a área do triângulo
+        area = x * y;
+
+        // Escreve o resultado no terminal
+        printf("A área do retângulo é: %f\n", area);
+
+        return 0;
+    }
+\end{verbatim}
+
+O código acima funciona da seguinte forma: ao ser iniciado, o usuário deve 
+digitar no terminal os valores da altura e comprimento de um retângulo 
+imaginário. Em seguida, o programa calcula automaticamente a área do 
+retângulo e exibe o resultado.
+
+\begin{verbatim}
+        float x;
+        float y;
+        float area;
+\end{verbatim}
+
+No trecho abaixo, declaramos três variáveis diferentes: \textbf{x} para a altura, 
+\textbf{y} para o comprimento e \textbf{area} para o resultado do cálculo. Todas 
+as três variáveis são do tipo float, pois nada impede que as medidas do retângulo 
+sejam números fracionados.
+
+\begin{verbatim}
+        printf("Digite a altura do retângulo: ");
+        scanf("%f", &x);
+
+        printf("Digite a comprimento do retângulo: ");
+        scanf("%f", &y);
+\end{verbatim}
+
+Aqui utilizamos a função \texttt{printf} para exibir texto na tela, assim 
+como já feito antes, e em seguida, usamos uma nova função chamada 
+\texttt{scanf} para receber informações do usuário pelo terminal.
+\\\\
+Dentro de scanf, passamos dois parâmetros: o primeiro (\textbf{\%f}) 
+é o formatador, que especifica o tipo de valor esperado para ser recebido, 
+neste caso, uma float. O segundo (\textbf{\&x}) é onde queremos armazenar o 
+valor recebido; a variável vem com o sufixo \& porque estamos passando o 
+endereço da variável.
+
+\begin{ps}
+    O endereço de uma variável é um tópico que ainda será abordado com 
+    maior foco, porém, no momento você pode assumir que ele diz respeito 
+    a localização da variável dentro do computador.
+\end{ps}
+
+\begin{verbatim}
+        area = x * y;
+\end{verbatim}
+
+Após receber os valores de \(x\) e \(y\) usando a função \texttt{scanf}, 
+multiplicamos as variáveis usando o operador de multiplicação e armazenamos 
+o resultado em \texttt{area} usando o operador de atribuição (\texttt{=}).
+
+\begin{verbatim}
+        printf("A área do retângulo é: %f\n", area);
+
+        return 0;
+\end{verbatim}
+
+Finalmente, exibimos o valor na tela usando a função \texttt{printf} e 
+retornamos o valor 0 para indicar que o programa foi encerrado com sucesso. 
+É importante lembrar que, ao exibir uma variável do tipo float, é necessário 
+utilizar o formatador \%f.
+
+Entendendo bem o código acima, é possível praticar os conceitos de operadores 
+e variáveis sem muitas dificuldades.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o 
+conteúdo.}
+
+\begin{enumerate}
+    \item{Modifique a lógica do programa acima para calcular a área de um triângulo.}
+    \item{Crie uma calculadora simples capaz de receber 2 números e realizar alguma das 4 operações básicas.}
+    \item{Crie um conversor de unidade de metro para centímetros.}
+\end{enumerate}
