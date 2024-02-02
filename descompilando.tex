@@ -79,6 +79,41 @@
 \input{variaveis_e_tipos_de_dados.tex}
 
 \subsection{Conversão de tipos}
+
+Normalmente referido como \"casting\", as conversões de tipos de dados podem
+ser feitas com as mais diferentes finalidades.
+
+\subsubsection{Conversões implícitas}
+
+Ao avaliar uma expressão, o compilador acaba por realizar um processo de conversão 
+de dados que respeita uma regra chamada \textbf{promoção automática} onde todas as 
+variáveis são convertidas para um mesmo tipo.
+
+Essa regra funciona de forma que os tipos de menor tamanho são convertidos para os 
+tipos de maior tamanho que existem dentro da expressão, essa hierarquia, por assim 
+dizer, de tipos segue a seguinte ordem:
+
+\begin{verbatim}
+    char < short < int < long < long long < float < double < long double
+\end{verbatim}
+
+A esse ponto você deve estar se perguntando o porquê de existirem todos esses tipos 
+se no final eles são todos interpretados como iguais pelo compilador.
+
+\begin{ps}
+    Não entenda o processo de promoção automática como se todas as variáveis fossem 
+    tratadas como iguais pelo computador e o processo de tipagem como apenas uma 
+    regalia para facilitar o processo de desenvolvimento.
+
+    A tipagem de variáveis continua sendo extremamente necessária para que o 
+    compilador realize, de maneira correta e precisa, processos que eu provavelmente 
+    sequer me atreveria a tentar explicar neste livro.
+    
+    Sendo assim, o processo de promoção automática faz com que as variáveis \"sejam 
+    tratadas como iguais\" somente dentro do escopo de uma expressão ou operação, regra essa que 
+    não se aplica ao programa em um escopo maior.
+\end{ps}
+
 \subsection{Loops e condicionais}
 \subsection{Funções e bibliotecas}
 \subsection{Escopo}
