@@ -1,7 +1,7 @@
 Durante o desenvolvimento de aplicações mais complexas é comum a utilização 
-de bibliotecas externas para facilitar o processo de desenvolvimento. Portanto, 
-iremos cumprir aqui neste capítulo o básico que você precisa saber para lidar com 
-a utilização e implementação de bibliotecas em um projeto.
+de bibliotecas para facilitar o processo de desenvolvimento. Portanto, iremos 
+cumprir aqui neste capítulo o básico que você precisa saber para lidar com a 
+utilização e implementação de bibliotecas em um projeto.
 \\\\
 Para entender melhor sobre o assunto vamos usar o seguinte código como exemplo:
 
@@ -24,7 +24,7 @@ Para entender melhor sobre o assunto vamos usar o seguinte código como exemplo:
     }
 \end{verbatim}
 
-O código abaixo é responsável por calcular a hipotenusa de um triângulo 
+O código acima é responsável por calcular a hipotenusa de um triângulo 
 conforme os valores dados pelas variáveis \(c1\) e \(c2\). Porém, os mais 
 atentos notaram o uso das funções \textbf{pow} e \textbf{sqrt}, responsáveis 
 por calcular a potência e a raiz quadrada de um número, respectivamente.
@@ -51,7 +51,10 @@ Isso indica que, embora a biblioteca tenha sido incluída adequadamente no
 código, ela não está sendo linkada pelo compilador, resultando na não 
 localização das funções.
 \\\\
-Para corrigir isso, basta informar ao compilador que você pretende compilar o código usando uma biblioteca específica. Neste caso, como estamos incluindo a biblioteca \texttt{math}, devemos adicionar ``-lm'' ao comando de compilação, como mostrado abaixo:
+Para corrigir isso, basta informar ao compilador que você pretende compilar 
+o código usando uma biblioteca específica. Neste caso, como estamos incluindo 
+a biblioteca \texttt{math}, devemos adicionar ``-lm'' ao comando de compilação, 
+como mostrado abaixo:
 
 \begin{verbatim}
     gcc -o main main.c -lm
@@ -59,3 +62,14 @@ Para corrigir isso, basta informar ao compilador que você pretende compilar o c
 
 Dessa forma, o compilador reconhecerá a biblioteca e realizará a compilação 
 corretamente.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o 
+conteúdo.}
+
+\begin{enumerate}
+    \item{Tente compilar o código acima sem valor de `y'.}
+\end{enumerate}
+
+\clearpage
