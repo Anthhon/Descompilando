@@ -1,0 +1,109 @@
+Apesar de talvez não ter notado, desde o seu primeiro código você vem lidando 
+com funções. Funções nada mais são do que blocos de códigos capazes de 
+executar uma sequência específica de instruções e são utilizadas para realizar 
+uma melhor modularização do código, ou seja, separar o código ``em pedaços'' 
+com diferentes funções bem definidas.
+\\\\
+As funções em C geralmente seguem o seguinte padrão de declaração:
+
+\begin{verbatim}
+    tipo_do_retorno nome_da_função(argumentos)
+    {
+    // Código da função
+    }
+\end{verbatim}
+
+O tipo do retorno identifica o tipo de valor que a função deve retornar, 
+caso necessário. Este valor pode ser de qualquer tipo já apresentado até o 
+momento, como inteiros, caracteres, ponto flutuante, entre outros.
+\\\\
+Vamos considerar um exemplo simples para melhor entender a declaração de uma função:
+
+\begin{verbatim}
+    #include <stdio.h>
+
+    void printHello(void) // Define uma nova função
+    {
+        printf("Hello!\n");
+    }
+
+    int main(void) // Define a função principal
+    {
+        printHello();
+        printHello();
+        printHello();
+        return 0;
+    }
+\end{verbatim}
+
+Este código é um exemplo básico de utilização de função. Ele define uma 
+função chamada \textbf{printHello}, responsável por imprimir o texto 
+"Hello!" três vezes consecutivas, sem necessidade de receber ou retornar 
+qualquer valor.
+
+\begin{ps}
+    Um detalhe interessante sobre funções em C é que, devido ao fato de 
+    a linguagem não depender de indentação, é possível declarar funções 
+    em apenas uma linha, independentemente do seu tamanho.
+    \\\\
+    Isso não significa necessariamente que você deve fazer isso em todos 
+    os casos, mas pode ser útil em algumas situações específicas. Se não 
+    ficou claro como isso é possível, aqui está um exemplo utilizando a 
+    mesma função \textbf{printHello}:
+
+    \begin{verbatim}
+    void printHello(void) { printf("Hello!\n"); }
+    \end{verbatim}
+
+    Se você substituir o código anterior por essa versão de apenas uma 
+    linha, o código continuará sendo compilado normalmente.
+\end{ps}
+
+\clearpage
+
+\subsubsection{Recebendo e retornando Valores}
+
+As funções podem retornar valores após a execução de suas operações. Isso 
+permite que elas comuniquem resultados de volta para o código que as 
+chamou. Vamos elaborar outro exemplo para demonstrar isso:
+
+\begin{verbatim}
+    #include <stdio.h>
+
+    // Define uma nova função que retorna 
+    // o valor da soma de dois valores
+    int soma(int a, int b) 
+    {
+        return a + b;
+    }
+
+    int main(void)
+    {
+        int resultado = soma(3, 4);
+        printf("A soma é: %d\n", resultado);
+        return 0;
+    }
+\end{verbatim}
+
+Neste exemplo, a função \textbf{soma} recebe dois argumentos inteiros e 
+retorna a soma deles. No \textbf{main}, chamamos essa função com os 
+argumentos \(3\) e \(4\), atribuindo o resultado à variável "resultado", 
+que é então impressa na tela. É importante observar que os argumentos devem 
+ser inseridos na mesma ordem em que foram declarados na função.
+\\\\
+Os conceitos acima explicados são fundamentais para entender o funcionamento 
+das funções em C e como elas podem ser utilizadas para tornar o código mais 
+modular e eficiente. Ademais, o recomendado é que se utilize de bastante prática 
+testes para ter certeza que você entendeu tudo que foi explicado.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o 
+conteúdo.}
+
+\begin{enumerate}
+    \item{Modifique os valores passados para a função soma para gerar diferentes resultados.}
+    \item{Tente alterar os valores passados para a função soma para caracteres ou símbolos (`c', `\$' e etc.) e analise o comportamento do código.}
+    \item{Modifique a função de maneira que seja possível somar 3 valores ao invés de 2.}
+    \item{Elabore mais 3 funções para que seja possível realizar operações de subtração, multiplicação, divisão e tente utilizá-las ao invés da função soma.}
+\end{enumerate}
