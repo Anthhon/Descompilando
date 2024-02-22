@@ -86,87 +86,9 @@
 \input{funcoes.tex}
 
 \subsection{Escopo}
+\input{escopo.tex}
 
-Apesar de ser um assunto bem relacionado a funções, escopo de variáveis é um 
-assunto que merece toda uma atenção por si só. Em geral, ao falarmos de escopo 
-estamos nos referindo a um conjunto de regras que determinam a utilização de 
-variáveis.
-\\\\
-De maneira geral é possível dividir variáveis em 2 tipos, sendo essas as locais 
-e globais.
-
-\subsubsection{Variáveis locais}
-
-As variáveis locais são aquelas que só podem ser utilizadas numa função ou 
-bloco de código em específico. Ou seja, caso declaradas em uma função \(x\), 
-não é possível utilizá-las ou modificá-las em outra função, além de que 
-ao fim da função a variável deixa de existir.
-\\\\
-Vamos usar um exemplo prático para ilustrar essas propriedades de uma variável 
-local:
-
-\begin{verbatim}
-    #include <stdio.h>
-
-    void printnum(int x) { // Recebe argumento 'x'
-        printf("%i\n", x);
-
-        int y = 369; // Cria variável local
-        printf("%i\n", y);
-    }
-
-    int main (void) {
-        printnum(369);
-        return 0;
-    }
-\end{verbatim}
-
-Neste código é possível notar que a função \(printnum\) imprime o valor de 
-duas variáveis na tela, sendo uma delas o valor \(x\) recebido na função 
-por meio de argumentos e o outro que é declarada e inicializado dentro 
-da própria função.
-\\\\
-Ambos os valores, apesar de serem declarados de maneiras diferentes, constam 
-como variáveis locais, pois podem ser lidos ou modificados somente dentro da 
-própria função.
-
-\begin{ps}
-    Em alguns casos você vai ver artigos ou livros que chamam essas variáveis 
-    locais recebidas por argumentos como ``parâmetros formais'', mas ao nível de 
-    entendimento e praticidade é desnecessário separar as mesmas em duas categorias, 
-    uma vez que ambas podem ser manipuladas da mesma forma.
-\end{ps}
-
-\subsubsection{Variáveis globais}
-
-Não muito diferente das variáveis locais, as globais também podem ser lidas e 
-manipuladas normalmente por funções ou blocos de códigos, porém, elas tem a 
-característica de poderem ser acessadas e modificadas de qualquer parte do código 
-além de que ao fim da seção elas também continuam existindo.
-\\\\
-Em aplicações mais simples isso pode ser extremamente útil já que você não vai 
-precisar se preocupar em passar valores entre funções para realizar uma tarefa 
-qualquer. Porém, em aplicações mais complexas isso começa a se tornar um problema, 
-visto que você pode ter diferentes partes do programa querendo acessar ou modificar 
-a mesma variável ao mesmo tempo, então você tem que garantir que haverá um fluxo de 
-acesso bem estabelecido de acesso a aquele valor.
-\\\\
-Porém, apesar de parecer algo meio assustador é algo que você não só não deve ter 
-medo de utilizar, como deve utilizar bastante justamente com o intuito de aprender 
-e ter certo domínio sobre.
-\\\\
-Portanto, vamos tentar utilizar um exemplo simples e prático de como uma 
-variável global pode ser utilizada em um projeto real. Vamos supor que você 
-está criando um jogo e você quer criar algumas funções que irão controlar a 
-vida do seu personagem, para isso poderiamos usar algo do tipo:
-
-\begin{verbatim}
-    #include <stdio.h>
-
-    int main(void
-\end{verbatim}
-
-\subsection{Loops e condicionais}
+\subsection{Condicionais e loops}
 
 \subsection{Entrada e saída de dados}
 

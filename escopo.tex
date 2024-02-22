@@ -1,0 +1,105 @@
+Embora intimamente relacionado às funções, o escopo de variáveis é um 
+conceito que merece atenção própria. Em termos gerais, o escopo refere-se 
+a um conjunto de regras que determinam como as variáveis podem ser usadas em 
+um programa.
+
+\subsubsection{Variáveis locais}
+
+Variáveis locais são aquelas que só podem ser acessadas dentro de uma função 
+ou bloco de código específico. Em outras palavras, uma vez declaradas dentro 
+de uma função, elas não podem ser utilizadas ou modificadas em outros 
+contextos, e deixam de existir ao término da função.
+\\\\
+Para ilustrar essas propriedades das variáveis locais, considere o seguinte exemplo:
+
+\begin{verbatim}
+    #include <stdio.h>
+
+    void printnum(int x) { // Recebe argumento 'x'
+        printf("%i\n", x);
+
+        int y = 369; // Cria variável local
+        printf("%i\n", y);
+    }
+
+    int main (void) {
+        printnum(369);
+        return 0;
+    }
+\end{verbatim}
+
+Neste código, a função \texttt{printnum} imprime dois valores na tela: o 
+argumento \(x\) passado para a função e a variável local \(y\) declarada 
+dentro dela. Ambos os valores são considerados variáveis locais, pois só 
+podem ser acessados e modificados dentro da função em que foram declarados.
+
+\begin{ps}
+    Em alguns contextos, as variáveis locais recebidas como argumentos são 
+    chamadas de ``parâmetros locais'', mas, para fins de entendimento e 
+    praticidade, não há necessidade de distinção, uma vez que ambas são 
+    manipuladas da mesma forma.
+\end{ps}
+
+\subsubsection{Variáveis globais}
+
+Similarmente às variáveis locais, as variáveis globais podem ser acessadas e 
+modificadas por funções ou blocos de código. No entanto, elas têm a 
+característica de serem acessíveis de qualquer parte do código e permanecerem 
+em existência após o término de um bloco ou função.
+\\\\
+Em aplicações simples, variáveis globais podem ser extremamente úteis, pois 
+eliminam a necessidade de passar valores entre funções para realizar 
+determinadas tarefas. No entanto, em aplicações mais complexas, o uso 
+excessivo de variáveis globais pode levar a problemas de controle de acesso, 
+já que diferentes partes do programa podem tentar acessar ou modificar a mesma 
+variável simultaneamente, o que pode acabar gerando algumas inconveniências.
+\\\\
+Apesar de inicialmente intimidador, o uso de variáveis globais é uma prática 
+que deve ser dominada, pois é fundamental para compreender o fluxo de dados 
+em programas mais complexos.
+\\\\
+Considere o seguinte exemplo prático de como uma variável global pode ser 
+utilizada em um projeto real, como para controlar a vida do personagem em um jogo:
+
+\begin{verbatim}
+    #include <stdio.h>
+
+    unsigned int life = 100; // Vida do personagem
+
+    // Danifica a vida do personagem
+    void lifeDamage(int points) {
+        life -= points;
+    }
+
+    // Recupera a vida do personagem
+    void lifeHeal(int points) {
+        life += points;
+    }
+
+    // Exibe a vida do personagem
+    void lifePrint(void) {
+        printf("Vida: %i\n", life);
+    }
+
+    int main(void) {
+        lifePrint();
+
+        lifeDamage(10);
+        lifePrint();
+
+        lifeHeal(10);
+        lifePrint();
+
+        // Modifica o valor da vida diretamente
+        life = 10;
+        lifePrint();
+
+        return 0;
+    }
+\end{verbatim}
+
+Neste código, a variável \texttt{life} é uma variável global que armazena 
+a vida do personagem. Ela pode ser acessada e modificada por todas as 
+funções do programa, o que simplifica o controle do estado do personagem ao 
+longo do jogo. É notável também que, ao contrário das variáveis locais, uma variável 
+global mantém seu valor durante toda a execução do programa.
