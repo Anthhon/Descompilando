@@ -10,7 +10,8 @@ ou bloco de código específico. Em outras palavras, uma vez declaradas dentro
 de uma função, elas não podem ser utilizadas ou modificadas em outros 
 contextos, e deixam de existir ao término da função.
 \\\\
-Para ilustrar essas propriedades das variáveis locais, considere o seguinte exemplo:
+Para ilustrar essas propriedades das variáveis locais, considere o seguinte 
+exemplo:
 
 \begin{verbatim}
     #include <stdio.h>
@@ -40,6 +41,8 @@ podem ser acessados e modificados dentro da função em que foram declarados.
     manipuladas da mesma forma.
 \end{ps}
 
+% TODO: Extender tópico para explicar utilização da diretiva 'static'
+
 \subsubsection{Variáveis globais}
 
 Similarmente às variáveis locais, as variáveis globais podem ser acessadas e 
@@ -59,7 +62,8 @@ que deve ser dominada, pois é fundamental para compreender o fluxo de dados
 em programas mais complexos.
 \\\\
 Considere o seguinte exemplo prático de como uma variável global pode ser 
-utilizada em um projeto real, como para controlar a vida do personagem em um jogo:
+utilizada em um projeto real, como para controlar a vida do personagem em um 
+jogo:
 
 \begin{verbatim}
     #include <stdio.h>
@@ -101,5 +105,5 @@ utilizada em um projeto real, como para controlar a vida do personagem em um jog
 Neste código, a variável \texttt{life} é uma variável global que armazena 
 a vida do personagem. Ela pode ser acessada e modificada por todas as 
 funções do programa, o que simplifica o controle do estado do personagem ao 
-longo do jogo. É notável também que, ao contrário das variáveis locais, uma variável 
-global mantém seu valor durante toda a execução do programa.
+longo do jogo. É notável também que, ao contrário das variáveis locais, uma 
+variável global mantém seu valor durante toda a execução do programa.
