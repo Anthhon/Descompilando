@@ -41,8 +41,6 @@ podem ser acessados e modificados dentro da função em que foram declarados.
     manipuladas da mesma forma.
 \end{ps}
 
-% TODO: Extender tópico para explicar utilização da diretiva 'static'
-
 \subsubsection{Variáveis globais}
 
 Similarmente às variáveis locais, as variáveis globais podem ser acessadas e 
@@ -107,3 +105,122 @@ a vida do personagem. Ela pode ser acessada e modificada por todas as
 funções do programa, o que simplifica o controle do estado do personagem ao 
 longo do jogo. É notável também que, ao contrário das variáveis locais, uma 
 variável global mantém seu valor durante toda a execução do programa.
+
+\subsubsection{A diretiva static}
+
+Variáveis precedidas pela diretiva \texttt{static} mantêm seus valores mesmo 
+quando saem de escopo. Isso significa que, ao executar uma função que contém 
+uma variável \texttt{static}, a variável é inicializada apenas na primeira vez 
+que a função é chamada, e seu valor é preservado para chamadas subsequentes.
+
+Variáveis \texttt{static} são alocadas em uma área da memória do programa 
+conhecida como \texttt{data}, enquanto todas as outras variáveis que 
+aprendemos a declarar até agora são alocadas em uma área conhecida como 
+\texttt{stack}. Por isso, as variáveis \texttt{static} são inicializadas com o 
+valor \(0\) por padrão, a menos que o usuário as inicialize explicitamente com 
+um valor diferente.
+
+O código a seguir ilustra essa propriedade:
+
+\begin{verbatim}
+    #include <stdio.h>
+     
+    int main(void)
+    {
+        static int x;
+        int y;
+        printf("x: %d\n", x);
+        printf("y: %d\n", y);
+    }
+\end{verbatim}
+
+\subsubsection{Exercícios}
+
+Ao compilar e executar o código o código acima você vai notar que a variável 
+\(y\) terá um valor aleatório, enquanto a variável \(x\) sempre terá o valor 0. 
+Isso ocorre porque, quando uma variável é alocada no espaço \texttt{data} da 
+memória, seu valor deve ser constante.
+
+Usemos esse código como exemplo:
+
+\begin{verbatim}
+    int initializer(void)
+    {
+        return 50;
+    }
+      
+    int main(void)
+    {
+        // Inicializa o valor de x com o valor retornado pela função
+        static int x = initializer(); 
+        printf("x: %d\n", x);
+
+        return 0;
+    }
+\end{verbatim}
+
+Ao compilar o código acima você verá um erro semelhante a:
+
+\begin{verbatim}
+    main.c: In function ‘main’:
+    main.c:10:24: error: initializer element is not constant
+       10 |         static int x = initializer();
+          |                        ^~~~~~~~~~~
+\end{verbatim}
+
+Isso se deve ao fato de que o valor de \(x\) não é conhecido durante a 
+compilação do programa, sendo assim dependente de outra função ou variável 
+para ser atribuído.
+
+\begin{ps}
+    Em relação aos espaços \texttt{heap} e \texttt{data} da memória, esses 
+    conceitos serão discutidos com mais detalhes no capítulo % TODO...
+\end{ps}
+
+Além disso, é possível declarar variáveis \texttt{static} no contexto de 
+variáveis globais e funções. Quando isso é feito, o compilador limita o uso 
+dessa variável (ou função) ao arquivo em que foi declarada. Por exemplo, em 
+programas mais complexos que são divididos em vários arquivos com diferentes 
+segmentos de código, pode haver variáveis globais e funções com o mesmo nome, 
+mas com propósitos diferentes. Nesses casos, a diretiva \texttt{static} pode 
+ser útil.
+
+O código a seguir ilustra o uso de variáveis globais \texttt{static}:
+
+\begin{verbatim}
+    // arquivo 'main.c'
+    #include <stdio.h>
+
+    static int x = 10;
+
+    int main(void)
+    {
+        printf("x in main.c: %d\n", x);
+        printX();
+        return 0;
+    }
+
+    // Arquivo: example.c
+    #include <stdio.h>
+
+    static int x = 20;
+
+    void printX(void)
+    {
+        printf("x in example.c: %d\n", x);
+    }
+\begin{verbatim}
+
+% TODO: Elaborar código para exemplicar o uso de variáveis globais static
+
+% TODO: Elaborar código para exemplicar o uso de funções static
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
+
+\begin{enumerate}
+    \item Escreva um programa em C que declare duas variáveis com o mesmo 
+        nome, uma global e uma local dentro de uma função que não seja a 
+        \texttt{main}. O que acontece quando você tenta imprimir o valor 
+        dessas variáveis dentro da função? 
+        E fora da função?
+\end{enumerate}
