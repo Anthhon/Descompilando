@@ -6,19 +6,19 @@ ser feitas com as mais diferentes finalidades.
 Ao avaliar uma expressão, o compilador acaba por realizar um processo de conversão 
 de dados que respeita uma regra chamada \textbf{promoção automática} onde todas as 
 variáveis são convertidas para um mesmo tipo.
-\\\\
+
 Essa regra funciona de forma que os tipos de menor tamanho são convertidos para os 
 tipos de maior tamanho que existem dentro da expressão, essa hierarquia, por assim 
 dizer, de tipos segue a seguinte ordem:
 
-\begin{verbatim}
+\begin{code}
     char < short < int < long < long long < float < double < long double
-\end{verbatim}
+\end{code}
 
 Para ilustrar melhor o processo de promoção automática vamos usar o código 
 abaixo como exemplo:
 
-\begin{verbatim}
+\begin{code}
     int main(void) {
         char x = 'A' ;
         int j;
@@ -30,7 +30,7 @@ abaixo como exemplo:
         y = a / b; // `a' é convertido para float
         return 0;
     }
-\end{verbatim}
+\end{code}
 
 As conversões acima acabam acontecendo pois estamos realizando cálculos com 
 valores de diferentes tipos, o que acaba forçando o compilador a fazer essa 
@@ -50,7 +50,7 @@ valores na memória.
 As conversões explícitas são bem mais simples de entender e de se usar. Contudo, 
 para usuários mais experientes podem ser uma ferramenta bem poderosa e complicada.
 
-\begin{verbatim}
+\begin{code}
     int main(void) {
         float y = 10.01;
         int x;
@@ -58,19 +58,19 @@ para usuários mais experientes podem ser uma ferramenta bem poderosa e complica
         x = (int)y;
         return 0;
     }
-\end{verbatim}
+\end{code}
 
 Como o valor de \(x\) é de um tipo menor que \(y\) é necessário realizar essa conversão 
 para int utilizando ``(int)'' antes do valor que será atribuído a \(x\). 
 Dessa forma também, já que \(x\) é incapaz de guardar valores quebrados o valor de 
 0.01 será perdido.
-\\\\
+
 Portanto, sempre que for necessário realizar uma conversão de tipos em uma 
 expressão basta seguir esse padrão:
 
-\begin{verbatim}
+\begin{code}
     (tipo a ser convertido) valor a ser convertido
-\end{verbatim}
+\end{code}
 
 \subsubsection{Exercícios}
 
@@ -82,5 +82,3 @@ conteúdo.}
     \item{Declare duas variáveis do tipo `float', realize um cálculo entre ambas, converta o resultado para `int' e imprima o valor}
     \item{Declare uma variável do tipo `float', uma do tipo `int' e realize um cálculo entre ambas que deve ter o resultado guardado em uma variável do tipo `short int' para ver o que acontece}
 \end{enumerate}
-
-\clearpage

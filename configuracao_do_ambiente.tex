@@ -11,15 +11,15 @@ Para configurar o ambiente de desenvolvimento C em sistemas Linux, siga estes pa
         Em maior parte das distribuições Linux o GCC já está disponível por padrão, 
         mas caso não esteja, ele pode ser facilmente instalado utilizando o gerenciador 
         de pacotes da sua distribuição (como apt para Ubuntu/Debian ou yum para Fedora).
-        \\\\
+        
         Segue abaixo uma lista de comandos para instalar o GCC nas distribuições Linux 
         mais famosas:
 
-        \begin{verbatim}
+        \begin{code}
         # Debian
         sudo apt update
         sudo apt install build-essential
-        # Red Hat-based (Fedora, CentOS)
+        # Baseados em Red Hat (Fedora, CentOS)
         sudo dnf update
         sudo dnf install gcc
         # Arch Linux
@@ -35,7 +35,7 @@ Para configurar o ambiente de desenvolvimento C em sistemas Linux, siga estes pa
         # Para checar se o GCC foi instalado 
         # corretamente use o comando abaixo
         gcc --version
-        \end{verbatim}
+        \end{code}
 \end{enumerate}
 
 \subsubsection{Windows}
@@ -70,7 +70,7 @@ estes passos:
                     \item Para Windows 10, pesquise "Editar variáveis de ambiente 
                         do sistema" na barra de pesquisa e clique em "Variáveis 
                         de ambiente". Em "Variáveis do sistema", selecione a 
-                        variável PATH e clique em "Editar...". Adicione o caminho 
+                        variável PATH e clique em ``Editar...''. Adicione o caminho 
                         para o diretório bin do MinGW (exemplo: 
                         \texttt{C:\textbackslash MinGW\textbackslash bin}) e 
                         clique em OK.
@@ -83,9 +83,9 @@ estes passos:
             \item Verifique se a instalação foi bem-sucedida abra o Prompt de Comando (cmd) 
                 e insira o seguinte comando:
 
-                \begin{verbatim}
+                \begin{code}
                 gcc --version
-                \end{verbatim}
+                \end{code}
         \end{enumerate}
 
     \item \textbf{Editor de texto ou IDE:} 

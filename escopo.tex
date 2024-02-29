@@ -5,15 +5,15 @@ um programa.
 
 \subsubsection{Variáveis locais}
 
-Variáveis locais são aquelas que só podem ser acessadas dentro de uma função 
-ou bloco de código específico. Em outras palavras, uma vez declaradas dentro 
-de uma função, elas não podem ser utilizadas ou modificadas em outros 
-contextos, e deixam de existir ao término da função.
-\\\\
+Variáveis locais são aquelas que só podem ser acessadas em uma função ou bloco 
+de código específico. Em outras palavras, uma vez declaradas numa função, elas 
+não podem ser utilizadas ou modificadas em outros contextos, e deixam de 
+existir ao término da função.
+
 Para ilustrar essas propriedades das variáveis locais, considere o seguinte 
 exemplo:
 
-\begin{verbatim}
+\begin{code}
     #include <stdio.h>
 
     void printnum(int x) { // Recebe argumento 'x'
@@ -27,7 +27,7 @@ exemplo:
         printnum(369);
         return 0;
     }
-\end{verbatim}
+\end{code}
 
 Neste código, a função \texttt{printnum} imprime dois valores na tela: o 
 argumento \(x\) passado para a função e a variável local \(y\) declarada 
@@ -47,23 +47,23 @@ Similarmente às variáveis locais, as variáveis globais podem ser acessadas e
 modificadas por funções ou blocos de código. No entanto, elas têm a 
 característica de serem acessíveis de qualquer parte do código e permanecerem 
 em existência após o término de um bloco ou função.
-\\\\
+
 Em aplicações simples, variáveis globais podem ser extremamente úteis, pois 
 eliminam a necessidade de passar valores entre funções para realizar 
 determinadas tarefas. No entanto, em aplicações mais complexas, o uso 
 excessivo de variáveis globais pode levar a problemas de controle de acesso, 
 já que diferentes partes do programa podem tentar acessar ou modificar a mesma 
 variável simultaneamente, o que pode acabar gerando algumas inconveniências.
-\\\\
+
 Apesar de inicialmente intimidador, o uso de variáveis globais é uma prática 
 que deve ser dominada, pois é fundamental para compreender o fluxo de dados 
 em programas mais complexos.
-\\\\
+
 Considere o seguinte exemplo prático de como uma variável global pode ser 
 utilizada em um projeto real, como para controlar a vida do personagem em um 
 jogo:
 
-\begin{verbatim}
+\begin{code}
     #include <stdio.h>
 
     unsigned int life = 100; // Vida do personagem
@@ -98,11 +98,11 @@ jogo:
 
         return 0;
     }
-\end{verbatim}
+\end{code}
 
 Neste código, a variável \texttt{life} é uma variável global que armazena 
 a vida do personagem. Ela pode ser acessada e modificada por todas as 
-funções do programa, o que simplifica o controle do estado do personagem ao 
+funções do programa, que simplifica o controle do estado do personagem ao 
 longo do jogo. É notável também que, ao contrário das variáveis locais, uma 
 variável global mantém seu valor durante toda a execução do programa.
 
@@ -122,7 +122,7 @@ um valor diferente.
 
 O código a seguir ilustra essa propriedade:
 
-\begin{verbatim}
+\begin{code}
     #include <stdio.h>
      
     int main(void)
@@ -132,18 +132,16 @@ O código a seguir ilustra essa propriedade:
         printf("x: %d\n", x);
         printf("y: %d\n", y);
     }
-\end{verbatim}
+\end{code}
 
-\subsubsection{Exercícios}
-
-Ao compilar e executar o código o código acima você vai notar que a variável 
-\(y\) terá um valor aleatório, enquanto a variável \(x\) sempre terá o valor 0. 
+Ao compilar e executar o código acima você vai notar que a variável \(y\) 
+terá um valor aleatório, enquanto a variável \(x\) sempre terá o valor 0. 
 Isso ocorre porque, quando uma variável é alocada no espaço \texttt{data} da 
 memória, seu valor deve ser constante.
 
 Usemos esse código como exemplo:
 
-\begin{verbatim}
+\begin{code}
     int initializer(void)
     {
         return 50;
@@ -157,16 +155,16 @@ Usemos esse código como exemplo:
 
         return 0;
     }
-\end{verbatim}
+\end{code}
 
 Ao compilar o código acima você verá um erro semelhante a:
 
-\begin{verbatim}
+\begin{code}
     main.c: In function ‘main’:
     main.c:10:24: error: initializer element is not constant
        10 |         static int x = initializer();
           |                        ^~~~~~~~~~~
-\end{verbatim}
+\end{code}
 
 Isso se deve ao fato de que o valor de \(x\) não é conhecido durante a 
 compilação do programa, sendo assim dependente de outra função ou variável 
@@ -187,7 +185,7 @@ ser útil.
 
 O código a seguir ilustra o uso de variáveis globais \texttt{static}:
 
-\begin{verbatim}
+\begin{code}
     // arquivo 'main.c'
     #include <stdio.h>
 
@@ -207,13 +205,13 @@ O código a seguir ilustra o uso de variáveis globais \texttt{static}:
 
     void printX(void)
     {
-        printf("x in example.c: %d\n", x);
+        printf("x in example.c: \%d\n", x);
     }
-\end{verbatim}
+\end{code}
 
 E aqui está um exemplo de código que ilustra o uso de funções \texttt{static}:
 
-\begin{verbatim}
+\begin{code}
     // Arquivo: main.c
     #include <stdio.h>
 
@@ -235,14 +233,16 @@ E aqui está um exemplo de código que ilustra o uso de funções \texttt{static
     {
         printf("Hello from example.c!\n");
     }
-\end{verbatim}
+\end{code}
+
+\subsubsection{Exercícios}
 
 \textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
 
 \begin{enumerate}
-    \item Escreva um programa em C que declare duas variáveis com o mesmo 
-        nome, uma global e uma local dentro de uma função que não seja a 
+    \item {Escreva um programa em C que declare duas variáveis com o mesmo 
+        nome, uma global e uma local em uma função que não seja a 
         \texttt{main}. O que acontece quando você tenta imprimir o valor 
         dessas variáveis dentro da função? 
-        E fora da função?
+        E fora da função?}
 \end{enumerate}

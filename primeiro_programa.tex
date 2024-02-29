@@ -1,10 +1,10 @@
 Após configurar e instalar todas as ferramentas necessárias, é comum começar 
 com um simples ``Olá, mundo!''.
-\\\\
+
 O programa que iremos fazer exibe o texto ``Olá, mundo!'' na tela e embora seja simples, é 
 um ponto de partida essencial para começar a entender não somente como a linguagem C 
 funciona, mas qualquer outra linguagem de programação.
-\\\\
+
 Para criar o seu primeiro programa, siga estes passos:
 
 \begin{enumerate}
@@ -12,25 +12,25 @@ Para criar o seu primeiro programa, siga estes passos:
     \item Crie um arquivo chamado ``main.c'' onde será escrito o código.
     \item Abra o arquivo ``main.c'' no seu editor de código e escreva o seguinte:
 
-        \begin{verbatim}
+        \begin{code}
         #include <stdio.h>
 
         int main(void) {
             printf("Olá, mundo!\n");
             return 0;
         }
-        \end{verbatim}
+        \end{code}
     \item Salve o arquivo de texto e compile o código com o GCC usando o seguinte comando no seu terminal:
-        \begin{verbatim}
+        \begin{code}
         gcc main.c
-        \end{verbatim}
+        \end{code}
     \item Agora, execute o programa compilado com o seguinte comando:
-        \begin{verbatim}
+        \begin{code}
         # Para sistemas Linux
         ./a.out
         # Para sistemas Windows
         ./a.exe
-        \end{verbatim}
+        \end{code}
 \end{enumerate}
 
 \begin{ps}
@@ -47,18 +47,18 @@ exatamente cada uma das linhas de código que você escreveu fazem e como
 exatamente elas fazem esse texto aparecer na sua tela. Por isso, vou explicar passo a 
 passo o que significa cada linha do código acima.
 
-\begin{verbatim}
+\begin{code}
     #include <stdio.h>
-\end{verbatim}
+\end{code}
 
 Na linha número 1, temos o ``include'', uma diretiva que inclui bibliotecas 
 externas no nosso programa. Aqui, estamos incluindo a biblioteca ``stdio.h''. 
 O conceito de bibliotecas ainda vai ser melhor explicado futuramente, mas você pode 
 entender como se cada biblioteca fosse um tipo de extensão com funções extras.
 
-\begin{verbatim}
+\begin{code}
     int main(void) {
-\end{verbatim}
+\end{code}
 
 Na linha número 2, temos o início de uma função. Nessa linha, há o uso 
 de quatro palavras/caracteres importantes:
@@ -76,15 +76,15 @@ de quatro palavras/caracteres importantes:
     \item \textbf{"\{":} Marca o início de um bloco de código de uma função.
 \end{itemize}
 
-\begin{verbatim}
+\begin{code}
     printf("Olá, mundo!\n");
-\end{verbatim}
+\end{code}
 
 Na linha número 3, encontramos a diretiva ``printf'', responsável por exibir 
 informações no terminal. Esta diretiva na verdade não existe como uma funcionalidade 
 padrão na linguagem C, e está sendo implementada através da biblioteca 
 ``stdio.h'', mencionada na linha 1.
-\\\\
+
 Neste caso a informação que está sendo passada para a função é o texto "Olá, 
 mundo!\textbackslash n" que sempre deve ser colocado entre os parênteses e as aspas, 
 você pode ter percebido também a presença do caracter ``\textbackslash n'' que não 
@@ -92,27 +92,27 @@ aparece quando a mensagem é exibida. Esse caracter é um caracter especial e te
 como função fazer com que naquele espaço da mensagem o terminal desça uma 
 linha abaixo antes de continuar.
 
-\begin{verbatim}
+\begin{code}
     return 0;
-\end{verbatim}
+\end{code}
 
 Na linha número 4, encontramos o comando ``return''. Em uma função, essa diretiva
 indica o valor que a função deve retornar quando terminar sua execução e normalmente, 
 mas nem sempre, é acompanhada de um valor que está escrito como um sufixo da diretiva. 
-\\\\
+
 No caso da função ``main'', que é a função principal em um programa C, o valor 0 
 geralmente é usado como uma boa prática para indicar que o programa foi finalizado sem 
 erros.
 
-\begin{verbatim}
+\begin{code}
     }
-\end{verbatim}
+\end{code}
 
 A linha número 5 é a chave de fechamento ``\}'', que indica o fim do bloco de 
 código da função ``main''. Tudo o que está contido entre as chaves forma o corpo 
 da função, o compilador (GCC) utiliza dessas chaves de abertura e fechamento como uma 
 forma de entender quando um código é pertencente a uma função.
-\\\\
+
 Caso tenha parecido um pouco confuso a primeira vista, acredito que com um pouco de 
 prática você vai começar a escrever esse tipo de código sem sequer pensar direito 
 sobre isso. E no geral, essa estrutura tende a se repetir bastante, então caso não 

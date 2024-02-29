@@ -3,6 +3,7 @@
 \usepackage{tcolorbox}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{fancyvrb}
 \usepackage[utf8]{inputenc}
 \usepackage[brazilian]{babel}
 
@@ -12,6 +13,8 @@
 \geometry{
     margin=1in,
 }
+
+\setlength{\parskip}{0.5em}
 
 % Estilização do livro
 
@@ -34,26 +37,32 @@
     \endtcolorbox
 }
 
+% Define o ambiente da caixa de código
+% Define o ambiente da caixa de código
+\DefineVerbatimEnvironment{code}{Verbatim}{
+  frame=single,
+  rulecolor=\color{black}
+}
+
 \title{Descompilando\\ \large Entendendo o código da máquina}
 \author{Anthony Carneiro da Silva}
 
 \begin{document}
 \maketitle
 
-\clearpage
-
 \tableofcontents
 
+\chapter{Índice}
 \clearpage
 
-\chapter{Índice}
-\clearpage % Define página isolada para novo capítulo
-
+\section{Sobre o autor}
 \input{sobre_o_autor.tex}
+
+\section{Sobre o livro}
 \input{sobre_o_livro.tex}
 
 \chapter{Introdução a linguagem C}
-\clearpage % Define página isolada para novo capítulo
+\clearpage
 
 \section{O que é a linguagem C}
 
@@ -100,19 +109,19 @@ Quando discutimos entrada e saída de dados em C, frequentemente nos referimos
 a essa interação por meio de ``arquivos''. Embora esses ``arquivos'' não sejam, 
 na verdade, arquivos físicos dentro do seu computador, essa é uma abstração 
 útil para compreender o processo.
-\\\\
+
 Na prática, um "arquivo" é simplesmente um espaço na memória usado pelo 
 sistema para armazenar informações de forma organizada. Uma analogia útil é 
 imaginar que cada vez que o computador recebe uma informação, ela é escrita em 
 um arquivo para armazenamento, e cada vez que uma informação precisa ser 
 exibida, ela é escrita em um arquivo padrão que o terminal utiliza para 
 determinar o que deve ser exibido na tela.
-\\\\
+
 % Quais são os arquivos de entrada e saída que existem (stdin, stdout, stderr)
 Além disso, é importante mencionar que os nomes oficiais, por assim a se dizer, 
 utilizados para se referir a esses arquivos são: \texttt{stdin (entrada), 
 stdout (saída)}.
-\\\\
+
 Porém, um detalhe que vale ser mencionado, e que poucas pessoas se perguntam 
 sobre é, existe algum outro tipo de arquivo que não sejam os de entrada e 
 saída? E a resposta é que sim, esse arquivo seria o \texttt{stderr}. Que é 

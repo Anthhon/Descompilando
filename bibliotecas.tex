@@ -6,27 +6,27 @@ bibliotecas em um projeto.
 
 \subsubsection{Bibliotecas estáticas}
 
-As bibliotecas estáticas consistem em segmentos de código que são 
-incorporados ao seu código durante o processo de compilação. Elas são 
-acopladas diretamente ao seu programa, de modo que passam a fazer parte do 
-executável produzido pelo compilador.
-\\\\
+As bibliotecas estáticas consistem em segmentos de código incorporados ao 
+seu código durante o processo de compilação. Elas são acopladas diretamente 
+ao seu programa, de modo que passam a fazer parte do executável produzido 
+pelo compilador.
+
 Em geral, as bibliotecas estáticas são as mais simples de usar, pois não 
 exigem que o usuário instale ou gerencie quaisquer outros arquivos além dos 
 do seu próprio código para compilar o código de forma independente.
-\\\\
+
 Exemplos de bibliotecas estáticas incluem: \texttt{stdio.h, string.h e 
 stdlib.h}. Todas essas bibliotecas são, na verdade, arquivos localizados em 
-um diretório padrão do seu sistema, que geralmente são instalados 
-automaticamente junto com o compilador \texttt{gcc}. Em sistemas Linux, esses 
-arquivos podem ser encontrados no diretório: \texttt{/usr/include/}. Já em 
-sistemas Windows, a localização desses arquivos dependerá do método que você 
+um diretório padrão do seu sistema, que são instalados automaticamente com 
+o compilador \texttt{gcc}. Em sistemas Linux, esses arquivos podem ser 
+encontrados no diretório: \texttt{/usr/include/}. Já em sistemas Windows, 
+a localização desses arquivos dependerá do método que você 
 usou para instalar o \texttt{gcc}, portanto, recomendo que você pesquise por 
 conta própria na internet.
-\\\\
+
 Aqui está um exemplo comum de uso de bibliotecas estáticas:
 
-\begin{verbatim}
+\begin{code}
     #include <stdio.h>
 
     int main(void)
@@ -34,42 +34,42 @@ Aqui está um exemplo comum de uso de bibliotecas estáticas:
         printf("Olá, mundo!\n");
         return 0;
     }
-\end{verbatim}
+\end{code}
 
 Como você pode ver, já na primeira linha, estamos incluindo a biblioteca \texttt{stdio.h} no código para poder usar a função \texttt{printf}.
 
 \subsubsection{Utilizando bibliotecas dinâmicas}
 
 As bibliotecas dinâmicas, também conhecidas como bibliotecas compartilhadas, 
-são um conjunto de funções e procedimentos que são carregados durante a 
-execução, em vez de serem vinculados ao programa durante a compilação. Isso 
-significa que o código contido nessas bibliotecas não é incorporado 
-diretamente no executável final do programa.
-\\\\
+são um conjunto de funções e procedimentos carregados durante a execução, 
+em vez de serem vinculados ao programa durante a compilação. Isso significa 
+que o código contido nessas bibliotecas não é incorporado diretamente no 
+executável final do programa.
+
 A principal vantagem das bibliotecas dinâmicas é que elas permitem que vários 
 programas compartilhem o mesmo código de biblioteca na memória, economizando 
 espaço e recursos do sistema, pois aquele código não vai precisar estar 
 incluso no executável de todos os programas que a utilizam. Além disso, as 
 bibliotecas dinâmicas permitem que os programas sejam atualizados ou 
-modificados sem a necessidade de recompilar ou relinkar os programas que as 
+modificados, sem a necessidade de recompilar ou relinkar os programas que as 
 utilizam.
-\\\\
+
 No entanto, o uso de bibliotecas dinâmicas também tem suas desvantagens. 
 Por exemplo, se um programa depende de uma biblioteca dinâmica específica e 
 essa biblioteca não está disponível no sistema onde o programa está sendo 
-executado, o programa não será capaz de ser executado corretamente. Além 
-disso, o uso de bibliotecas dinâmicas pode tornar o processo de compilação 
-e linkagem mais complexo.
-\\\\
+executado, o programa não será executado corretamente. Além disso, o uso de 
+bibliotecas dinâmicas pode tornar o processo de compilação e linkagem mais 
+complexo.
+
 Em resumo, as bibliotecas dinâmicas são uma ferramenta poderosa que permite 
 aos desenvolvedores compartilhar e reutilizar código de maneira eficiente. 
 No entanto, eles também exigem um entendimento cuidadoso de como eles 
 funcionam para evitar potenciais problemas.
-\\\\
+
 Para exemplificar a utilização de bibliotecas externas, vamos considerar o 
 seguinte código:
 
-\begin{verbatim}
+\begin{code}
     #include <stdio.h>
     #include <math.h>
 
@@ -86,34 +86,36 @@ seguinte código:
         printf("Valor da hipotenusa: %.2f\n", h);
         return 0;
     }
-\end{verbatim}
+\end{code}
 
-Este código calcula a hipotenusa de um triângulo com base nos valores fornecidos pelas variáveis (c1) e (c2). No entanto, as funções \textbf{pow} e \textbf{sqrt}, responsáveis por calcular a potência e a raiz quadrada de um número, respectivamente, não estão definidas em nenhum lugar do código.
-\\\\
-Ambas as funções estão incluídas na biblioteca \textbf{math.h}, que contém várias funções relacionadas a operações matemáticas mais complexas que não estão incluídas por padrão na linguagem C e que poderiam ser difíceis de implementar manualmente. Dito isso, se você tentar compilar o código acima usando o comando:
+Este código calcula a hipotenusa de um triângulo com base nos valores fornecidos pelas variáveis \texttt{c1} e \texttt{c2}. No entanto, as funções \texttt{pow} e \texttt{sqrt}, responsáveis por calcular a potência e a raiz quadrada de um número, respectivamente, não estão definidas em nenhum lugar do código.
 
-\begin{verbatim}
+Ambas as funções estão incluídas na biblioteca \texttt{math.h}, que contém várias funções relacionadas a operações matemáticas mais complexas que não estão incluídas por padrão na linguagem C e que poderiam ser difíceis de implementar manualmente. Dito isso, se você tentar compilar o código acima usando o comando:
+
+\begin{code}
     gcc -o main main.c
-\end{verbatim}
+\end{code}
 
 É provável que você veja um erro semelhante ao seguinte:
 
-\begin{verbatim}
+\begin{code}
     /usr/bin/ld: /tmp/ccF2H2AC.o: in function `main':
     main.c:(.text+0x3d): undefined reference to `pow'
     /usr/bin/ld: main.c:(.text+0x66): undefined reference to `pow'
     /usr/bin/ld: main.c:(.text+0x7e): undefined reference to `sqrt'
     collect2: error: ld returned 1 exit status
-\end{verbatim}
+\end{code}
 
 Isso indica que as funções \texttt{pow e sqrt} não estão sendo encontradas 
 pelo compilador.
-\\\\
-Para corrigir o erro, você precisa informar ao compilador que pretende compilar o código usando uma biblioteca específica. Neste caso, como estamos incluindo a biblioteca \texttt{math}, devemos adicionar ``-lm'' ao comando de compilação, conforme mostrado abaixo:
 
-\begin{verbatim}
+Para corrigir o erro, você precisa informar ao compilador que pretende 
+compilar o código usando uma biblioteca específica. Neste caso, como estamos 
+incluindo a biblioteca \texttt{math}, devemos adicionar ``-lm'' ao comando de compilação, conforme mostrado abaixo:
+
+\begin{code}
     gcc -o main main.c -lm
-\end{verbatim}
+\end{code}
 
 Dessa forma, o compilador reconhecerá a biblioteca e realizará a compilação 
 corretamente.
@@ -122,14 +124,14 @@ corretamente.
 
 Um aspecto interessante das bibliotecas é que você pode criar as suas 
 próprias para implementar funções com uma quantidade mínima de código.
-\\\\
+
 Para demonstrar isso vamos supor uma situação bem simples. Vamos supor que 
 você está incomodado de ter que adicionar o `f' no final da chamada da função 
 \texttt{printf} e que você também não quer ter que se lembrar de adicionar o 
 \texttt{\\n} ao final do texto impresso para ter que pular para a próxima 
 linha e para resolver isso você resolveu implementar a função \texttt{print}.
 
-\begin{verbatim}
+\begin{code}
     // Arquivo minha_biblioteca.c
     #include <stdio.h>
 
@@ -156,56 +158,53 @@ linha e para resolver isso você resolveu implementar a função \texttt{print}.
         print("A função print está funcionando");
         print("Esse texto deve ser impresso na linha abaixo");
     }
-\end{verbatim}
-
-% TODO: Resolver os símbolos <> que estão sendo exibidos de maneira incorreta
+\end{code}
 
 Vamos supor que o código acima esteja dividido em três arquivos diferentes, 
 localizados no mesmo diretório, com os respectivos nomes indicados nos 
 comentários acima. Primeiramente, é importante notar a maneira como o arquivo 
 \texttt{minha\_biblioteca.h} foi incluído no código do arquivo ``main.c''. 
-Como o nome da biblioteca foi colocado entre aspas, e não entre `<>', isso 
-indica ao compilador que estamos tentando incluir um arquivo que está 
-localizado no mesmo diretório, e não no diretório padrão de bibliotecas.
-\\\\
+Como o nome da biblioteca foi colocado entre aspas, e não entre `\textless 
+\textgreater', isso indicará ao compilador que estamos tentando incluir um 
+arquivo localizado no mesmo diretório, e não no diretório padrão de bibliotecas.
+
 Além disso, é importante notar que, em vez de incluir diretamente o arquivo 
 \texttt{minha\_biblioteca.c}, incluímos o arquivo \texttt{minha\_biblioteca.h}. 
 Arquivos `.h' são chamados de ``headers'', que são basicamente arquivos que 
 contêm os protótipos das funções que pretendemos chamar. Uma vez incluídos 
-esses protótipos, o compilador será capaz de lidar sozinho com todo o 
-trabalho de incluir os arquivos necessários para que o código seja compilado 
-com sucesso.
-\\\\
+esses protótipos, o compilador capaz de lidar sozinho com todo o trabalho de 
+incluir os arquivos necessários para que o código seja compilado com sucesso.
+
 Além disso, caso você tenha observado atentamente é possível perceber a 
 inclusão das seguintes linhas de código:
 
-\begin{verbatim}
+\begin{code}
     #ifndef MINHA_BIBLIOTECA_H
     #define MINHA_BIBLIOTECA_H
     ...
     #endif
-\end{verbatim}
+\end{code}
 
 Essas três linhas são marcadores que, embora não sejam obrigatórios, são 
 extremamente importantes, pois evitam que uma mesma biblioteca seja incluída 
 repetidamente de maneira desnecessária. Para entender melhor como isso 
 funciona, vamos analisar o que cada uma dessas linhas significa.
 
-\begin{verbatim}
+\begin{code}
     #ifndef MINHA_BIBLIOTECA_H
-\end{verbatim}
+\end{code}
 
 Verifica se \texttt{MINHA\_BIBLIOTECA\_H} ainda não foi definido. Se já tiver sido definido, a inclusão do restante do código é cancelada.
 
-\begin{verbatim}
+\begin{code}
     #define MINHA_BIBLIOTECA_H
-\end{verbatim}
+\end{code}
 
 Define \texttt{MINHA\_BIBLIOTECA\_H} e inclui todo o código abaixo.
 
-\begin{verbatim}
+\begin{code}
     #endif
-\end{verbatim}
+\end{code}
 
 Delimita o fim do bloco que deve ser definido junto a \texttt{MINHA\_BIBLIOTECA\_H}.
 
@@ -213,7 +212,7 @@ Delimita o fim do bloco que deve ser definido junto a \texttt{MINHA\_BIBLIOTECA\
     No trecho de código acima, você pode entender \texttt{MINHA\_BIBLIOTECA\_H} 
     como sendo uma variável booleana, pois quando utilizada desta forma ela 
     possui apenas dois estados, sendo esses definido e não definido.
-\\\\
+
     O nome que se pode dar é de escolha do usuário, não tendo que seguir 
     obrigatoriamente nenhum tipo de padrão, porém, por convenção e 
     padronização o costume é que se utilize, sempre em maiúsculo, o nome da 
@@ -226,9 +225,9 @@ passar para o processo de compilação do código, que vai mudar um pouco devido
 aos múltiplos arquivos. Para compilar o código acima, usaremos o seguinte 
 comando:
 
-\begin{verbatim}
+\begin{code}
     gcc -o main main.c minha_biblioteca.c
-\end{verbatim}
+\end{code}
 
 Com isso, o compilador deve processar todos os arquivos e gerar um executável 
 com sucesso.
