@@ -209,11 +209,33 @@ O código a seguir ilustra o uso de variáveis globais \texttt{static}:
     {
         printf("x in example.c: %d\n", x);
     }
+\end{verbatim}
+
+E aqui está um exemplo de código que ilustra o uso de funções \texttt{static}:
+
 \begin{verbatim}
+    // Arquivo: main.c
+    #include <stdio.h>
 
-% TODO: Elaborar código para exemplicar o uso de variáveis globais static
+    static void printHello(void)
+    {
+        printf("Hello from main.c!\n");
+    }
 
-% TODO: Elaborar código para exemplicar o uso de funções static
+    int main(void)
+    {
+        printHello();
+        return 0;
+    }
+
+    // Arquivo: example.c
+    #include <stdio.h>
+
+    static void printHello(void)
+    {
+        printf("Hello from example.c!\n");
+    }
+\end{verbatim}
 
 \textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
 
