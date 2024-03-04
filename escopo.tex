@@ -17,10 +17,10 @@ exemplo:
     #include <stdio.h>
 
     void printnum(int x) { // Recebe argumento 'x'
-        printf("%i\n", x);
+    printf("\%i\n", x);
 
-        int y = 369; // Cria variável local
-        printf("%i\n", y);
+    int y = 369; // Cria variável local
+    printf("\%i\n", y);
     }
 
     int main (void) {
@@ -80,7 +80,7 @@ jogo:
 
     // Exibe a vida do personagem
     void lifePrint(void) {
-        printf("Vida: %i\n", life);
+        printf("Vida: \%i\n", life);
     }
 
     int main(void) {
@@ -124,13 +124,13 @@ O código a seguir ilustra essa propriedade:
 
 \begin{code}
     #include <stdio.h>
-     
+
     int main(void)
     {
         static int x;
         int y;
-        printf("x: %d\n", x);
-        printf("y: %d\n", y);
+        printf("x: \%d\n", x);
+        printf("y: \%d\n", y);
     }
 \end{code}
 
@@ -146,12 +146,12 @@ Usemos esse código como exemplo:
     {
         return 50;
     }
-      
+
     int main(void)
     {
         // Inicializa o valor de x com o valor retornado pela função
         static int x = initializer(); 
-        printf("x: %d\n", x);
+        printf("x: \%d\n", x);
 
         return 0;
     }
@@ -162,8 +162,8 @@ Ao compilar o código acima você verá um erro semelhante a:
 \begin{code}
     main.c: In function ‘main’:
     main.c:10:24: error: initializer element is not constant
-       10 |         static int x = initializer();
-          |                        ^~~~~~~~~~~
+    10 |         static int x = initializer();
+    |                        ^~~~~~~~~~~
 \end{code}
 
 Isso se deve ao fato de que o valor de \(x\) não é conhecido durante a 
@@ -186,14 +186,14 @@ ser útil.
 O código a seguir ilustra o uso de variáveis globais \texttt{static}:
 
 \begin{code}
-    // arquivo 'main.c'
+    // Arquivo: main.c
     #include <stdio.h>
 
     static int x = 10;
 
     int main(void)
     {
-        printf("x in main.c: %d\n", x);
+        printf("x in main.c: \%d\n", x);
         printX();
         return 0;
     }
@@ -240,7 +240,7 @@ E aqui está um exemplo de código que ilustra o uso de funções \texttt{static
 \textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
 
 \begin{enumerate}
-    \item {Escreva um programa em C que declare duas variáveis com o mesmo 
+    \item {Escreva um programa que declare duas variáveis com o mesmo 
         nome, uma global e uma local em uma função que não seja a 
         \texttt{main}. O que acontece quando você tenta imprimir o valor 
         dessas variáveis dentro da função? 
