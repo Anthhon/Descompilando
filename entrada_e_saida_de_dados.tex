@@ -1,0 +1,125 @@
+Quando discutimos entrada e saída de dados em C, frequentemente nos referimos 
+a essa interação por meio de ``arquivos''. Embora esses ``arquivos'' não sejam, 
+na verdade, arquivos físicos dentro do seu computador, essa é uma abstração 
+útil para compreender o processo.
+
+Na prática, um "arquivo" é simplesmente um espaço na memória usado pelo 
+sistema para armazenar informações de forma organizada. Uma analogia útil é 
+imaginar que cada vez que o computador recebe uma informação, ela é escrita em 
+um arquivo para armazenamento, e cada vez que uma informação precisa ser 
+exibida, ela é escrita em um arquivo padrão que o terminal utiliza para 
+determinar o que deve ser exibido na tela.
+
+\subsubsection{Saída}
+
+Além disso, é importante mencionar que os nomes oficiais, por assim a se dizer, 
+utilizados para se referir a esses arquivos são: \texttt{stdin (entrada), 
+stdout (saída)}.
+
+Porém, um detalhe que vale ser mencionado, e que poucas pessoas se perguntam 
+sobre é, existe algum outro tipo de arquivo que não sejam os de entrada e 
+saída? E a resposta é que sim, esse arquivo seria o \texttt{stderr}. Que é 
+unicamente designado para exibição de mensagens de erro e é completamente 
+independente do \texttt{stdout}, permitindo assim, que haja uma distinção 
+entre todo o conteúdo padrão que está sendo exibido no terminal e mensagens 
+de erro.
+
+Para demonstrar a utilização desses dois tipos de saída de dados diferentes 
+vamos usar o seguinte exemplo:
+
+\begin{code}
+    #include <stdio.h>
+
+    void print_error(void)
+    {
+        // Escreve a mensagem no arquivo `stdout'
+        fprintf(stdout, "Essa é uma mensagem normal.");
+    }
+
+    void print_message(void)
+    {
+        // Escreve a mensagem no arquivo `stderr'
+        fprintf(stderr, "Essa é uma mensagem de erro.");
+    }
+
+    int main(void)
+    {
+        print_message();
+        print_error();
+        return 0;
+    }
+\end{code}
+
+O código acima utiliza da função \texttt{fprintf} para direcionar o output de 
+cada uma das mensagens de maneira mais específica. Diferente do \texttt{printf}, 
+nessa outra função você deve escolher entre o \texttt{stdout e o stderr} antes 
+de escolher qual mensagem você quer que seja exibida.
+
+Ao compilar e executar o código você deve conseguir ver as duas mensagens 
+sendo exibidas na tela da mesma forma, porém, as duas estão sendo exibidas de 
+locais diferentes. Em sistemas Linux e Windows é possível filtrar o fluxo 
+dessas mensagens da seguinte forma:
+
+\begin{code}
+    # Envia o conteúdo de stdout e stderr para 'output.txt'
+    ./main > output.txt
+    # Envia somente as mensagens de stderr para 'error.txt'
+    ./main 2> error.txt
+    # Envia somente as mensagens de stderr para 'error.txt'
+    ./main > output.txt 2> error.txt
+\end{code}
+
+\subsubsection{Entrada}
+
+Em C, a entrada de dados geralmente é realizada através do arquivo padrão de 
+entrada, conhecido como \texttt{stdin}. Este arquivo é associado ao 
+teclado, permitindo que o programa receba dados inseridos pelo usuário durante 
+a execução.
+
+Para ler dados do \texttt{stdin}, podemos usar funções de entrada como 
+\texttt{scanf} e \texttt{fgets}. A função \texttt{scanf} é usada para ler 
+entrada formatada, enquanto \texttt{fgets} é usada para ler uma linha de 
+entrada como um texto.
+
+Aqui está um exemplo de uso do \texttt{scanf} para ler um número inteiro:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int num;
+        printf("Digite um número inteiro: ");
+        scanf("\%d", &num);
+        printf("Você digitou: \%d\n", num);
+        return 0;
+    }
+\end{code}
+
+No exemplo acima, o programa solicita ao usuário que digite um número inteiro. 
+O valor inserido pelo usuário é lido pelo \texttt{scanf} e armazenado na variável 
+\texttt{num}, o qual é impressa na tela.
+
+Se o programa precisar ler uma linha inteira de texto, pode-se usar a função 
+\texttt{fgets}, como mostrado no exemplo a seguir:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        char linha[100];
+        printf("Digite uma frase: ");
+        fgets(linha, 100, stdin);
+        printf("Você digitou: %s\n", linha);
+        return 0;
+    }
+\end{code}
+
+Neste exemplo, o programa solicita ao usuário que digite uma frase. A função 
+\texttt{fgets} lê a linha de entrada e armazena na variável \texttt{linha}, 
+a qual é então impressa na tela.
+
+Esses são exemplos simples de como usar o \texttt{stdin} para entrada de dados 
+em um programa em C. É importante lembrar de validar e manipular os dados de 
+entrada adequadamente para garantir o bom funcionamento do programa.
