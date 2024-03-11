@@ -1,0 +1,363 @@
+Através de condicionais e loops, é possível criar programas que executam 
+seções específicas de código com base em determinadas condições definidas 
+no próprio código.
+
+\subsubsection{Condicionais}
+
+Condicionais são estruturas de controle que direcionam o fluxo de execução 
+do programa. Este conceito pode ser exemplificado diretamente com um código:
+
+A estrutura \texttt{if} geralmente segue o seguinte formato:
+
+\begin{code}
+    if (condição) {
+        // Código a executar se condição for verdadeira...
+    }
+\end{code}
+
+A condição fornecida entre parênteses para o \texttt{if} deve ser uma 
+expressão que resulta em verdadeiro ou falso. Dependendo do resultado da 
+expressão, o bloco de código entre chaves será executado ou ignorado.
+
+É possível utilizar valores constantes como \(0\) ou \(1\) para representar 
+verdadeiro e falso, respectivamente. No entanto, é redundante utilizar uma 
+expressão que sempre resulta em verdadeiro ou falso. Embora esse tipo de 
+operação seja raramente utilizado, segue um exemplo para ilustrar o conceito:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        if (0) { // 0 representa falso printf("Esse texto nunca será impresso\n");
+        }
+        if (1 > 2) { // 1 nunca será maior que 2
+            printf("Esse texto nunca será impresso\n");
+        }
+        if (1) { // Qualquer número que não seja 0 representa verdadeiro
+            printf("Esse texto sempre será impresso\n");
+        }
+        if (10 > 0) { // 10 sempre será maior que 0
+            printf("Esse texto sempre será impresso\n");
+        }
+        
+        return 0;
+    }
+\end{code}
+
+Neste exemplo, as verificações produzem resultados constantes, ou seja, o 
+resultado não varia independentemente do número de vezes que o código é 
+executado.
+
+Outra diretiva importante de se entender é o \texttt{else}, que complementa o 
+\texttt{if}. O bloco de código dentro do \texttt{else} é executado se a 
+condição do \texttt{if} for falsa. Um exemplo prático ilustra sua utilização:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int number = 0;
+        printf("Digite um número: ");
+        scanf("\%d", &number);
+
+        if (number < 0) {
+            printf("Número é maior que 0\n");
+        } else {
+            printf("Número não é maior que 0\n");
+        }
+        
+        return 0;
+    }
+\end{code}
+
+Neste código, se o número digitado for maior que \(0\), o primeiro bloco de 
+código será executado; caso contrário, o bloco de código dentro do 
+\texttt{else} será executado.
+
+Além disso, é possível criar fluxos de execução mais complexos utilizando 
+\texttt{if} dentro de \texttt{else} para definir condições adicionais. 
+Apesar de ser complexo de entender apenas com explicações textuais, um 
+exemplo de código esclarecerá o conceito:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int number = 0;
+        printf("Digite um número: ");
+        scanf("\%d", &number);
+
+        if (number < 0) {
+            // Executa bloco se número for menor que 0
+            printf("Número é menor que 0\n");
+        } else if (number > 0) {
+            // Executa bloco se número for maior que 0
+            printf("Número é maior que 0\n");
+        } else {
+            // Caso nenhuma das condições sejam
+            // verdadeiras, o número só pode ser igual a 0
+            printf("Número é exatamente igual a 0\n");
+        }
+        
+        return 0;
+    }
+\end{code}
+
+Neste exemplo, além de verificar se o número é maior ou menor que \(0\), o 
+programa também identifica quando o número é exatamente \(0\). Vale 
+ressaltar que, ao utilizar \texttt{else if}, a expressão dentro dos 
+parênteses só é avaliada se as condições anteriores forem falsas.
+
+Em situações em que é necessário avaliar cada condição individualmente, 
+vários \texttt{if} consecutivos são utilizados. Como por exemplo:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int number = 120;
+
+        if (number > 0) {
+            printf("Número é maior que 0\n");
+        }
+        if (number > 10) {
+            printf("Número é maior que 10\n");
+        }
+        if (number > 100) {
+            printf("Número é maior que 100\n");
+        }
+        if (number > 1000) {
+            printf("Número é maior que 1000\n");
+        }
+
+        return 0;
+    }
+\end{code}
+
+Ao executar o código acima, você deve ver algo como:
+
+\begin{code}
+    Número é maior que 0
+    Número é maior que 10
+    Número é maior que 100
+\end{code}
+
+Isso ocorre porque cada bloco \texttt{if} é independente dos outros; portanto, todos são avaliados individualmente. Se fosse utilizado um \texttt{else} dentro dos \texttt{if}, como no exemplo a seguir:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int number = 120;
+
+        if (number > 0) {
+            printf("Número é maior que 0\n");
+        } else if (number > 10) {
+            printf("Número é maior que 10\n");
+        } else if (number > 100) {
+            printf("Número é maior que 100\n");
+        } else if (number > 1000) {
+            printf("Número é maior que 1000\n");
+        }
+
+        return 0;
+    }
+\end{code}
+
+O resultado seria apenas:
+
+\begin{code}
+    Número é maior que 0
+\end{code}
+
+Isso ocorre porque a primeira condição já é avaliada como verdadeira, e as 
+condições subsequentes dependem da falsidade das condições anteriores, o que 
+não ocorre neste caso.
+
+\subsubsection{Loops}
+
+A estrutura de loop mais simples é criada com a diretiva \texttt{while}. Essa 
+estrutura é responsável por repetir uma seção de código enquanto uma expressão 
+for verdadeira.
+
+\begin{code}
+    while (expressão) {
+        // Bloco de código a ser executado
+    }
+\end{code}
+
+Vamos ilustrar um simples caso de uso para a estrutura while:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int x = 0;
+
+        while (x != 10) {
+            printf("x: \%d\n", x);
+            ++x; // Incrementa o valor de x em 1
+        }
+
+        return 0;
+    }
+\end{code}
+
+Neste exemplo, criamos uma estrutura \texttt{while} que verifica se \(x\) é 
+diferente de 10. Enquanto o valor for diferente de 10, o código entre chaves é 
+repetido. Quando executado, este código produzirá a seguinte saída:
+
+\begin{code}
+    x: 0
+    x: 1
+    x: 2
+    x: 3
+    x: 4
+    x: 5
+    x: 6
+    x: 7
+    x: 8
+    x: 9
+\end{code}
+
+Essa funcionalidade pode ser usada para criar algoritmos mais complexos, 
+repetindo um mesmo código várias vezes sem a necessidade de escrever mais 
+linhas de código.
+
+Um código equivalente, porém menos eficiente, do ponto de vista da criação, 
+seria:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        printf("x: 0\n");
+        printf("x: 1\n");
+        printf("x: 2\n");
+        printf("x: 3\n");
+        printf("x: 4\n");
+        printf("x: 5\n");
+        printf("x: 6\n");
+        printf("x: 7\n");
+        printf("x: 8\n");
+        printf("x: 9\n");
+
+        return 0;
+    }
+\end{code}
+
+Imagine repetir essa estrutura para números maiores, como até 10000. Seria um 
+processo extremamente tedioso e ineficiente ter que escrever tudo isso 
+manualmente, daí a utilidade das estruturas como \texttt{while}.
+
+Outra estrutura de loop semelhante, mas um pouco mais complexa, é o 
+\texttt{for} (conhecido também como for loop). Esta estrutura segue o seguinte padrão:
+
+\begin{code}
+    for (inicialização ; expressao; incremento) {
+        // Código a ser executado
+    }
+\end{code}
+
+Dentro de uma única estrutura, há três seções com características únicas: a 
+inicialização, que é executada uma vez antes do looping começar; a expressão, 
+verificada a cada finalização do looping; e o incremento, executado antes de 
+reavaliar a expressão.
+
+Para ilustrar, vamos usar essa estrutura para replicar o exemplo do \texttt{while}:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        for (int x = 0; x != 10; ++x) {
+            printf("x: \%d\n", x);
+        }
+
+        return 0;
+    }
+\end{code}
+
+Para entender melhor o código acima, vamos explicar cada parâmetro 
+individualmente:
+
+\begin{itemize}
+    \item{\texttt{int x = 0} - Inicializa a variável \(x\) com o valor 0.}
+    \item{\texttt{x != 10} - Expressão avaliada no início de cada looping.}
+    \item{\texttt{++x} - Incrementa o valor de \(x\) ao final de cada looping.}
+\end{itemize}
+
+
+Ao executar o código, o resultado será idêntico ao exemplo utilizando 
+\texttt{while}.
+
+É importante notar que, em um \texttt{for loop}, é possível omitir qualquer 
+um desses parâmetros, embora seja contra-intuitivo. Por exemplo, podemos criar 
+um loop infinito da seguinte forma:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        for (;;) {
+            // Esse looping deve continuar sendo executado indefinidamente 
+        }
+
+        while (1) {
+            // O while requer uma expressão constante verdadeira para 
+            // funcionar como um loop infinito
+        }
+    }
+\end{code}
+
+Por fim, temos o menos utilizado loop da linguagem C, chamado 
+\texttt{do while}. A diferença fundamental deste loop é que ele executa o 
+bloco de código antes de verificar a expressão. A estrutura deste loop é a 
+seguinte:
+
+\begin{code}
+    do {
+        // Código a ser executado
+    } while (expressão);
+\end{code}
+
+Vamos demonstrar o funcionamento desse looping com um exemplo simples:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        do {
+            print("Esse texto será impresso\n");
+        } while (0); // Verificação é feita após a execução
+
+        while (0) { // Verificação é feita antes da execução
+            print("Esse texto não será impresso\n");
+        }
+
+        return 0;
+    }
+\end{code}
+
+Caso executemos o código acima, veremos o seguinte resultado:
+
+\begin{code}
+    Esse texto será impresso
+\end{code}
+
+Nota-se que o texto de \texttt{while}, ao contrário do texto de 
+\texttt{do while}, não foi impresso. Isso ocorre porque o \texttt{do while} 
+primeiro executa o código dentro do bloco e, em seguida, verifica a expressão. 
+Como ambas as expressões no código acima são falsas, o \texttt{do while} 
+executará o código uma vez e sairá do looping, enquanto o \texttt{while} 
+nunca executará seu bloco de código.

@@ -3,13 +3,13 @@ ser feitas com as mais diferentes finalidades.
 
 \subsubsection{Conversões implícitas}
 
-Ao avaliar uma expressão, o compilador acaba por realizar um processo de conversão 
-de dados que respeita uma regra chamada \textbf{promoção automática} onde todas as 
-variáveis são convertidas para um mesmo tipo.
+Ao avaliar uma expressão, o compilador acaba por realizar um processo de 
+conversão de dados que respeita uma regra chamada \textbf{promoção automática} 
+onde todas as variáveis são convertidas para um mesmo tipo.
 
-Essa regra funciona de forma que os tipos de menor tamanho são convertidos para os 
-tipos de maior tamanho que existem dentro da expressão, essa hierarquia, por assim 
-dizer, de tipos segue a seguinte ordem:
+Essa regra funciona de forma que os tipos de menor tamanho são convertidos 
+para os tipos de maior tamanho que existem dentro da expressão, essa 
+hierarquia, por assim dizer, de tipos segue a seguinte ordem:
 
 \begin{code}
     char < short < int < long < long long < float < double < long double
@@ -47,8 +47,9 @@ valores na memória.
 
 \subsubsection{Conversões explícitas}
 
-As conversões explícitas são bem mais simples de entender e de se usar. Contudo, 
-para usuários mais experientes podem ser uma ferramenta bem poderosa e complicada.
+As conversões explícitas são bem mais simples de entender e de se usar. 
+Contudo, para usuários mais experientes podem ser uma ferramenta bem poderosa 
+e complicada.
 
 \begin{code}
     int main(void) {
@@ -60,10 +61,10 @@ para usuários mais experientes podem ser uma ferramenta bem poderosa e complica
     }
 \end{code}
 
-Como o valor de \(x\) é de um tipo menor que \(y\) é necessário realizar essa conversão 
-para int utilizando ``(int)'' antes do valor que será atribuído a \(x\). 
-Dessa forma também, já que \(x\) é incapaz de guardar valores quebrados o valor de 
-0.01 será perdido.
+Como o valor de \(x\) é de um tipo menor que \(y\) é necessário realizar essa 
+conversão para int utilizando ``(int)'' antes do valor que será atribuído a 
+\(x\). Dessa forma também, já que \(x\) é incapaz de guardar valores quebrados 
+o valor de 0.01 será perdido.
 
 Portanto, sempre que for necessário realizar uma conversão de tipos em uma 
 expressão basta seguir esse padrão:
@@ -74,11 +75,12 @@ expressão basta seguir esse padrão:
 
 \subsubsection{Exercícios}
 
-\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o 
-conteúdo.}
+\textbf{É de extrema importância que você realize os exercícios aqui 
+elaborados para fixar o conteúdo.}
 
 \begin{enumerate}
     \item{Tente compilar o código acima sem converter o valor de `y'.}
-    \item{Declare duas variáveis do tipo `float', realize um cálculo entre ambas, converta o resultado para `int' e imprima o valor}
+    \item{Declare duas variáveis do tipo `float', realize um cálculo entre 
+        ambas, converta o resultado para `int' e imprima o valor}
     \item{Declare uma variável do tipo `float', uma do tipo `int' e realize um cálculo entre ambas que deve ter o resultado guardado em uma variável do tipo `short int' para ver o que acontece}
 \end{enumerate}

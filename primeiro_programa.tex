@@ -1,16 +1,18 @@
 Após configurar e instalar todas as ferramentas necessárias, é comum começar 
 com um simples ``Olá, mundo!''.
 
-O programa que iremos fazer exibe o texto ``Olá, mundo!'' na tela e embora seja simples, é 
-um ponto de partida essencial para começar a entender não somente como a linguagem C 
-funciona, mas qualquer outra linguagem de programação.
+O programa que iremos fazer exibe o texto ``Olá, mundo!'' na tela e embora 
+seja simples, é um ponto de partida essencial para começar a entender não 
+somente como a linguagem C funciona, mas qualquer outra linguagem de 
+programação.
 
 Para criar o seu primeiro programa, siga estes passos:
 
 \begin{enumerate}
     \item Crie um diretório para guardar o seu projeto.
     \item Crie um arquivo chamado ``main.c'' onde será escrito o código.
-    \item Abra o arquivo ``main.c'' no seu editor de código e escreva o seguinte:
+    \item Abra o arquivo ``main.c'' no seu editor de código e escreva o 
+        seguinte:
 
         \begin{code}
         #include <stdio.h>
@@ -20,7 +22,8 @@ Para criar o seu primeiro programa, siga estes passos:
             return 0;
         }
         \end{code}
-    \item Salve o arquivo de texto e compile o código com o GCC usando o seguinte comando no seu terminal:
+    \item Salve o arquivo de texto e compile o código com o GCC usando o 
+        seguinte comando no seu terminal:
         \begin{code}
         gcc main.c
         \end{code}
@@ -44,8 +47,8 @@ Para criar o seu primeiro programa, siga estes passos:
 Após executar o comando acima, você já deve ver o texto ``Olá, mundo!'' na sua 
 tela. Mas antes de prosseguir, você provavelmente está se perguntando o que 
 exatamente cada uma das linhas de código que você escreveu fazem e como 
-exatamente elas fazem esse texto aparecer na sua tela. Por isso, vou explicar passo a 
-passo o que significa cada linha do código acima.
+exatamente elas fazem esse texto aparecer na sua tela. Por isso, vou explicar 
+passo a passo o que significa cada linha do código acima.
 
 \begin{code}
     #include <stdio.h>
@@ -53,8 +56,9 @@ passo o que significa cada linha do código acima.
 
 Na linha número 1, temos o ``include'', uma diretiva que inclui bibliotecas 
 externas no nosso programa. Aqui, estamos incluindo a biblioteca ``stdio.h''. 
-O conceito de bibliotecas ainda vai ser melhor explicado futuramente, mas você pode 
-entender como se cada biblioteca fosse um tipo de extensão com funções extras.
+O conceito de bibliotecas ainda vai ser melhor explicado futuramente, mas você 
+pode entender como se cada biblioteca fosse um tipo de extensão com funções 
+extras.
 
 \begin{code}
     int main(void) {
@@ -64,15 +68,15 @@ Na linha número 2, temos o início de uma função. Nessa linha, há o uso
 de quatro palavras/caracteres importantes:
 
 \begin{itemize}
-    \item \textbf{"int":} Define o que a função deve retornar ao ser finalizada, 
-        neste caso, um número inteiro.
+    \item \textbf{"int":} Define o que a função deve retornar ao ser 
+        finalizada, neste caso, um número inteiro.
     \item \textbf{"main":} É o nome que foi escolhido para o bloco de código 
         principal. Apesar de não ser necessariamente obrigatório usar o nome 
-        \textbf{main} para a sua função principal, acabar por ser uma boa prática 
-        a ser seguida.
-    \item \textbf{"(void)":} Define quais parâmetros/argumentos são necessários para 
-        chamar a função. Neste caso, a palavra \textbf{void} indica que a função não 
-        precisa de nenhum valor para ser chamada.
+        \textbf{main} para a sua função principal, acabar por ser uma boa 
+        prática a ser seguida.
+    \item \textbf{"(void)":} Define quais parâmetros/argumentos são 
+        necessários para chamar a função. Neste caso, a palavra \textbf{void} 
+        indica que a função não precisa de nenhum valor para ser chamada.
     \item \textbf{"\{":} Marca o início de um bloco de código de uma função.
 \end{itemize}
 
@@ -81,51 +85,57 @@ de quatro palavras/caracteres importantes:
 \end{code}
 
 Na linha número 3, encontramos a diretiva ``printf'', responsável por exibir 
-informações no terminal. Esta diretiva na verdade não existe como uma funcionalidade 
-padrão na linguagem C, e está sendo implementada através da biblioteca 
-``stdio.h'', mencionada na linha 1.
+informações no terminal. Esta diretiva na verdade não existe como uma 
+funcionalidade padrão na linguagem C, e está sendo implementada através da 
+biblioteca ``stdio.h'', mencionada na linha 1.
 
 Neste caso a informação que está sendo passada para a função é o texto "Olá, 
-mundo!\textbackslash n" que sempre deve ser colocado entre os parênteses e as aspas, 
-você pode ter percebido também a presença do caracter ``\textbackslash n'' que não 
-aparece quando a mensagem é exibida. Esse caracter é um caracter especial e tem 
-como função fazer com que naquele espaço da mensagem o terminal desça uma 
-linha abaixo antes de continuar.
+mundo!\textbackslash n" que sempre deve ser colocado entre os parênteses e as 
+aspas, você pode ter percebido também a presença do caracter 
+``\textbackslash n'' que não aparece quando a mensagem é exibida. Esse 
+caracter é um caracter especial e tem como função fazer com que naquele espaço 
+da mensagem o terminal desça uma linha abaixo antes de continuar.
 
 \begin{code}
     return 0;
 \end{code}
 
-Na linha número 4, encontramos o comando ``return''. Em uma função, essa diretiva
-indica o valor que a função deve retornar quando terminar sua execução e normalmente, 
-mas nem sempre, é acompanhada de um valor que está escrito como um sufixo da diretiva. 
+Na linha número 4, encontramos o comando ``return''. Em uma função, essa 
+diretiva indica o valor que a função deve retornar quando terminar sua 
+execução e normalmente, mas nem sempre, é acompanhada de um valor que está 
+escrito como um sufixo da diretiva. 
 
-No caso da função ``main'', que é a função principal em um programa C, o valor 0 
-geralmente é usado como uma boa prática para indicar que o programa foi finalizado sem 
-erros.
+No caso da função ``main'', que é a função principal em um programa C, o 
+valor 0 geralmente é usado como uma boa prática para indicar que o programa 
+foi finalizado sem erros.
 
 \begin{code}
     }
 \end{code}
 
 A linha número 5 é a chave de fechamento ``\}'', que indica o fim do bloco de 
-código da função ``main''. Tudo o que está contido entre as chaves forma o corpo 
-da função, o compilador (GCC) utiliza dessas chaves de abertura e fechamento como uma 
-forma de entender quando um código é pertencente a uma função.
+código da função ``main''. Tudo o que está contido entre as chaves forma o 
+corpo da função, o compilador (GCC) utiliza dessas chaves de abertura e 
+fechamento como uma forma de entender quando um código é pertencente a uma 
+função.
 
-Caso tenha parecido um pouco confuso a primeira vista, acredito que com um pouco de 
-prática você vai começar a escrever esse tipo de código sem sequer pensar direito 
-sobre isso. E no geral, essa estrutura tende a se repetir bastante, então caso não 
-tenha entendido algo muito bem vale a pena voltar e reler.
+Caso tenha parecido um pouco confuso a primeira vista, acredito que com um 
+pouco de prática você vai começar a escrever esse tipo de código sem sequer 
+pensar direito sobre isso. E no geral, essa estrutura tende a se repetir 
+bastante, então caso não tenha entendido algo muito bem vale a pena voltar e 
+reler.
 
 \subsubsection{Exercícios}
 
-\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o 
-conteúdo.}
+\textbf{É de extrema importância que você realize os exercícios aqui 
+elaborados para fixar o conteúdo.}
 
 \begin{enumerate}
     \item{Modifique a mensagem exibida na tela pela função ``printf''.}
-    \item{Tente alterar a posição do caracter especial ``\textbackslash n'' e veja o que acontece.}
-    \item{Mudar o nome da função para qualquer outra coisa e veja qual o erro retornado.}
-    \item{Remova a linha de código que inclui a biblioteca ``stdio.h'' e veja qual o erro retornado.}
+    \item{Tente alterar a posição do caracter especial ``\textbackslash n'' e 
+        veja o que acontece.}
+    \item{Mudar o nome da função para qualquer outra coisa e veja qual o erro 
+        retornado.}
+    \item{Remova a linha de código que inclui a biblioteca ``stdio.h'' e veja 
+        qual o erro retornado.}
 \end{enumerate}
