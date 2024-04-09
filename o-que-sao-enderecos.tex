@@ -1,0 +1,117 @@
+\subsubsection{Entendendo endereços}
+
+A memória RAM\footnote{Random Access Memory}, local onde as variáveis são 
+guardadas e manipuladas, é essencialmente uma sequência linear de bytes, 
+organizada como uma fila, com a capacidade de armazenar informações. Essa 
+estrutura pode ser visualizada como uma série de ``caixas'' sequenciais, cada 
+uma capaz de reter um valor específico, conforme demonstrado na figura a seguir:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.2]{memory-address-example}
+\label{fig:memoryAdressExample}
+\end{figure}
+
+O conceito de endereço refere-se à posição específica de uma variável \(x\) 
+dentro desta sequência linear. Esses endereços funcionam como números de 
+identificação únicos para a localização de variáveis dentro do espaço de 
+memória do programa. Na figura apresentada, os endereços são indicados pelos 
+números na parte inferior de cada ``caixa''.
+
+Cada variável vai ocupar uma quantidade diferente de bytes, a depender de seu 
+tipo. Por exemplo, variáveis do tipo \texttt{char} ocupam 1 byte, variáveis do 
+tipo \texttt{int} ocupam 4 bytes e uma variável do tipo \texttt{double}, 8 
+bytes. O tamanho relativo de cada tipo pode ser encontrado na tabela do subcapítulo 
+\ref{tipos-de-dados}.
+
+Para acessar o endereço de memória de uma variável, utilizamos o operador \(\&\), conforme exemplificado no código a seguir:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int x = 0;
+        printf("Endereço de x: %p\n", &x);
+
+        return 0;
+    }
+\end{code}
+
+O código inicializa uma variável \(x\) com o valor 0 e, em seguida, emprega a 
+função \texttt{printf}, utilizando o especificador de formato \texttt{\%p} 
+para indicar a impressão de um endereço. Dentro da função \texttt{printf}, o 
+argumento \texttt{\&x} é utilizado para obter e imprimir o endereço da variável 
+\(x\).
+
+Ao executar o código, espera-se um resultado semelhante ao seguinte:
+
+\begin{code}
+    Endereço de x: 0x7ffd3a450b3c
+\end{code}
+
+\subsubsection{Bases numéricas}
+
+O valor impresso representa o endereço da variável \(x\) no espaço de memória 
+do programa. Nota-se que o endereço é exibido em formato hexadecimal, que 
+difere dos números decimais convencionais. A escolha do formato hexadecimal 
+(base 16) sobre o decimal é consequência da expansão da capacidade de memória 
+ao longo do tempo, tornando os endereços de memória progressivamente maiores e 
+mais complexos para representação em base decimal. A base hexadecimal, ao 
+permitir uma representação mais compacta de números grandes, tornou-se a 
+convenção adotada.
+
+Além do sistema hexadecimal, existem outros sistemas numéricos como o octal 
+(base 8) e o binário (base 2) que também podem vir a ser úteis de se conhecer. 
+A seguir, apresentamos o número 42.000 representado nessas diferentes bases:
+
+\begin{code}
+    Hexadecimal: 0xA410
+    Octal: 0122020
+    Binário: 1010010000010000
+\end{code}
+
+Observa-se que com o aumento da base numérica, os números representados 
+tornam-se mais compactos, enquanto em bases menores, os números expandem. Além 
+disso, é importante destacar as convenções para declarar números em diferentes 
+bases em C:
+
+\begin{itemize}
+        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
+    \item Números hexadecimais devem iniciar com \texttt{0x}
+    \item Números Octais devem iniciar com \texttt{0}
+    \item Números binários devem começar com \texttt{0b}
+\end{itemize}
+
+Abaixo, um exemplo prático de como declarar números em diferentes bases na 
+linguagem C e imprimir seus valores usando formatações distintas:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int hexa = 0xa410;
+        int octal = 0122020; // Não confundir com 122020
+        int bin = 0b1010010000010000;
+
+        // %x -> Imprime número em formato hexadecimal
+        // %o -> Imprime número em formato octal
+        printf("Valor de hexa: %x (%d)\n", hexa, hexa);
+        printf("Valor de octal: %o (%d)\n", octal, octal);
+        printf("Valor de bin: %d\n", bin);
+
+        return 0;
+    }
+\end{code}
+
+Infelizmente, a linguagem C padrão não suporta a formatação direta de números 
+binários com \texttt{\%b}. Esta funcionalidade pode requerer implementações 
+específicas ou bibliotecas adicionais. Ademais, executando o código acima você 
+deve ter o seguinte resultado:
+
+\begin{code}
+    Valor de hexa: 0xa410 (42000)
+    Valor de octal: 122020 (42000)
+    Valor de bin: 42000
+\end{code}

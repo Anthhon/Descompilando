@@ -1,0 +1,197 @@
+\subsubsection{Entendendo vetores}
+
+Ao abordar o conceito de vetores, entramos em um dos fundamentos da organização 
+de dados em programação, especialmente na linguagem C. Vetores permitem agrupar 
+dados do mesmo tipo em uma única estrutura acessível através de ponteiros. Isso 
+simplifica a manipulação de coleções de dados como, por exemplo, um conjunto de 
+idades tal qual no exemplo proposto. Vamos ver como isso pode ser implementado:
+
+\begin{code}
+    #include <stdio.h>
+    
+    int main(void)
+    {
+        // Declara um vetor de inteiros com espaço para 5 idades.
+        int idades[5] = {23, 45, 56, 19, 30};
+        int soma = 0;
+        float media;
+
+        // Calcula a soma das idades
+        for (int i = 0; i < 5; i++) {
+            soma += idades[i];
+        }
+
+        // Calcula a média das idades
+        media = (float)soma / 5;
+
+        printf("A média das idades é: %.2f\n", media);
+
+        return 0;
+    }
+\end{code}
+
+Neste exemplo, declaramos um vetor \texttt{idades} capaz de armazenar 5 valores 
+inteiros, correspondentes às idades de pessoas aleatórias. Em seguida, 
+utilizamos um \texttt{for loop} para somar todas as idades armazenadas no vetor. 
+Após calcular a soma, dividimos esse valor pelo número total de idades para 
+encontrar a média, que é armazenada na variável \texttt{media} e, por fim, 
+exibida na tela.
+
+Algumas nomenclaturas que podem facilitar o entendimento acerca dos vetores 
+são as seguintes:
+
+\begin{itemize}
+        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
+    \item \textbf{Tamanho:} Refere-se à quantidade de espaço total alocada para o vetor 
+        na memória, o tamanho de um vetor estático é definido durante a sua 
+        declaração e \textbf{não pode ser alterado durante a execução do programa.}
+        Geralmente o tamanho do vetor se encontra entre os colchetes durante a 
+        declaração do mesmo ou é definido de maneira implícita pelo próprio compilador.
+    \item \textbf{Comprimento ou quantidade de itens:} Refere-se à quantidade de elementos 
+        atualmente armazenados no vetor, esse valor pode ser menor que o tamanho 
+        total do vetor, mas nunca maior.
+    \item \textbf{Índice:} Refere-se a posição de um item específico dentro do 
+        vetor. Os índices são valores que podem ser utilizados como um número 
+        de identificação para um item específico em um vetor de tamanho \(N\) 
+        e podem ir de 0 até \(N\) - 1.
+\end{itemize}
+
+Um detalhe importante a se saber sobre o código acima, é que quando declaramos 
+um vetor para guardar a idade de 5 pessoas, na verdade estamos alocando o 
+espaço necessário para guardar 5 números, em sequência, na memória do computador. 
+Ou seja, ao declarar:
+
+\begin{code}
+        int idades[5] = {23, 45, 56, 19, 30};
+\end{code}
+
+Estamos criando na memória do computador uma sequência de dados semelhante a seguinte:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.2]{array-in-memory-example}
+\caption{Os valores do endereço da imagem acima são apenas ilustrativos.}
+\label{fig:arrayInMemory}
+\end{figure}
+
+Ao considerarmos a criação de uma sequência de dados na memória do computador, 
+conforme ilustrado anteriormente, compreendemos que um vetor é essencialmente 
+uma série de valores organizados de maneira contínua na memória. A variável do 
+vetor só precisa guardar o endereço do primeiro número na memória, semelhante 
+ao que um ponteiro faria, e usa de um truque interessante para acessar cada um 
+de seus elementos usando o valor do índice. No código acima, especificamente na 
+seguinte linha:
+
+\begin{code}
+    soma += idades[i];
+\end{code}
+
+Usamos o valor de \(i\), que vai de 0 a 4 dentro do looping, como um valor de 
+índice para indicar qual item queremos acessar dentro do vetor. Por exemplo, 
+quando \(i\) é igual a 0, o computador acessa o endereço do primeiro número 
+contido na variável do vetor e pula \(X\) itens a frente na memória baseado no 
+valor passado entre colchetes.
+
+\begin{ps}
+    Caso você queira entender como esse processo ocorre, de maneira mais 
+    técnica, seria como se o compilador convertesse o trecho de código acima 
+    para o trecho abaixo:
+
+    \begin{code}
+        soma += *(idades + sizeof(int) * i)
+    \end{code}
+
+    Neste contexto, \texttt{idades} atua como um ponteiro para o endereço do primeiro 
+    elemento do vetor. A operação \texttt{sizeof(int) * i} calcula o deslocamento em 
+    bytes necessários para alcançar o elemento do vetor relativo ao valor de \(i\), considerando o 
+    tamanho de um inteiro (expresso por sizeof(int)). Somando este deslocamento ao 
+    endereço base armazenado em idades, obtemos o endereço do elemento \(i\). 
+    
+    E em seguida usamos o operador de deferenciação * para acessar o valor 
+    armazenado neste endereço específico, permitindo sua adição a soma.
+\end{ps}
+
+\subsubsection{Utilizando vetores de texto}
+
+O uso mais comum de vetores em C é para armazenar textos longos, como nomes e 
+frases. Como a linguagem não possui tipos de variáveis nativos capazes de 
+armazenar textos, nomes ou frases, recorre-se a vetores de variáveis do tipo 
+\texttt{char} para representá-los. Vejamos o exemplo abaixo para ilustrar esse 
+conceito:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        // Ao deixar o espaço entre cochetes vazio
+        // o compilador calcula automaticamente o tamanho
+        // necessário para guardar todos os itens do vetor
+        char nome1[] = "Alan";
+        char nome2[] = "Vinicius";
+        char nome3[] = "Janiel";
+
+        // A linguagem C prevê a impressão de
+        // vetores de caracteres com o formatador '%s'
+        printf("1º Nome: %s\n", nome1);
+        printf("2º Nome: %s\n", nome1);
+        printf("3º Nome: %s\n", nome1);
+
+        return 0;
+    }
+\end{code}
+
+No exemplo acima, criamos vetores de caracteres para armazenar os nomes de três 
+pessoas, os quais são impressos posteriormente. Apesar de não existir um tipo 
+de dado de texto nativo em C, a linguagem oferece implementações e convenções 
+para a manipulação de vetores de caracteres como textos.
+
+Um detalhe extremamente importante a mencionar é que, em relação ao uso de 
+vetores para armazenar informações de texto, muitos projetos e bibliotecas 
+utilizam um caractere especial para sinalizar o fim do vetor, conhecido como 
+caractere nulo. Carácter esse que caso não esteja presente no vetor, ou até 
+mesmo mal posicionado, pode ocasionar erros de acesso de memória inválida ou 
+perda de informação.
+
+Devido à capacidade de tamanho variável dos vetores de texto, não é possível 
+determinar com certeza o tamanho do vetor quando ele é recebido por uma função, 
+por exemplo. Para evitar erros relacionados ao acesso de memória não autorizada, 
+uma convenção foi estabelecida: adicionar o carácter `\textbackslash0' ao final de cada 
+vetor de texto, sinalizando o seu término.
+
+\begin{code}
+    char nome1[] = "Alan";
+    char nome2[] = "Vinicius";
+    char nome3[] = "Janiel";
+\end{code}
+
+No caso acima, quando declaramos e inicializamos os vetores de texto com os 
+nomes, o compilador calcula o tamanho necessário para que o vetor possa conter 
+todos os caracteres e mais um byte extra que deve conter o carácter nulo adicional.
+
+\subsubsection{Declarando vetores de texto manualmente}
+
+Outra forma não tão prática de definir um vetor, mas que ilustra bem a 
+utilização do carácter nulo em um vetor, é a seguinte:
+
+\begin{code}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        char nome[5];
+        nome[0] = 'A';
+        nome[1] = 'l';
+        nome[2] = 'a';
+        nome[3] = 'n';
+        nome[4] = '\0';
+
+        printf("Nome: %s\n", nome);
+
+        return 0;
+    }
+\end{code}
+
+Aqui, declaramos manualmente um vetor com o tamanho de 5 caracteres e 
+inicializamos cada um dos itens com os caracteres desejados seguidos ao 
+carácter nulo especial no fim do vetor.

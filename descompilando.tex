@@ -1,12 +1,18 @@
 \documentclass[12pt]{book}
 \usepackage{times}
+\renewcommand{\familydefault}{\rmdefault}
 \usepackage{tcolorbox}
 \usepackage{graphicx}
+\usepackage{amssymb}
 \usepackage{lmodern}
 \usepackage{fancyvrb}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage[brazilian]{babel}
+
+% Caminho do diretório de imagens
+
+\graphicspath{ {./images/} {./images/illustrations/} }
 
 % Espaçamento e definições
 
@@ -113,21 +119,21 @@
 
 \section{Ponteiros}
 
-\subsection{Como visualizar a memória}
+\subsection{O que são endereços} \label{o-que-sao-enderecos}
+\input{o-que-sao-enderecos.tex}
 
-\subsection{Endereço de memória}
+\subsection{O que são ponteiros}
+\input{o-que-sao-ponteiros.tex}
+
+\subsection{Vetores}
+\input{vetores}
+
 \subsection{Alocação de memória}
 
-\section{Seções da memória}
+\section{Seções da memória} \label{secoes-da-memoria}
 
 \subsection{Heap}
 \subsection{Stack}
-
-\section{Strings}
-
-\subsection{Por baixo dos panos}
-\subsection{Declaração}
-\subsection{Manipulação}
 
 \chapter{Tópicos avançados}
 \clearpage % Define página isolada para novo capítulo

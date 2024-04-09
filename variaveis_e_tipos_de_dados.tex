@@ -34,7 +34,7 @@ Você não precisa necessariamente memorizar todas essas diretivas neste
 momento; isso é algo que você absorverá e memorizará com bastante prática e 
 um pouco de tempo.
 
-\subsubsection{Tipos de dados}
+\subsubsection{Tipos de dados} \label{tipos-de-dados}
 
 Um aspecto que ainda não abordamos é a 'tipagem' de variáveis. Embora cada 
 variável tenha um nome definido, o computador não sabe exatamente o que há 
@@ -75,6 +75,10 @@ com algumas informações adicionais:
         \hline
     \end{tabular}
 \end{center}
+
+\begin{ps}
+    Para converter o tamanho de bits para bytes, basta dividir o valor do tamanho em bits por 8.
+\end{ps}
 
 \clearpage
 
@@ -121,8 +125,8 @@ retângulo e exibe o resultado.
 
 No trecho abaixo, declaramos três variáveis diferentes: \textbf{x} para a 
 altura, \textbf{y} para o comprimento e \textbf{area} para o resultado do 
-cálculo. Todas as três variáveis são do tipo float, pois nada impede que as 
-medidas do retângulo sejam números fracionados.
+cálculo. Todas as três variáveis são do tipo \textbf{float}, pois nada impede 
+que as medidas do retângulo sejam números fracionados.
 
 \begin{code}
         printf("Digite a altura do retângulo: ");
@@ -138,14 +142,14 @@ como já feito antes, e em seguida, usamos uma nova função chamada
 
 Dentro de scanf, passamos dois parâmetros: o primeiro (\textbf{\%f}) 
 é o formatador, que especifica o tipo de valor esperado para ser recebido, 
-neste caso, uma float. O segundo (\textbf{\&x}) é onde queremos armazenar o 
-valor recebido; a variável vem com o sufixo \& porque estamos passando o 
-endereço da variável.
+neste caso, uma \textbf{float}. O segundo (\textbf{\&x}) é onde queremos 
+armazenar o valor recebido; a variável vem com o sufixo \& porque estamos 
+passando o endereço da variável.
 
 \begin{ps}
-    O endereço de uma variável é um tópico que ainda será abordado com 
-    maior foco, porém, no momento você pode assumir que ele diz respeito 
-    a localização da variável dentro do computador.
+    O endereço de uma variável é um tópico que será abordado com 
+    maior foco no capítulo \ref{o-que-sao-enderecos}, porém, no momento você pode assumir que ele 
+    diz respeito a localização da variável na memória do computador.
 \end{ps}
 
 \begin{code}
@@ -158,14 +162,13 @@ o resultado em \texttt{area} usando o operador de atribuição (\texttt{=}).
 
 \begin{code}
         printf("A área do retângulo é: %f\n", area);
-
         return 0;
 \end{code}
 
 Finalmente, exibimos o valor na tela usando a função \texttt{printf} e 
 retornamos o valor 0 para indicar que o programa foi encerrado com sucesso. 
-É importante lembrar que, ao exibir uma variável do tipo float, é necessário 
-utilizar o formatador \%f.
+É importante lembrar que, ao exibir uma variável do tipo \textbf{float}, é 
+necessário utilizar o formatador \%f.
 
 Entendendo bem o código acima, é possível praticar os conceitos de operadores 
 e variáveis sem muitas dificuldades.
