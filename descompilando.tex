@@ -31,6 +31,20 @@
 
 % Macros
 
+\usepackage{mdframed}
+% Define a new graybox environment
+\newmdenv[
+  backgroundcolor=gray!12, % Background color (adjust as needed)
+  linewidth=0pt, % No frame line width
+  skipabove=20pt, % Space above the graybox
+  skipbelow=20pt, % Space below the graybox
+  innerleftmargin=14pt, % Left margin inside the graybox
+  innerrightmargin=14pt, % Right margin inside the graybox
+  innertopmargin=10pt, % Top margin inside the graybox
+  innerbottommargin=10pt, % Bottom margin inside the graybox
+  roundcorner=0pt, % Round corner radius
+]{postscript}
+
 % Define o ambiente da caixa de observações
 \newenvironment{ps}{%
     \tcolorbox[
@@ -144,6 +158,7 @@
 \section{Leitura e escrita de arquivos}
 
 \section{Manipulação de bits}
+
 \subsection{NOT}
 \subsection{AND}
 \subsection{OR}
