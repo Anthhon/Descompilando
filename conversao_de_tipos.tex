@@ -11,9 +11,9 @@ Essa regra funciona de forma que os tipos de menor tamanho são convertidos
 para os tipos de maior tamanho que existem dentro da expressão, essa 
 hierarquia, por assim dizer, de tipos segue a seguinte ordem:
 
-\begin{code}
+\begin{textbox}
     char < short < int < long < long long < float < double < long double
-\end{code}
+\end{textbox}
 
 Para ilustrar melhor o processo de promoção automática vamos usar o código 
 abaixo como exemplo:
@@ -69,9 +69,9 @@ o valor de 0.01 será perdido.
 Portanto, sempre que for necessário realizar uma conversão de tipos em uma 
 expressão basta seguir esse padrão:
 
-\begin{code}
+\begin{textbox}
     (tipo a ser convertido) valor a ser convertido
-\end{code}
+\end{textbox}
 
 \subsubsection{Exercícios}
 

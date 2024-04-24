@@ -159,12 +159,12 @@ Usemos esse código como exemplo:
 
 Ao compilar o código acima você verá um erro semelhante a:
 
-\begin{code}
+\begin{textbox}
     main.c: In function ‘main’:
     main.c:10:24: error: initializer element is not constant
     10 |         static int x = initializer();
     |                        ^~~~~~~~~~~
-\end{code}
+\end{textbox}
 
 Isso se deve ao fato de que o valor de \(x\) não é conhecido durante a 
 compilação do programa, sendo assim dependente de outra função ou variável 

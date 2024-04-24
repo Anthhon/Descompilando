@@ -92,19 +92,19 @@ Este código calcula a hipotenusa de um triângulo com base nos valores fornecid
 
 Ambas as funções estão incluídas na biblioteca \texttt{math.h}, que contém várias funções relacionadas a operações matemáticas mais complexas que não estão incluídas por padrão na linguagem C e que poderiam ser difíceis de implementar manualmente. Dito isso, se você tentar compilar o código acima usando o comando:
 
-\begin{code}
+\begin{textbox}
     gcc -o main main.c
-\end{code}
+\end{textbox}
 
 É provável que você veja um erro semelhante ao seguinte:
 
-\begin{code}
+\begin{textbox}
     /usr/bin/ld: /tmp/ccF2H2AC.o: in function `main':
     main.c:(.text+0x3d): undefined reference to `pow'
     /usr/bin/ld: main.c:(.text+0x66): undefined reference to `pow'
     /usr/bin/ld: main.c:(.text+0x7e): undefined reference to `sqrt'
     collect2: error: ld returned 1 exit status
-\end{code}
+\end{textbox}
 
 Isso indica que as funções \texttt{pow e sqrt} não estão sendo encontradas 
 pelo compilador.
@@ -113,9 +113,9 @@ Para corrigir o erro, você precisa informar ao compilador que pretende
 compilar o código usando uma biblioteca específica. Neste caso, como estamos 
 incluindo a biblioteca \texttt{math}, devemos adicionar ``-lm'' ao comando de compilação, conforme mostrado abaixo:
 
-\begin{code}
+\begin{textbox}
     gcc -o main main.c -lm
-\end{code}
+\end{textbox}
 
 Dessa forma, o compilador reconhecerá a biblioteca e realizará a compilação 
 corretamente.
@@ -225,9 +225,9 @@ passar para o processo de compilação do código, que vai mudar um pouco devido
 aos múltiplos arquivos. Para compilar o código acima, usaremos o seguinte 
 comando:
 
-\begin{code}
+\begin{textbox}
     gcc -o main main.c minha_biblioteca.c
-\end{code}
+\end{textbox}
 
 Com isso, o compilador deve processar todos os arquivos e gerar um executável 
 com sucesso.

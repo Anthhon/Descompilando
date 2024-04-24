@@ -70,11 +70,11 @@ apenas nessa cópia local.
 Portanto, ao executar o programa acima é possível notar que o valor de \(x\) 
 continua o mesmo na função \texttt{main} mesmo após a execução de \texttt{foo}:
 
-\begin{code}
+\begin{textbox}
     main: valor de x: 10
     foo: valor de x: 20
     main: valor de x: 10
-\end{code}
+\end{textbox}
 
 Para alterar efetivamente o valor de \(x\) dentro de foo, podemos utilizar 
 ponteiros para acessar o endereço de memória da variável \(x\) original. Veja 
@@ -109,11 +109,11 @@ valor apontado pelo ponteiro \(x\) e alteramos seu valor para 20. Dessa forma,
 ao executar o programa, o valor de \(x\) também é alterado na função 
 \texttt{main}, resultando no seguinte:
 
-\begin{code}
+\begin{textbox}
     main: valor de x: 10
     foo: valor de x: 20
     main: valor de x: 20
-\end{code}
+\end{textbox}
 
 Esse exemplo demonstra como os ponteiros permitem acessar e modificar variáveis 
 fora do escopo atual de uma função, facilitando a manipulação de dados e a 
