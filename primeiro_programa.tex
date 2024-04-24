@@ -14,14 +14,14 @@ Para criar o seu primeiro programa, siga estes passos:
     \item Abra o arquivo ``main.c'' no seu editor de código e escreva o 
         seguinte:
 
-        \begin{code}
+        \begin{excode}
         #include <stdio.h>
 
         int main(void) {
             printf("Olá, mundo!\n");
             return 0;
         }
-        \end{code}
+        \end{excode}
     \item Salve o arquivo de texto e compile o código com o GCC usando o 
         seguinte comando no seu terminal:
         \begin{code}
@@ -50,9 +50,9 @@ exatamente cada uma das linhas de código que você escreveu fazem e como
 exatamente elas fazem esse texto aparecer na sua tela. Por isso, vou explicar 
 passo a passo o que significa cada linha do código acima.
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
-\end{code}
+\end{excode}
 
 Na linha número 1, temos o ``include'', uma diretiva que inclui bibliotecas 
 externas no nosso programa. Aqui, estamos incluindo a biblioteca ``stdio.h''. 
@@ -60,9 +60,9 @@ O conceito de bibliotecas ainda vai ser melhor explicado futuramente, mas você
 pode entender como se cada biblioteca fosse um tipo de extensão com funções 
 extras.
 
-\begin{code}
+\begin{excode}
     int main(void) {
-\end{code}
+\end{excode}
 
 Na linha número 2, temos o início de uma função. Nessa linha, há o uso 
 de quatro palavras/caracteres importantes:
@@ -81,9 +81,9 @@ de quatro palavras/caracteres importantes:
     \item \textbf{"\{":} Marca o início de um bloco de código de uma função.
 \end{itemize}
 
-\begin{code}
+\begin{excode}
     printf("Olá, mundo!\n");
-\end{code}
+\end{excode}
 
 Na linha número 3, encontramos a diretiva ``printf'', responsável por exibir 
 informações no terminal. Esta diretiva na verdade não existe como uma 
@@ -97,9 +97,9 @@ aspas, você pode ter percebido também a presença do caracter
 caracter é um caracter especial e tem como função fazer com que naquele espaço 
 da mensagem o terminal desça uma linha abaixo antes de continuar.
 
-\begin{code}
+\begin{excode}
     return 0;
-\end{code}
+\end{excode}
 
 Na linha número 4, encontramos o comando ``return''. Em uma função, essa 
 diretiva indica o valor que a função deve retornar quando terminar sua 
@@ -110,9 +110,9 @@ No caso da função ``main'', que é a função principal em um programa C, o
 valor 0 geralmente é usado como uma boa prática para indicar que o programa 
 foi finalizado sem erros.
 
-\begin{code}
+\begin{excode}
     }
-\end{code}
+\end{excode}
 
 A linha número 5 é a chave de fechamento ``\}'', que indica o fim do bloco de 
 código da função ``main''. Tudo o que está contido entre as chaves forma o 

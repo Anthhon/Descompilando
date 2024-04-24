@@ -27,7 +27,7 @@ de erro.
 Para demonstrar a utilização desses dois tipos de saída de dados diferentes 
 vamos usar o seguinte exemplo:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     void print_error(void)
@@ -48,7 +48,7 @@ vamos usar o seguinte exemplo:
         print_error();
         return 0;
     }
-\end{code}
+\end{excode}
 
 O código acima utiliza da função \texttt{fprintf} para direcionar o output de 
 cada uma das mensagens de maneira mais específica. Diferente do \texttt{printf}, 
@@ -83,7 +83,7 @@ entrada como um texto.
 
 Aqui está um exemplo de uso do \texttt{scanf} para ler um número inteiro:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -94,7 +94,7 @@ Aqui está um exemplo de uso do \texttt{scanf} para ler um número inteiro:
         printf("Você digitou: \%d\n", num);
         return 0;
     }
-\end{code}
+\end{excode}
 
 No exemplo acima, o programa solicita ao usuário que digite um número inteiro. 
 O valor inserido pelo usuário é lido pelo \texttt{scanf} e armazenado na variável 
@@ -103,7 +103,7 @@ O valor inserido pelo usuário é lido pelo \texttt{scanf} e armazenado na vari�
 Se o programa precisar ler uma linha inteira de texto, pode-se usar a função 
 \texttt{fgets}, como mostrado no exemplo a seguir:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -114,7 +114,7 @@ Se o programa precisar ler uma linha inteira de texto, pode-se usar a função
         printf("Você digitou: %s\n", linha);
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste exemplo, o programa solicita ao usuário que digite uma frase. A função 
 \texttt{fgets} lê a linha de entrada e armazena na variável \texttt{linha}, 

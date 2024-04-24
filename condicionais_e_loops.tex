@@ -9,11 +9,11 @@ do programa. Este conceito pode ser exemplificado diretamente com um código:
 
 A estrutura \texttt{if} geralmente segue o seguinte formato:
 
-\begin{code}
+\begin{excode}
     if (condição) {
         // Código a executar se condição for verdadeira...
     }
-\end{code}
+\end{excode}
 
 A condição fornecida entre parênteses para o \texttt{if} deve ser uma 
 expressão que resulta em verdadeiro ou falso. Dependendo do resultado da 
@@ -24,7 +24,7 @@ verdadeiro e falso, respectivamente. No entanto, é redundante utilizar uma
 expressão que sempre resulta em verdadeiro ou falso. Embora esse tipo de 
 operação seja raramente utilizado, segue um exemplo para ilustrar o conceito:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -43,7 +43,7 @@ operação seja raramente utilizado, segue um exemplo para ilustrar o conceito:
         
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste exemplo, as verificações produzem resultados constantes, ou seja, o 
 resultado não varia independentemente do número de vezes que o código é 
@@ -53,7 +53,7 @@ Outra diretiva importante de se entender é o \texttt{else}, que complementa o
 \texttt{if}. O bloco de código dentro do \texttt{else} é executado se a 
 condição do \texttt{if} for falsa. Um exemplo prático ilustra sua utilização:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -70,7 +70,7 @@ condição do \texttt{if} for falsa. Um exemplo prático ilustra sua utilizaçã
         
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste código, se o número digitado for maior que \(0\), o primeiro bloco de 
 código será executado; caso contrário, o bloco de código dentro do 
@@ -81,7 +81,7 @@ Além disso, é possível criar fluxos de execução mais complexos utilizando
 Apesar de ser complexo de entender apenas com explicações textuais, um 
 exemplo de código esclarecerá o conceito:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -104,7 +104,7 @@ exemplo de código esclarecerá o conceito:
         
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste exemplo, além de verificar se o número é maior ou menor que \(0\), o 
 programa também identifica quando o número é exatamente \(0\). Vale 
@@ -114,7 +114,7 @@ parênteses só é avaliada se as condições anteriores forem falsas.
 Em situações em que é necessário avaliar cada condição individualmente, 
 vários \texttt{if} consecutivos são utilizados. Como por exemplo:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -136,7 +136,7 @@ vários \texttt{if} consecutivos são utilizados. Como por exemplo:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Ao executar o código acima, você deve ver algo como:
 
@@ -148,7 +148,7 @@ Ao executar o código acima, você deve ver algo como:
 
 Isso ocorre porque cada bloco \texttt{if} é independente dos outros; portanto, todos são avaliados individualmente. Se fosse utilizado um \texttt{else} dentro dos \texttt{if}, como no exemplo a seguir:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -167,7 +167,7 @@ Isso ocorre porque cada bloco \texttt{if} é independente dos outros; portanto, 
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 O resultado seria apenas:
 
@@ -185,15 +185,15 @@ A estrutura de loop mais simples é criada com a diretiva \texttt{while}. Essa
 estrutura é responsável por repetir uma seção de código enquanto uma expressão 
 for verdadeira.
 
-\begin{code}
+\begin{excode}
     while (expressão) {
         // Bloco de código a ser executado
     }
-\end{code}
+\end{excode}
 
 Vamos ilustrar um simples caso de uso para a estrutura while:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -207,7 +207,7 @@ Vamos ilustrar um simples caso de uso para a estrutura while:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste exemplo, criamos uma estrutura \texttt{while} que verifica se \(x\) é 
 diferente de 10. Enquanto o valor for diferente de 10, o código entre chaves é 
@@ -233,7 +233,7 @@ linhas de código.
 Um código equivalente, porém menos eficiente, do ponto de vista da criação, 
 seria:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -251,7 +251,7 @@ seria:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Imagine repetir essa estrutura para números maiores, como até 10000. Seria um 
 processo extremamente tedioso e ineficiente ter que escrever tudo isso 
@@ -260,11 +260,11 @@ manualmente, daí a utilidade das estruturas como \texttt{while}.
 Outra estrutura de loop semelhante, mas um pouco mais complexa, é o 
 \texttt{for} (conhecido também como for loop). Esta estrutura segue o seguinte padrão:
 
-\begin{code}
+\begin{excode}
     for (inicialização ; expressao; incremento) {
         // Código a ser executado
     }
-\end{code}
+\end{excode}
 
 Dentro de uma única estrutura, há três seções com características únicas: a 
 inicialização, que é executada uma vez antes do looping começar; a expressão, 
@@ -273,7 +273,7 @@ reavaliar a expressão.
 
 Para ilustrar, vamos usar essa estrutura para replicar o exemplo do \texttt{while}:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -284,7 +284,7 @@ Para ilustrar, vamos usar essa estrutura para replicar o exemplo do \texttt{whil
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Para entender melhor o código acima, vamos explicar cada parâmetro 
 individualmente:
@@ -304,7 +304,7 @@ Ao executar o código, o resultado será idêntico ao exemplo utilizando
 um desses parâmetros, embora seja contra-intuitivo. Por exemplo, podemos criar 
 um loop infinito da seguinte forma:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -318,22 +318,22 @@ um loop infinito da seguinte forma:
             // funcionar como um loop infinito
         }
     }
-\end{code}
+\end{excode}
 
 Por fim, temos o menos utilizado loop da linguagem C, chamado 
 \texttt{do while}. A diferença fundamental deste loop é que ele executa o 
 bloco de código antes de verificar a expressão. A estrutura deste loop é a 
 seguinte:
 
-\begin{code}
+\begin{excode}
     do {
         // Código a ser executado
     } while (expressão);
-\end{code}
+\end{excode}
 
 Vamos demonstrar o funcionamento desse looping com um exemplo simples:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -348,7 +348,7 @@ Vamos demonstrar o funcionamento desse looping com um exemplo simples:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Caso executemos o código acima, veremos o seguinte resultado:
 

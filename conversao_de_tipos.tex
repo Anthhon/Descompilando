@@ -18,7 +18,7 @@ hierarquia, por assim dizer, de tipos segue a seguinte ordem:
 Para ilustrar melhor o processo de promoção automática vamos usar o código 
 abaixo como exemplo:
 
-\begin{code}
+\begin{excode}
     int main(void) {
         char x = 'A' ;
         int j;
@@ -30,7 +30,7 @@ abaixo como exemplo:
         y = a / b; // `a' é convertido para float
         return 0;
     }
-\end{code}
+\end{excode}
 
 As conversões acima acabam acontecendo pois estamos realizando cálculos com 
 valores de diferentes tipos, o que acaba forçando o compilador a fazer essa 
@@ -51,7 +51,7 @@ As conversões explícitas são bem mais simples de entender e de se usar.
 Contudo, para usuários mais experientes podem ser uma ferramenta bem poderosa 
 e complicada.
 
-\begin{code}
+\begin{excode}
     int main(void) {
         float y = 10.01;
         int x;
@@ -59,7 +59,7 @@ e complicada.
         x = (int)y;
         return 0;
     }
-\end{code}
+\end{excode}
 
 Como o valor de \(x\) é de um tipo menor que \(y\) é necessário realizar essa 
 conversão para int utilizando ``(int)'' antes do valor que será atribuído a 

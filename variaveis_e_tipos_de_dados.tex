@@ -85,7 +85,7 @@ com algumas informações adicionais:
 Agora, saindo um pouco da teoria e partindo para a prática, vamos aplicar os 
 conceitos aprendidos em um programa simples.
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void) {
@@ -110,31 +110,31 @@ conceitos aprendidos em um programa simples.
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 O código acima funciona da seguinte forma: ao ser iniciado, o usuário deve 
 digitar no terminal os valores da altura e comprimento de um retângulo 
 imaginário. Em seguida, o programa calcula automaticamente a área do 
 retângulo e exibe o resultado.
 
-\begin{code}
+\begin{excode}
         float x;
         float y;
         float area;
-\end{code}
+\end{excode}
 
 No trecho abaixo, declaramos três variáveis diferentes: \textbf{x} para a 
 altura, \textbf{y} para o comprimento e \textbf{area} para o resultado do 
 cálculo. Todas as três variáveis são do tipo \textbf{float}, pois nada impede 
 que as medidas do retângulo sejam números fracionados.
 
-\begin{code}
+\begin{excode}
         printf("Digite a altura do retângulo: ");
         scanf("%f", &x);
 
         printf("Digite a comprimento do retângulo: ");
         scanf("%f", &y);
-\end{code}
+\end{excode}
 
 Aqui utilizamos a função \texttt{printf} para exibir texto na tela, assim 
 como já feito antes, e em seguida, usamos uma nova função chamada 
@@ -152,18 +152,18 @@ passando o endereço da variável.
     diz respeito a localização da variável na memória do computador.
 \end{postscript}
 
-\begin{code}
+\begin{excode}
         area = x * y;
-\end{code}
+\end{excode}
 
 Após receber os valores de \(x\) e \(y\) usando a função \texttt{scanf}, 
 multiplicamos as variáveis usando o operador de multiplicação e armazenamos 
 o resultado em \texttt{area} usando o operador de atribuição (\texttt{=}).
 
-\begin{code}
+\begin{excode}
         printf("A área do retângulo é: %f\n", area);
         return 0;
-\end{code}
+\end{excode}
 
 Finalmente, exibimos o valor na tela usando a função \texttt{printf} e 
 retornamos o valor 0 para indicar que o programa foi encerrado com sucesso. 

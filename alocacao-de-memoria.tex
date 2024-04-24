@@ -30,7 +30,7 @@ Portanto, é necessário que ao utilizar memória alocada em sua aplicação o
 usuário lembre-se de liberar a memória após o seu uso. Ademais, vamos tentar 
 exemplificar o processo de alocação de memória:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
     #include <stdlib.h>
 
@@ -72,7 +72,7 @@ exemplificar o processo de alocação de memória:
         free(numeros);
         return 0;
     }
-\end{code}
+\end{excode}
 
 No código acima é pedido ao usuário para escolher uma quantidade \(N\) de 
 números, que deverão ser digitados pelo usuário, de maneira que em seguida o 
@@ -83,7 +83,7 @@ estático.
 (Para explicar o processo de alocação e liberação de memória vamos focar nas 
 seguintes linhas de código)
 
-\begin{code}
+\begin{excode}
     numeros = malloc(n * sizeof(int));
     ...
     if (numeros == NULL) {
@@ -92,7 +92,7 @@ seguintes linhas de código)
     }
     ...
     free(numeros);
-\end{code}
+\end{excode}
 
 Sendo assim, declaramos um ponteiro \texttt{numeros} e atribuímos como valor o 
 resultado da  função \texttt{malloc}, que aceita como parâmetro um número 
@@ -125,11 +125,11 @@ Aqui estão algumas funções similares a malloc que podem ser úteis:
         ser necessário que se faça essa ``limpeza'' em blocos de memória 
         alocados. Segue abaixo um exemplo de como usar a função \texttt{calloc}:
 
-        \begin{code}
+        \begin{excode}
     ...
     char *ponteiro = calloc(numero_de_itens, tamanho_de_cada_item);
     ...
-        \end{code}
+        \end{excode}
     \item \textbf{realloc:} A função realloc é a mais diferente dentre as três, 
         pois tem a função de re-alocar uma mesma seção de memória porém com um 
         tamanho diferente do anterior, geralmente essa função é utilizada 
@@ -139,14 +139,14 @@ Aqui estão algumas funções similares a malloc que podem ser úteis:
         pré-existente daquela seção. Segue abaixo um exemplo de como usar a 
         função \texttt{realloc}:
 
-        \begin{code}
+        \begin{excode}
     ...
     // Alocando memória para um vetor hipotético
     int *ponteiro = malloc(sizeof(int) * 10);
     // Modificando o tamanho da seção de memória alocada
     ponteiro = realloc(ponteiro, novo_tamanho_da_seção);
     ...
-        \end{code}
+        \end{excode}
 \end{itemize}
 
 Caso deseje aprender mais sobre o funcionamento das funções \texttt{malloc, 

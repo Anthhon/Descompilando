@@ -7,7 +7,7 @@ um tipo definido.
 
 Para esclarecer, vejamos um exemplo prático de como declarar e utilizar ponteiros:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -18,7 +18,7 @@ Para esclarecer, vejamos um exemplo prático de como declarar e utilizar ponteir
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste exemplo, inicializamos a variável \(x\) com o valor 10. Em seguida, 
 declaramos uma variável \texttt{ptr} do tipo \texttt{int *}, indicando que 
@@ -39,7 +39,7 @@ Acessar variáveis fora do escopo atual de uma função pode ser útil em muitas
 situações, e os ponteiros facilitam esse processo. Vamos explorar um exemplo 
 prático para ilustrar como isso pode ser feito:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     void foo(int x)
@@ -57,7 +57,7 @@ prático para ilustrar como isso pode ser feito:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 No código acima, declaramos uma variável \(x\) com o valor 10 na função main, 
 imprimimos o valor de \(x\) e, em seguida, chamamos a função \texttt{foo} 
@@ -80,7 +80,7 @@ Para alterar efetivamente o valor de \(x\) dentro de foo, podemos utilizar
 ponteiros para acessar o endereço de memória da variável \(x\) original. Veja 
 como isso pode ser feito:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     void foo(int *x)
@@ -100,7 +100,7 @@ como isso pode ser feito:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste código, declaramos um ponteiro \texttt{ptr} que guarda o endereço de 
 memória de \(x\). Em seguida, passamos esse ponteiro para a função 

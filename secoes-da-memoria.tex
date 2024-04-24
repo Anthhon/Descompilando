@@ -27,7 +27,7 @@ ser modificada durante a execução do programa.
 
 Considere o seguinte código:
 
-\begin{code}
+\begin{excode}
     static char *z = "Eu sou Z\n"
     char *w = "Eu sou W\n"
 
@@ -43,7 +43,7 @@ Considere o seguinte código:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 No código acima, são definidas as variáveis \texttt{x}, \texttt{y}, \texttt{z} 
 e \texttt{w}. Todas elas, exceto \texttt{x}, são direcionadas para a seção 
@@ -63,7 +63,7 @@ de inicialização das variáveis.
 
 Repetindo o mesmo código da seção anterior de forma ilustrativa:
 
-\begin{code}
+\begin{excode}
     static char *z;
     char *w;
 
@@ -79,7 +79,7 @@ Repetindo o mesmo código da seção anterior de forma ilustrativa:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 As variáveis \texttt{y}, \texttt{z} e \texttt{w}, sendo declaradas como globais 
 ou estáticas sem uma inicialização explícita, são alocadas na seção \textbf{BSS} 
@@ -94,9 +94,9 @@ compilador não realiza nenhuma inicialização automática para elas. Isso impl
 que \texttt{x} pode conter qualquer valor aleatório presente na stack no 
 momento de sua declaração.
 
-\begin{ps}
+\begin{postscript}
     \textbf{BSS} é uma abreviação para: \textbf{Block Started By Symbol}. 
-\end{ps}
+\end{postscript}
 
 \subsection{Heap}
 

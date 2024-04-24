@@ -13,7 +13,7 @@ existir ao término da função.
 Para ilustrar essas propriedades das variáveis locais, considere o seguinte 
 exemplo:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     void printnum(int x) { // Recebe argumento 'x'
@@ -27,7 +27,7 @@ exemplo:
         printnum(369);
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste código, a função \texttt{printnum} imprime dois valores na tela: o 
 argumento \(x\) passado para a função e a variável local \(y\) declarada 
@@ -63,7 +63,7 @@ Considere o seguinte exemplo prático de como uma variável global pode ser
 utilizada em um projeto real, como para controlar a vida do personagem em um 
 jogo:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     unsigned int life = 100; // Vida do personagem
@@ -98,7 +98,7 @@ jogo:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste código, a variável \texttt{life} é uma variável global que armazena 
 a vida do personagem. Ela pode ser acessada e modificada por todas as 
@@ -122,7 +122,7 @@ um valor diferente.
 
 O código a seguir ilustra essa propriedade:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -132,7 +132,7 @@ O código a seguir ilustra essa propriedade:
         printf("x: \%d\n", x);
         printf("y: \%d\n", y);
     }
-\end{code}
+\end{excode}
 
 Ao compilar e executar o código acima você vai notar que a variável \(y\) 
 terá um valor aleatório, enquanto a variável \(x\) sempre terá o valor 0. 
@@ -141,7 +141,7 @@ memória, seu valor deve ser constante.
 
 Usemos esse código como exemplo:
 
-\begin{code}
+\begin{excode}
     int initializer(void)
     {
         return 50;
@@ -155,7 +155,7 @@ Usemos esse código como exemplo:
 
         return 0;
     }
-\end{code}
+\end{excode}
 
 Ao compilar o código acima você verá um erro semelhante a:
 
@@ -185,7 +185,7 @@ ser útil.
 
 O código a seguir ilustra o uso de variáveis globais \texttt{static}:
 
-\begin{code}
+\begin{excode}
     // Arquivo: main.c
     #include <stdio.h>
 
@@ -207,11 +207,11 @@ O código a seguir ilustra o uso de variáveis globais \texttt{static}:
     {
         printf("x in example.c: \%d\n", x);
     }
-\end{code}
+\end{excode}
 
 E aqui está um exemplo de código que ilustra o uso de funções \texttt{static}:
 
-\begin{code}
+\begin{excode}
     // Arquivo: main.c
     #include <stdio.h>
 
@@ -233,7 +233,7 @@ E aqui está um exemplo de código que ilustra o uso de funções \texttt{static
     {
         printf("Hello from example.c!\n");
     }
-\end{code}
+\end{excode}
 
 \subsubsection{Exercícios}
 

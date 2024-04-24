@@ -26,7 +26,7 @@ conta própria na internet.
 
 Aqui está um exemplo comum de uso de bibliotecas estáticas:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     int main(void)
@@ -34,7 +34,7 @@ Aqui está um exemplo comum de uso de bibliotecas estáticas:
         printf("Olá, mundo!\n");
         return 0;
     }
-\end{code}
+\end{excode}
 
 Como você pode ver, já na primeira linha, estamos incluindo a biblioteca \texttt{stdio.h} no código para poder usar a função \texttt{printf}.
 
@@ -69,7 +69,7 @@ funcionam para evitar potenciais problemas.
 Para exemplificar a utilização de bibliotecas externas, vamos considerar o 
 seguinte código:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
     #include <math.h>
 
@@ -86,7 +86,7 @@ seguinte código:
         printf("Valor da hipotenusa: %.2f\n", h);
         return 0;
     }
-\end{code}
+\end{excode}
 
 Este código calcula a hipotenusa de um triângulo com base nos valores fornecidos pelas variáveis \texttt{c1} e \texttt{c2}. No entanto, as funções \texttt{pow} e \texttt{sqrt}, responsáveis por calcular a potência e a raiz quadrada de um número, respectivamente, não estão definidas em nenhum lugar do código.
 
@@ -131,7 +131,7 @@ você está incomodado de ter que adicionar o `f' no final da chamada da funçã
 \texttt{\textbackslash n} ao final do texto impresso para ter que pular para a próxima 
 linha e para resolver isso você resolveu implementar a função \texttt{print}.
 
-\begin{code}
+\begin{excode}
     // Arquivo minha_biblioteca.c
     #include <stdio.h>
 
@@ -158,7 +158,7 @@ linha e para resolver isso você resolveu implementar a função \texttt{print}.
         print("A função print está funcionando");
         print("Esse texto deve ser impresso na linha abaixo");
     }
-\end{code}
+\end{excode}
 
 Vamos supor que o código acima esteja dividido em três arquivos diferentes, 
 localizados no mesmo diretório, com os respectivos nomes indicados nos 
@@ -178,33 +178,33 @@ incluir os arquivos necessários para que o código seja compilado com sucesso.
 Além disso, caso você tenha observado atentamente é possível perceber a 
 inclusão das seguintes linhas de código:
 
-\begin{code}
+\begin{excode}
     #ifndef MINHA_BIBLIOTECA_H
     #define MINHA_BIBLIOTECA_H
     ...
     #endif
-\end{code}
+\end{excode}
 
 Essas três linhas são marcadores que, embora não sejam obrigatórios, são 
 extremamente importantes, pois evitam que uma mesma biblioteca seja incluída 
 repetidamente de maneira desnecessária. Para entender melhor como isso 
 funciona, vamos analisar o que cada uma dessas linhas significa.
 
-\begin{code}
+\begin{excode}
     #ifndef MINHA_BIBLIOTECA_H
-\end{code}
+\end{excode}
 
 Verifica se \texttt{MINHA\_BIBLIOTECA\_H} ainda não foi definido. Se já tiver sido definido, a inclusão do restante do código é cancelada.
 
-\begin{code}
+\begin{excode}
     #define MINHA_BIBLIOTECA_H
-\end{code}
+\end{excode}
 
 Define \texttt{MINHA\_BIBLIOTECA\_H} e inclui todo o código abaixo.
 
-\begin{code}
+\begin{excode}
     #endif
-\end{code}
+\end{excode}
 
 Delimita o fim do bloco que deve ser definido junto a \texttt{MINHA\_BIBLIOTECA\_H}.
 

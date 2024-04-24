@@ -38,8 +38,8 @@
   linewidth=0pt, % No frame line width
   skipabove=20pt, % Space above the graybox
   skipbelow=20pt, % Space below the graybox
-  innerleftmargin=14pt, % Left margin inside the graybox
-  innerrightmargin=14pt, % Right margin inside the graybox
+  innerleftmargin=22pt, % Left margin inside the graybox
+  innerrightmargin=22pt, % Right margin inside the graybox
   innertopmargin=10pt, % Top margin inside the graybox
   innerbottommargin=10pt, % Bottom margin inside the graybox
   roundcorner=0pt, % Round corner radius
@@ -59,11 +59,42 @@
 }
 
 % Define o ambiente da caixa de código
+\lstnewenvironment{excode}[1][]{
+    \lstset{
+        inputencoding=utf8,
+        breaklines=true,
+        extendedchars=true,
+        showstringspaces=false,
+        frame=single,
+        rulecolor=\color{black},
+        basicstyle=\ttfamily,
+        keywordstyle=\color{blue},
+        stringstyle=\color{red},
+        commentstyle=\color{green!60!black},
+        numbers=left,
+        numberstyle=\footnotesize\sffamily,
+        language=C,
+        literate =
+        {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+        {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+        {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+        {À}{{\`A}}1  {È}{{\`E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+        {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+        {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+        {ẞ}{{\SS}}1  {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ø}{{\o}}1  {Ø}{{\O}}1
+        {å}{{\aa}}1  {Å}{{\AA}}1  {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1
+        {Õ}{{\~O}}1  {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+        {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+        {£}{{\pounds}}1  {©}{{\copyright}}1  {®}{{\textregistered}}1,
+        #1
+    }
+}{}
+
+% Define o ambiente da caixa de código
 \DefineVerbatimEnvironment{code}{Verbatim}{
   frame=single,
   rulecolor=\color{black}
 }
-
 \title{Descompilando\\ \large Entendendo o código da máquina}
 \author{Anthony Carneiro da Silva}
 
@@ -122,9 +153,11 @@
 
 \subsection{Condicionais e loops}
 \input{condicionais_e_loops.tex}
+%TODO: Elaborar exercicícios
 
 \subsection{Entrada e saída de dados}
 \input{entrada_e_saida_de_dados.tex}
+%TODO: Elaborar exercicícios
 
 \chapter{Estrutura de dados e memória}
 \clearpage % Define página isolada para novo capítulo
@@ -135,28 +168,32 @@
 
 \subsection{O que são endereços} \label{o-que-sao-enderecos}
 \input{o-que-sao-enderecos.tex}
+%TODO: Elaborar exercicícios
 
 \subsection{O que são ponteiros}
 \input{o-que-sao-ponteiros.tex}
+%TODO: Elaborar exercicícios
 
 \subsection{Vetores}
 \input{vetores.tex}
+%TODO: Elaborar exercicícios
 
 \subsection{Alocação de memória}
 \input{alocacao-de-memoria.tex}
+%TODO: Elaborar exercicícios
 
 \section{Seções da memória} \label{secoes-da-memoria}
 \input{secoes-da-memoria.tex}
+%TODO: Elaborar exercicícios
 
-\chapter{Tópicos avançados}
+\chapter{Tópicos Extras}
 \clearpage % Define página isolada para novo capítulo
 
-\section{Bibliotecas estáticas e dinâmicas}
 \section{Manipulando arquivos}
-\section{Leitura e escrita de arquivos}
+\subsection{fopen, fread, fwrite e fclose}
+\subsection{fseek, ftell, rewind}
 
 \section{Manipulação de bits}
-
 \subsection{NOT}
 \subsection{AND}
 \subsection{OR}

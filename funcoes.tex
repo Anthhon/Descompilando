@@ -6,12 +6,12 @@ com diferentes funções bem definidas.
 
 As funções em C geralmente seguem o seguinte padrão de declaração:
 
-\begin{code}
+\begin{excode}
     tipo_do_retorno nome_da_função(argumentos)
     {
     // Código da função
     }
-\end{code}
+\end{excode}
 
 O tipo do retorno identifica o tipo de valor que a função deve retornar, 
 caso necessário. Este valor pode ser de qualquer tipo já apresentado até o 
@@ -20,7 +20,7 @@ momento, como inteiros, caracteres, ponto flutuante, entre outros.
 Vamos considerar um exemplo simples para melhor entender a declaração de uma 
 função:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     void printHello(void) // Define uma nova função
@@ -35,7 +35,7 @@ função:
         printHello();
         return 0;
     }
-\end{code}
+\end{excode}
 
 Este código é um exemplo básico de utilização de função. Ele define uma 
 função chamada \textbf{printHello}, responsável por imprimir o texto 
@@ -52,9 +52,9 @@ qualquer valor.
     ficou claro como isso é possível, aqui está um exemplo utilizando a 
     mesma função \textbf{printHello}:
 
-    \begin{code}
+    \begin{excode}
     void printHello(void) { printf("Hello!\n"); }
-    \end{code}
+    \end{excode}
 
     Se você substituir o código anterior por essa versão de apenas uma 
     linha, o código continuará sendo compilado normalmente.
@@ -66,7 +66,7 @@ As funções podem retornar valores após a execução de suas operações. Isso
 permite que elas comuniquem resultados de volta para o código que as 
 chamou. Vamos elaborar outro exemplo para demonstrar isso:
 
-\begin{code}
+\begin{excode}
     #include <stdio.h>
 
     // Define uma nova função que retorna 
@@ -82,7 +82,7 @@ chamou. Vamos elaborar outro exemplo para demonstrar isso:
         printf("A soma é: %d\n", resultado);
         return 0;
     }
-\end{code}
+\end{excode}
 
 Neste exemplo, a função \texttt{soma} recebe dois argumentos inteiros e 
 retorna a soma deles. No \texttt{main}, chamamos essa função com os 
