@@ -10,18 +10,17 @@ segmentos, cada um com propriedades e funções específicas.
 
 \subsection{Text}
 
-A seção \textbf{Text}, também conhecida como seção de \textbf{Texto}, contém o 
-código executável do programa. As instruções de máquina presentes nesta seção 
-são acessadas pelo processador para execução da aplicação. Importante destacar 
-que esta seção é somente de leitura, o que significa que, uma vez definida, seu 
-conteúdo não pode ser modificado durante a execução do programa. Isso é 
-essencial para a integridade e segurança do código executável.
+A seção \texttt{Text}, contém o código executável do programa. As instruções de 
+máquina presentes nesta seção são acessadas pelo processador para execução da 
+aplicação. Importante destacar que esta seção é somente de leitura, o que 
+significa que, uma vez definida, seu conteúdo não pode ser modificado durante 
+a execução do programa. Isso é essencial para a integridade e segurança do 
+código executável.
 
 \subsection{Data}
 
-A seção \textbf{Data}, também conhecida como seção de \textbf{Dados 
-Inicializados}, é onde são armazenadas as variáveis globais e estáticas do 
-programa que foram inicializadas com valores específicos. É importante 
+A seção \texttt{Data}, é onde são armazenadas as variáveis globais e estáticas do 
+programa que foram inicializadas durante o processo de compilação. É importante 
 destacar que a seção de dados inicializados não é apenas de leitura; ela pode 
 ser modificada durante a execução do programa.
 
@@ -47,17 +46,16 @@ Considere o seguinte código:
 
 No código acima, são definidas as variáveis \texttt{x}, \texttt{y}, \texttt{z} 
 e \texttt{w}. Todas elas, exceto \texttt{x}, são direcionadas para a seção 
-\textbf{Data}. Isso ocorre porque as variáveis globais, independentemente de 
-usarem a diretiva \textbf{static}, e as variáveis locais que utilizam a 
-diretiva \textbf{static}, são alocadas na seção \textbf{Data} caso sejam 
+\texttt{Data}. Isso ocorre porque as variáveis globais, independentemente de 
+usarem a diretiva \texttt{static}, e as variáveis locais que utilizam a 
+diretiva \texttt{static}, são alocadas na seção \texttt{Data} caso sejam 
 inicializadas corretamente.
 
 \subsection{BSS}
 
-A seção \textbf{BSS}, também conhecida como seção de \textbf{Dados Não 
-Inicializados}, armazena variáveis globais e estáticas que não foram 
+A seção \texttt{BSS}, armazena variáveis globais e estáticas que não foram 
 inicializadas explicitamente pelo programador. É normal ver também a seção 
-\textbf{BSS} ser considerada uma só com a seção \textbf{Data} por ambas 
+\texttt{BSS} ser considerada uma só com a seção \texttt{Data} por ambas 
 conterem variáveis globais e estáticas, diferenciando-se apenas pelo estado 
 de inicialização das variáveis.
 
@@ -82,29 +80,29 @@ Repetindo o mesmo código da seção anterior de forma ilustrativa:
 \end{excode}
 
 As variáveis \texttt{y}, \texttt{z} e \texttt{w}, sendo declaradas como globais 
-ou estáticas sem uma inicialização explícita, são alocadas na seção \textbf{BSS} 
+ou estáticas sem uma inicialização explícita, são alocadas na seção \texttt{BSS} 
 e inicializadas automaticamente com zero. Isso é uma característica padrão do 
-compilador para assegurar que todas as variáveis na seção \textbf{BSS} comecem 
+compilador para assegurar que todas as variáveis na seção \texttt{BSS} comecem 
 com um estado previsível.
 
 Por outro lado, a variável \texttt{x} apesar de não inicializada é declarada 
-localmente, portanto não pertence à seção \textbf{BSS}. Em C, variáveis locais 
+localmente, portanto não pertence à seção \texttt{BSS}. Em C, variáveis locais 
 não inicializadas como \texttt{x} podem conter valores indeterminados, pois o 
 compilador não realiza nenhuma inicialização automática para elas. Isso implica 
 que \texttt{x} pode conter qualquer valor aleatório presente na stack no 
 momento de sua declaração.
 
 \begin{postscript}
-    \textbf{BSS} é uma abreviação para: \textbf{Block Started By Symbol}. 
+    \texttt{BSS} é uma abreviação de "Block Started By Symbol". 
 \end{postscript}
 
 \subsection{Heap}
 
-A seção \textbf{Heap} é utilizada para armazenar dados alocados e liberados dinamicamente pelo programa durante sua execução, por meio de funções como \texttt{malloc}, \texttt{calloc}, \texttt{realloc} e \texttt{free}.
+A seção \texttt{Heap} é utilizada para armazenar dados alocados e liberados dinamicamente pelo programa durante sua execução, por meio de funções como \texttt{malloc}, \texttt{calloc}, \texttt{realloc} e \texttt{free}.
 
-É importante destacar que, ao contrário das outras seções de memória, a seção \textbf{Heap} não é necessariamente contígua na memória. Ela pode utilizar técnicas de mapeamento e alocação não contígua para ajustar o tamanho dos blocos de memória alocados dinamicamente. Devido a essa maior complexidade e dinamicidade dos blocos de memória na \textbf{Heap}, acessar variáveis localizadas nessa seção pode ser mais lento em comparação com as seções estáticas.
+É importante destacar que, ao contrário das outras seções de memória, a seção \texttt{Heap} não é necessariamente contígua na memória. Ela pode utilizar técnicas de mapeamento e alocação não contígua para ajustar o tamanho dos blocos de memória alocados dinamicamente. Devido a essa maior complexidade e dinamicidade dos blocos de memória na \texttt{Heap}, acessar variáveis localizadas nessa seção pode ser mais lento em comparação com as seções estáticas.
 
-Além disso, a seção \textbf{Heap}, conforme ilustrado na figura \ref{fig:memorySegmentsDiagram}, começa imediatamente após a seção \textbf{BSS} e pode crescer em direção à seção \textbf{Stack} à medida que mais memória dinâmica é alocada e utilizada.
+Além disso, a seção \texttt{Heap}, conforme ilustrado na figura \ref{fig:memorySegmentsDiagram}, começa imediatamente após a seção \texttt{BSS} e pode crescer em direção à seção \texttt{Stack} à medida que mais memória dinâmica é alocada e utilizada.
 
 %TODO: Elaborar uma melhor explicação com mais exemplos do que é a Stack
 \subsection{Stack}
@@ -116,18 +114,18 @@ de funções.
 A Stack, também conhecida como pilha, é uma estrutura de dados de natureza 
 LIFO\footnote{Last In, First Out}, o que significa que o último item a ser 
 inserido é o primeiro a ser retirado. No contexto da execução de um programa em 
-C, a \textbf{Stack} é utilizada para armazenar variáveis locais, parâmetros de 
+C, a \texttt{Stack} é utilizada para armazenar variáveis locais, parâmetros de 
 função e endereços de retorno.
 
-Quando uma função é chamada, um novo frame de execução é criado na \textbf{Stack} 
+Quando uma função é chamada, um novo frame de execução é criado na \texttt{Stack} 
 para armazenar suas variáveis locais e outros dados relacionados. Esse frame é 
 desalocado quando a função retorna, liberando assim a memória alocada para suas 
 variáveis locais.
 
-É importante ressaltar que a \textbf{Stack} possui um tamanho limitado, 
+É importante ressaltar que a \texttt{Stack} possui um tamanho limitado, 
 determinado pelo sistema operacional ou pelo compilador. Portanto, a alocação 
-excessiva de memória na \textbf{Stack} pode levar a um estouro de 
+excessiva de memória na \texttt{Stack} pode levar a um estouro de 
 pilha\footnote{também conhecido como Stack Overflow}, resultando em falha na 
 execução do programa. Além disso, como a memória na \footnote{Stack} é alocada 
 de forma estática durante a compilação, não é possível alocar ou liberar memória 
-de forma dinâmica, como acontece na \textbf{Heap}.
+de forma dinâmica, como acontece na \texttt{Heap}.

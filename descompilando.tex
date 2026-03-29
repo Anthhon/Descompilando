@@ -9,6 +9,7 @@
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage[brazilian]{babel}
+\usepackage{ulem}
 
 % Caminho do diretório de imagens
 
@@ -88,11 +89,42 @@
         {£}{{\pounds}}1  {©}{{\copyright}}1  {®}{{\textregistered}}1, #1 }
 }{}
 
+% Define o ambiente da caixa do terminal
+\lstnewenvironment{exterminal}[1][]{
+    \lstset{
+        inputencoding=utf8,
+        breaklines=true,
+        extendedchars=true,
+        showstringspaces=false,
+        frame=single,
+        rulecolor=\color{black},
+        basicstyle=\ttfamily,
+        language={},          % No language — plain text
+        keywordstyle={},
+        stringstyle={},
+        commentstyle={},
+        numbers=left,
+        numberstyle=\footnotesize\sffamily,
+        literate =
+        {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+        {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+        {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+        {À}{{\`A}}1  {È}{{\`E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+        {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+        {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+        {ẞ}{{\SS}}1  {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ø}{{\o}}1  {Ø}{{\O}}1
+        {å}{{\aa}}1  {Å}{{\AA}}1  {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1
+        {Õ}{{\~O}}1  {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+        {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+        {£}{{\pounds}}1  {©}{{\copyright}}1  {®}{{\textregistered}}1, #1 }
+}{}
+
 % Define o ambiente da caixa de código
 \DefineVerbatimEnvironment{textbox}{Verbatim}{
   frame=single,
   rulecolor=\color{black}
 }
+
 \title{Descompilando\\ \large Entendendo o código da máquina}
 \author{Anthony Carneiro da Silva}
 
@@ -102,7 +134,7 @@
 \tableofcontents
 
 \chapter{Índice}
-\clearpage
+\clearpage % Define página isolada para novo capítulo
 
 \section{Sobre o autor}
 \input{sobre_o_autor.tex}
@@ -111,7 +143,7 @@
 \input{sobre_o_livro.tex}
 
 \chapter{Introdução a linguagem C}
-\clearpage
+\clearpage % Define página isolada para novo capítulo
 
 \section{O que é a linguagem C}
 
@@ -184,291 +216,517 @@
 \input{secoes-da-memoria.tex}
 %TODO: Elaborar exercicícios
 
-\chapter{Tópicos Extras}
+\chapter{Depuração e testes}
 \clearpage % Define página isolada para novo capítulo
 
-\section{Manipulação de Arquivos}
+\section{Depuração}
 
-A manipulação de arquivos em C envolve operações como criação, abertura, 
-leitura, escrita e fechamento de arquivos. Como discutido anteriormente na 
-seção \ref{o-que-sao-arquivos}, o terminal também se enquadra na definição de 
-arquivos, pois pode receber operações de escrita, leitura, entre outras.
+Mais importante que saber programar é saber encontrar falhas no próprio código. Por isso, o processo 
+de depuração (debugging) é tão crucial. Não serão poucas as vezes em que, durante a criação de um software 
+mais complexo, você se deparará com erros que parecem não fazer sentido. Seja um novato ou alguém com décadas 
+de experiência, todos enfrentarão esse tipo de problema.
 
-É importante observar também que a maioria dessas operações de manipulação de 
-arquivos não é persistente, ou seja, elas são descartadas quando o programa é 
-encerrado. No entanto, em aplicações mais complexas, pode ser necessário 
-armazenar algumas informações fornecidas pelo usuário para reutilização pelo 
-programa na próxima execução. Por exemplo, seria impraticável e inconveniente 
-ter que criar uma nova conta ou reconfigurar todas as opções toda vez que um 
-jogo é iniciado.
-
-O uso da manipulação de arquivos é crucial devido às seguintes características:
+Depurar é uma arte à parte, algo que está em constante evolução dentro do universo da programação. Existem 
+inúmeras ferramentas e estratégias que podem ser utilizadas nesse processo; porém, serão abordadas aqui duas 
+das ferramentas mais conhecidas, disponíveis gratuitamente e com amplo material de suporte na internet:
 
 \begin{itemize}
-        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
-    \item \textbf{Reusabilidade:} As informações armazenadas em um arquivo 
-        podem ser acessadas, atualizadas e removidas conforme necessário.
-    \item \textbf{Portabilidade:} Como as informações são geralmente escritas 
-        seguindo algum padrão lógico, um arquivo de configurações pode ser 
-        facilmente transferido para outro computador sem complicações, 
-        reduzindo erros durante a transferência de dados.
-    \item \textbf{Eficiência:} Em muitas situações, é mais eficiente gerenciar 
-        um grande volume de informações do usuário com apenas algumas 
-        instruções, economizando tempo e reduzindo erros.
-    \item \textbf{Capacidade de Armazenamento:} Armazenar informações em 
-        arquivo elimina a necessidade de manter todas as informações de uma 
-        aplicação na memória RAM simultaneamente, evitando preocupações e erros 
-        relacionados à sobrecarga de memória.
+    \item \textbf{GDB}: uma ferramenta TUI (Text-based User Interface) que permite depurar aplicações em C 
+        de maneira detalhada por meio de comandos simples;
+    \item \textbf{Valgrind}: outra ferramenta TUI, usada principalmente para detectar vazamentos de memória 
+        em programas escritos em C.
 \end{itemize}
 
-\subsection{Tipos de arquivos}
-
-\subsubsection{Arquivos de texto}
-
-Esses arquivos contêm dados em formato de caracteres ASCII, podendo ser lidos e 
-editados por qualquer editor de texto. Geralmente, mas não obrigatoriamente, 
-esses arquivos possuem uma extensão '.txt' e todas as suas linhas terminam com 
-o caractere '\textbackslash n'.
-
-É comum encontrar esses tipos de arquivos sendo usados para guardar, por exemplo:
-
-\begin{itemize}
-        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
-    \item \textbf{Registro de logs:} Os arquivos de texto são comumente usados 
-        para registrar eventos e informações relevantes durante a execução de 
-        um programa. Por exemplo, um servidor web pode registrar todas as 
-        solicitações de página em um arquivo de log para fins de monitoramento 
-        e análise.
-    \item \textbf{Listas de contatos:} Arquivos de texto também podem ser usados 
-        para armazenar dados estruturados simples, como listas de contatos, 
-        configurações de aplicativos, ou até mesmo informações de configuração 
-        de rede.
-    \item \textbf{Arquivos de código fonte:} Embora não seja exclusivo de 
-        arquivos de texto, os arquivos de código-fonte em linguagens de 
-        programação são geralmente armazenados em formato de texto para 
-        facilidade de leitura e manipulação. Eles são editáveis por qualquer 
-        editor de texto e podem ser versionados facilmente por sistemas de 
-        controle de versão como Git.
-\end{itemize}
-
-\subsubsection{Arquivos binários}
-
-Diferentemente dos arquivos de texto, que têm o seu conteúdo em formato de 
-caracteres ASCII, os arquivos binários têm o seu conteúdo em um formato numérico, 
-que fora de contexto não podem ser interpretados por um ser humano, mas que, 
-quando corretamente interpretados por um programa, podem ser lidos e 
-transformados em informação útil. Por conta disso, os arquivos binários tendem 
-a ter uma maior segurança, pois mesmo que caiam em mãos de usuários maliciosos, 
-não podem ser facilmente interpretados e manipulados de maneira mal intencionada.
-
-Geralmente, esse tipo de arquivo é usado nas seguintes aplicações:
-
-\begin{itemize}
-        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
-    \item \textbf{Bancos de dados locais:} Muitos sistemas de gerenciamento de 
-        banco de dados usam arquivos binários para armazenar dados localmente. 
-        Embora os bancos de dados sejam mais comumente associados a servidores 
-        e sistemas de gerenciamento de dados complexos, eles também podem ser 
-        usados para aplicações simples de desktop.
-    \item \textbf{Guardar imagens e multimídias:} Arquivos binários são 
-        amplamente utilizados para armazenar imagens, vídeos, áudio e outros 
-        tipos de multimídia. Isso ocorre porque esses tipos de dados são melhor 
-        representados em formato binário, o que permite uma manipulação 
-        eficiente e compactação.
-    \item \textbf{Arquivos executáveis:} Os arquivos binários também incluem 
-        executáveis de programas. Quando você compila um programa em linguagem 
-        de máquina, o resultado é um arquivo binário que contém as instruções 
-        que o computador pode executar diretamente.
-\end{itemize}
-
-\subsection{fopen, fread, fwrite e fclose}
-
-\subsubsection{fopen}
-
-A função \texttt{fopen} é usada para abrir um arquivo existente ou criar um 
-novo arquivo. Ela retorna um ponteiro para o arquivo que pode ser usado em 
-outras operações de entrada e saída de arquivo. A assinatura da função é a 
-seguinte:
-
-\begin{excode}
-    FILE *fopen(const char *filename, const char *mode);
-\end{excode}
-
-O primeiro argumento \texttt{filename} é um vetor que contém o caminho do 
-arquivo a ser aberto ou criado. O segundo argumento \texttt{mode} especifica o 
-modo de abertura do arquivo, como leitura ("r"), escrita ("w"), anexação ("a"), 
-etc.
-
-\subsubsection{fread}
-
-A função \texttt{fread} é usada para ler blocos de dados de um arquivo. Ela 
-recebe quatro argumentos: um ponteiro para o vetor onde os dados lidos serão 
-armazenados, o tamanho em bytes de cada elemento a ser lido, o número de 
-elementos a serem lidos e um ponteiro para o arquivo a partir do qual os dados 
-serão lidos. A assinatura da função é a seguinte:
-
-\begin{excode}
-    size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
-\end{excode}
-
-O retorno da função é o número total de elementos lidos com sucesso. Valor esse 
-que pode ser utilizado para identificar quando um arquivo foi lido por completo, 
-já que quando a função alcança o final do arquivo, 0 bytes são lidos do mesmo.
-
-\subsubsection{fwrite}
-
-A função \texttt{fwrite} é usada para escrever blocos de dados em um arquivo. 
-Ela recebe quatro argumentos: um ponteiro para um vetor de dados a ser escrito, 
-o tamanho em bytes de cada elemento a ser escrito, o número de elementos a 
-serem escritos e um ponteiro para o arquivo no qual os dados serão escritos. A 
-assinatura da função é a seguinte:
-
-\begin{excode}
-    size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
-\end{excode}
-
-O retorno da função é o número total de elementos gravados com sucesso.
-
-\subsubsection{fclose}
-
-A função \texttt{fclose} é usada para fechar um arquivo previamente aberto. Ela 
-recebe um ponteiro para o arquivo a ser fechado como seu único argumento. 
-A assinatura da função é a seguinte:
-
-\begin{excode}
-    int fclose(FILE *stream);
-\end{excode}
-
-Se a operação for bem-sucedida, \texttt{fclose} retorna zero. Se ocorrer um 
-erro, retorna um valor diferente de zero.
-
-Essas funções são essenciais para manipular arquivos em C e são amplamente 
-utilizadas em programas que necessitam de entrada e saída de dados persistentes.
-
-\subsubsection{Exemplo prático}
-
-Após entender o que cada uma das funções acima faz, vamos tentar exemplificar um uso prático das mesmas:
+Antes de ensinar como utilizar essas duas ferramentas, vamos precisar definir um código exemplo, que deve 
+conter alguns erros a serem consertados. Portanto, vamos considerar o seguinte código:
 
 \begin{excode}
     #include <stdio.h>
     #include <stdlib.h>
 
-    int main() {
-        // Abre o arquivo para leitura
-        FILE *arquivo_entrada = fopen("dados.txt", "r");
-        if (arquivo_entrada == NULL) {
-            perror("Erro ao abrir arquivo de entrada");
-            return EXIT_FAILURE;
+    int main()
+    {
+        int* x = malloc(sizeof(*x));
+        *x = 0;
+
+        while (*x < 10) {
+            printf("X é menor que 10!\n");
+            x += 1;
         }
 
-        // Abre um novo arquivo para escrita
-        FILE *arquivo_saida = fopen("dados_modificados.txt", "w");
-        if (arquivo_saida == NULL) {
-            perror("Erro ao criar arquivo de saída");
-            fclose(arquivo_entrada);
-            return EXIT_FAILURE;
-        }
-
-        // Lê o conteúdo do arquivo de entrada
-        char buffer[100];
-        size_t bytes_lidos = fread(buffer, sizeof(char), 100, arquivo_entrada);
-        if (bytes_lidos == 0) {
-            perror("Erro ao ler arquivo de entrada");
-            fclose(arquivo_entrada);
-            fclose(arquivo_saida);
-            return EXIT_FAILURE;
-        }
-
-        // Modifica os dados lidos (exemplo: converter para maiúsculas)
-        for (size_t i = 0; i < bytes_lidos; i++) {
-            buffer[i] = toupper(buffer[i]);
-        }
-
-        // Escreve os dados modificados no arquivo de saída
-        size_t bytes_escritos = fwrite(buffer, sizeof(char), bytes_lidos, arquivo_saida);
-        if (bytes_escritos != bytes_lidos) {
-            perror("Erro ao escrever no arquivo de saída");
-            fclose(arquivo_entrada);
-            fclose(arquivo_saida);
-            return EXIT_FAILURE;
-        }
-
-        // Fecha os arquivos abertos
-        if (fclose(arquivo_entrada) == EOF) {
-            perror("Erro ao fechar arquivo de entrada");
-            return EXIT_FAILURE;
-        }
-        if (fclose(arquivo_saida) == EOF) {
-            perror("Erro ao fechar arquivo de saída");
-            return EXIT_FAILURE;
-        }
-
-        printf("Arquivo modificado com sucesso!\n");
-
-        return EXIT_SUCCESS;
+        return 0;
     }
 \end{excode}
 
-Neste exemplo:
+O objetivo do código acima é simples: alocar memória para um inteiro \texttt{x}, armazenar o valor 0 
+nessa posição, incrementar esse valor de 1 em 1 enquanto ele for menor que 10 e exibir um texto na tela a cada 
+iteração. Nesse ponto, a execução da aplicação deve ser finalizada.
+
+Quando compilado, o código não gera \textbf{erros de compilação}, apenas alguns \textit{warnings} 
+(avisos) que podem ser ignorados dependendo das configurações. Porém, ao executá-lo, você vai ter contato 
+ao que chamamos de \textbf{undefined behavior} (ou comportamento indefinido) pois não é possível dizer como o 
+código vai se comportar, podendo acontecer qualquer uma das seguintes situações:
 
 \begin{itemize}
-        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
-    \item Abrimos um arquivo chamado \texttt{dados.txt} para leitura ("r") e 
-        outro chamado \\\texttt{dados\_modificados.txt} para escrita ("w").
-    \item Usamos \texttt{fread} para ler até 100 bytes do arquivo de entrada.
-    \item Modificamos os dados lidos (nesse caso, convertemos todas as letras para maiúsculas).
-    \item Usamos \texttt{fwrite} para escrever os dados modificados no arquivo de saída.
-    \item Finalmente, fechamos ambos os arquivos com \texttt{fclose}.
+    \item Executar o \texttt{printf} uma única vez.
+    \item Executar o \texttt{printf} várias vezes.
+    \item Entrar em um looping infinito.
+    \item Código crashar com um erro de segmentação de memória.
 \end{itemize}
 
+No meu caso, ao executar o código na minha máquina foi possível obter um erro de segmentação de memória, como 
+é mostrado abaixo:
+
+\begin{excode}
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    ...
+    X é menor que 10!
+    Segmentation fault
+\end{excode}
+
+Para resolver isso, vamos aprender a utilizar as ferramentas de debugging.
+
 \begin{postscript}
-    \begin{quote}
-    "Dê um peixe a um homem e ele se alimentará por um dia. Ensine-o a pescar e ele se alimentará pelo resto da vida."
-    \end{quote}
-
-    Seria injusto que em um livro eu apenas ensinasse como usar as funções 
-    \texttt{fopen}, \texttt{fread}, \texttt{fwrite} e \texttt{fclose}, sem 
-    considerar a possibilidade de que novos padrões possam surgir no futuro, ou 
-    que você precise atualizar seus conhecimentos. Por isso, vou compartilhar 
-    um pequeno "truque" muito utilizado entre programadores em linguagem C, que 
-    pode ser útil para relembrar ou aprender como uma função funciona.
-
-    Para isso, vamos usar o comando Linux \texttt{man} (abreviação de manual), 
-    cujo nome por si só é autoexplicativo. Ele é usado para pesquisar o manual 
-    de utilização de alguma função ou comando. Felizmente, também é possível 
-    pesquisar por funções da biblioteca padrão da linguagem C, conhecida como 
-    \texttt{libc}. Para aqueles que não usam sistemas Linux, é possível usar o 
-    comando \texttt{man} para pesquisar sobre funções até mesmo pelo Google. 
-
-    Basta usar o comando:
+    Vale ressaltar que para utilizar ferramentas de debugging de maneira mais prática e 
+    eficiente, é necessário que seja utilizada a flag \texttt{-g} durante o processo de 
+    compilação de uma aplicação. Ex.:
 
     \begin{textbox}
-        man nome_da_funcao_ou_comando
+        gcc -o main main.c -g 
     \end{textbox}
 
-    Com isso, você será capaz de encontrar o manual de qualquer função padrão 
-    da biblioteca \texttt{libc}, e até mesmo de algumas funções que estão fora 
-    das bibliotecas padrão.
+    Usar essa opção faz com que o programa seja compilado com as informações extras de 
+    depuração que facilitam MUITO o uso de ferramentas como o GDB ou Valgrind. Nos exemplos 
+    abaixo vamos levar em consideração que você compilou o programa corretamente usando a flag \texttt{-g}
 \end{postscript}
 
-\subsection{fseek, ftell, rewind}
-
-\section{Manipulação de bits}
-\subsection{NOT}
-\subsection{AND}
-\subsection{OR}
-\subsection{XOR}
-
-\chapter{Depuração e testes}
-\clearpage % Define página isolada para novo capítulo
-
-\section{Depuração}
-\subsection{Estratégias de depuração de código}
 \subsection{GDB}
+
+A princípio o GDB acaba sendo fundamental por ser uma ferramenta que permite controlar a execução 
+de um programa, possibilitando inspecionar o código linha a linha, definir breakpoints (pontos de 
+interrupção), verificar o estado das variáveis, entre outras funcionalidades.
+
+Para entender seu funcionamento, vamos aprender alguns comandos básicos. Para iniciar a depuração, 
+é necessário abrir o programa pelo GDB com o seguinte comando:
+
+\begin{textbox}
+    gdb [nome_do_programa]
+\end{textbox}
+
+Após executar esse comando, o GDB carrega o programa em um contexto de depuração, sem executá-lo 
+imediatamente. Se tudo ocorrer corretamente, você deve ver no terminal:
+
+\begin{textbox}
+    Reading symbols from main...
+    (gdb)
+\end{textbox}
+
+A partir daí, é possível definir pontos de interrupção para investigar possíveis erros. Para visualizar 
+o código-fonte, utiliza-se o comando:
+
+\begin{textbox}
+    list [nome_da_funcao]
+    // ou
+    l [nome_da_funcao]
+\end{textbox}
+
+Este comando exibe o código da função especificada com suas respectivas numerações de linha. Em 
+nosso caso, usaremos para visualizar a função \texttt{main}.
+
+\begin{postscript}
+    Vale mencionar que o comando \texttt{list} exibe uma quantidade limitada de linhas por vez. 
+    Para ver as próximas linhas, basta digitar o comando novamente ou pressionar Enter. Ao chegar 
+    ao final da função, uma mensagem de aviso será exibida.
+\end{postscript}
+
+\begin{textbox}
+    (gdb) l main
+    1       #include <stdio.h>
+    2       #include <stdlib.h>
+    3
+    4       int main()
+    5       {
+    6           int* x = malloc(sizeof(*x));
+    7           *x = 0;
+    8
+    9           while (*x < 10) {
+    10              printf("X é menor que 10!\n");
+    (gdb) 
+    11              x += 1;
+    12          }
+    13
+    14          return 0;
+    15      }
+    (gdb) 
+    Line number 16 out of range; main.c has 15 lines.
+\end{textbox}
+
+Tendo o número de cada linha de código é possível definir os pontos de interrupção, neste caso, 
+vamos definir um ponto na função \texttt{main} com o seguinte comando:
+
+\begin{exterminal}
+    break main
+    // ou
+    b main
+\end{exterminal}
+
+Este comando cria um \textbf{breakpoint} no início da função especificada e exibe uma saída semelhante a:
+
+\begin{exterminal}
+    (gdb) break main
+    Breakpoint 1 at 0x1151: file main.c, line 6.
+\end{exterminal}
+
+\begin{postscript}
+    No programa de exemplo não há muitas funções para depurar, porém, em códigos maiores e/ou mais complexos, 
+    bons pontos de interrupção podem ser definidos ao responder uma pergunta simples: "Onde o código começou 
+    a apresentar problemas?".
+
+    No fim das contas, trata-se de um trabalho investigativo (e por vezes cansativo), mas com a prática você 
+    desenvolverá uma noção de onde e como procurar.
+\end{postscript}
+
+Em seguida, inicia-se o processo de depuração com o comando \texttt{run} (ou \texttt{r}):
+
+\begin{exterminal}
+    (gdb) r
+    Starting program: /file/path/main 
+    [Thread debugging using libthread_db enabled]
+    Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+    Breakpoint 1, main () at main.c:6
+    6           int* x = malloc(sizeof(*x));
+\end{exterminal}
+
+Nessa saída, é possível observar informações como:
+\begin{itemize}
+    \item O caminho do programa que está sendo depurado
+    \item O identificador do \textbf{breakpoint} ativo
+    \item A função em execução
+    \item A próxima linha de código a ser executada
+\end{itemize}
+
+Neste momento, a linha 6 ainda não foi executada, portanto não há nada a verificar. Para executar a linha 
+atual e avançar para a próxima, utiliza-se o comando \texttt{next} (ou \texttt{n}):
+
+\begin{exterminal}
+    (gdb) n
+    7           *x = 0;
+    (gdb) n
+    9           while (*x < 10)
+\end{exterminal}
+
+Para verificar o valor de variáveis vamos usar o seguinte comando:
+
+\begin{exterminal}
+    print nome_da_variavel
+    // ou
+    p nome_da_variavel
+\end{exterminal}
+
+Como executamos as linhas que alocam memória para a variável \texttt{x} usando a função \texttt{malloc} 
+e definimos o seu valor para 0, podemos verificar se as operações foram realizadas corretamente:
+
+\begin{exterminal}
+    (gdb) p x
+    $3 = (int *) 0x5555555592a0
+    (gdb) p *x
+    $4 = 0
+\end{exterminal}
+
+Note que foi necessário desreferenciar o ponteiro para acessar o valor armazenado na memória alocada. Sem a 
+desreferência, o GDB exibe apenas o endereço da variável em formato hexadecimal.
+
+Até este ponto, nada de anormal foi detectado. Portanto, vamos continuar com a 
+depuração passo a passo, usando apenas os comandos abordados acima:
+
+\begin{exterminal}
+    (gdb) n
+    9           while (*x < 10) {
+    (gdb) p x
+    $1 = (int *) 0x5555555592a0
+    (gdb) p *x
+    $2 = 0
+    (gdb) n
+    10              printf("X é menor que 10!\n");
+    (gdb) n
+    X é menor que 10! // Programa exibindo o output de printf
+    11              x += 1;
+    (gdb) n
+    9           while (*x < 10) {
+    (gdb) p x
+    $3 = (int *) 0x5555555592a4 // Ponteiro foi incrementado em vez do valor!!!!
+    (gdb) p *x
+    $4 = 0
+\end{exterminal}
+
+Como é possível observar no comentário, uma simples verificação das operações revelou que o comportamento 
+inesperado do código era causado por um pequeno erro na linha 11:
+
+\begin{excode}
+    x += 1;  // Incrementando o ponteiro
+    // Deve ser corrigido para
+    *x += 1; // Incrementando o valor
+\end{excode}
+
+Após identificar o erro, podemos encerrar a depuração com o comando \texttt{quit}:
+
+\begin{exterminal}
+    (gdb) quit
+    A debugging session is active.
+
+            Inferior 1 [process 19336] will be killed.
+
+    Quit anyway? (y or n) 
+\end{exterminal}
+
+Com a correção aplicada e o comportamento indefinido eliminado, ao executar o programa, obtemos o resultado esperado:
+
+\begin{exterminal}
+    \$ ./main
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+\end{exterminal}
+
+Com as informações desta seção, é possível perceber que, com apenas alguns comandos básicos, já é possível realizar 
+processos de depuração de maneira relativamente eficaz.
+
+O GDB é uma ferramenta que oferece comandos mais avançados, mas como não é o foco deste livro se aprofundar nela, 
+recomendo a você que pesquise mais sobre a ferramenta posteriormente para explorar todo o seu potencial.
+
+\begin{postscript}
+    Vale mencionar que, durante os exemplos de depuração acima, repeti várias vezes comandos como \texttt{next}. Entretanto, 
+    você pode simplesmente pressionar \textbf{Enter} para que o GDB repita o último comando, facilitando a passagem por 
+    trechos mais longos de código.
+
+    Além disso, existem \textit{plugins} que podem ser utilizados em conjunto com o GDB. Um que utilizo bastante é o 
+    \textbf{GEF (GDB Enhanced Features)}, que adiciona funcionalidades extras e uma interface melhorada à ferramenta original.
+\end{postscript}
+
 \subsection{Valgrind}
+
+O Valgrind, apesar de possuir um funcionamento bem diferente do GDB, é uma ferramenta igualmente fundamental. 
+Ele serve como um meio simples e relativamente fácil de usar para detectar vazamentos de memória. O programa funciona 
+da seguinte forma: o usuário deve passar algumas flags juntamente com o executável que será verificado; o Valgrind 
+então executa o programa e gera um relatório final com informações sobre possíveis problemas encontrados.
+
+Para exemplificar o uso do Valgrind, continuaremos utilizando o código corrigido na seção anterior, como forma de 
+complementar as correções de erros que o GDB não nos alerta.
+
+\begin{excode}
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main()
+    {
+        int* x = malloc(sizeof(*x));
+        *x = 0;
+
+        while (*x < 10) {
+            printf("X é menor que 10!\n");
+            *x += 1;
+        }
+
+        return 0;
+    }
+\end{excode}
+
+À primeira vista, o código aparenta funcionar corretamente, sem qualquer tipo de erro. Isso se deve ao fato de que o 
+problema presente no código não é um erro de lógica, mas sim um vazamento de memória. Para não adiantar a resposta, 
+vamos tentar descobrir o erro usando o Valgrind.
+
+Para verificar o código por meio do Valgrind, precisamos novamente compilar o programa utilizando a flag \texttt{-g}, 
+assim como foi feito na seção anterior para depuração com o GDB:
+
+\begin{exterminal}
+    gcc -o main main.c -g
+\end{exterminal}
+
+Em seguida, para iniciar a busca por vazamentos de memória, utilizamos um único comando no terminal com algumas flags 
+específicas. O Valgrind executará o programa e gerará um relatório ao final:
+
+\begin{exterminal}
+    valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes ./main
+\end{exterminal}
+
+\subsubsection{Explicação das flags}
+
+\begin{itemize}
+    \item \textbf{--tool=memcheck}: Especifica qual ferramenta do Valgrind será utilizada. O \texttt{memcheck} é a 
+        ferramenta padrão para verificação de memória e será usada neste exemplo.
+    \item \textbf{--leak-check=yes}: Ativa ou desativa a busca por vazamentos de memória ao final da execução. Quando 
+        definido como \texttt{yes} ou \texttt{full}, todos os vazamentos individuais são exibidos em detalhes, incluindo 
+        sua classificação como possíveis erros.
+    \item \textbf{--show-reachable=yes}: Define se devem ser exibidas no relatório as regiões de memória que não foram 
+        liberadas ao sistema, mas que ainda possuíam ponteiros apontando para elas ao final da execução do programa.
+    \item \textbf{--num-callers=20}: Define a profundidade do \textit{stacktrace} (rastreamento da pilha de chamadas), 
+        ou seja, quantas entradas serão exibidas para rastrear os pontos onde os erros ocorreram no código. O valor pode 
+        variar de 0 a 500. É importante notar que um número maior de entradas pode tornar a execução mais lenta, pois o 
+        programa precisa gerenciar e armazenar mais informações.
+    \item \textbf{--track-fds=yes}: Faz com que sejam exibidos, além dos vazamentos de memória, os descritores de arquivo 
+        (\textit{file descriptors}) que permaneceram abertos ao final da execução. O relatório inclui informações sobre 
+        onde no código o arquivo foi aberto, além de detalhes sobre \textit{sockets} e nomes de arquivo quando disponíveis.
+    \item \textbf{./main}: O executável a ser analisado pela ferramenta.
+\end{itemize}
+
+Depois de executar o comando acima, o seguinte relatório é exibido no terminal:
+
+\begin{exterminal}
+    ==4405== Memcheck, a memory error detector
+    ==4405== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+    ==4405== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+    ==4405== Command: ./main
+    ==4405== 
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    ==4405== 
+    ==4405== FILE DESCRIPTORS: 3 open (3 std) at exit.
+    ==4405== 
+    ==4405== HEAP SUMMARY:
+    ==4405==     in use at exit: 4 bytes in 1 blocks
+    ==4405==   total heap usage: 2 allocs, 1 frees, 1,028 bytes allocated
+    ==4405== 
+    ==4405== 4 bytes in 1 blocks are definitely lost in loss record 1 of 1
+    ==4405==    at 0x48417B4: malloc (vg_replace_malloc.c:381)
+    ==4405==    by 0x10915A: main (main.c:6)
+    ==4405== 
+    ==4405== LEAK SUMMARY:
+    ==4405==    definitely lost: 4 bytes in 1 blocks
+    ==4405==    indirectly lost: 0 bytes in 0 blocks
+    ==4405==      possibly lost: 0 bytes in 0 blocks
+    ==4405==    still reachable: 0 bytes in 0 blocks
+    ==4405==         suppressed: 0 bytes in 0 blocks
+    ==4405== 
+    ==4405== For lists of detected and suppressed errors, rerun with: -s
+    ==4405== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+\end{exterminal}
+
+Pelas informações do relatório podemos ver facilmente que, foram perdidos 4 bytes em 1 bloco de memória, que foi alocado na função 
+\texttt{main}, especficicamente na linha 6. Portanto, tudo que devemos fazer é verificar na linha 6 em que variável foi guardada a 
+o bloco de memória perdido e verificar porquê ele não foi liberado corretamente.
+
+\begin{excode}
+    ...
+    int* x = malloc(sizeof(*x));
+    ...
+\end{excode}
+
+No código é possível notar que após alocarmos memória para a variável \texttt{x}, em nenhum outro momento o espaço de memória da 
+variável foi liberado de volta ao sistema através da função \texttt{free}, o que ocasiona num problema de vazamento de memória que 
+não é informado ao usuário em momento algum durante a execução do programa, mas que em sistemas críticos ou em produtos reais que 
+possuem um hardware mais limite, pode ocasionar em problemas graves.
+
+Por fim, tudo que precisamos fazer para solucionar o caso acima, é usar devidamente a função \texttt{free} para liberar o espaço 
+de memória alocado para \texttt{x} quando ele não for mais ser utilizado pelo programa.
+
+\begin{excode}
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main()
+    {
+        int* x = malloc(sizeof(*x));
+        *x = 0;
+
+        while (*x < 10) {
+            printf("X é menor que 10!\n");
+            *x += 1;
+        }
+
+        free(x); // Libera o espaço de memória alocado para 'x'
+        return 0;
+    }
+\end{excode}
+
+Após fazer a correção exibida no código acima, é possível verificar o código novamente pelo Valgrind utilizando o mesmo comando, e 
+teremos o seguinte relatório:
+
+\begin{exterminal}
+    ==4669== Memcheck, a memory error detector
+    ==4669== Copyright (C) 2002-2022, and GNU GPL\'d, by Julian Seward et al.
+    ==4669== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+    ==4669== Command: ./main
+    ==4669== 
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    X é menor que 10!
+    ==4669== 
+    ==4669== FILE DESCRIPTORS: 3 open (3 std) at exit.
+    ==4669== 
+    ==4669== HEAP SUMMARY:
+    ==4669==     in use at exit: 0 bytes in 0 blocks
+    ==4669==   total heap usage: 2 allocs, 2 frees, 1,028 bytes allocated
+    ==4669== 
+    ==4669== All heap blocks were freed -- no leaks are possible
+    ==4669== 
+    ==4669== For lists of detected and suppressed errors, rerun with: -s
+    ==4669== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+\end{exterminal}
+
+Como é possível notar lendo o relatório acima, o programa continua executando da mesma forma. Porém, desta vez, sem nenhum 
+vazamento de memória, já que todos os espaços de memória alocados foram liberados corretamente.
+
+\subsection{Outras estratégias}
+
+Nesta subseção será abordada uma técnica mais informal de depuração em C, porém ainda bastante utilizada em casos mais 
+simples onde um processo de depuração mais rudimentar seja satisfatório.
+
+Um método que, por mais simples que pareça, pode ser utilizado em alguns casos é o uso de \texttt{printf} para verificar 
+valores de um módulo específico do código, ajudando a identificar se algo está sendo calculado corretamente ou até mesmo 
+para confirmar se determinadas seções estão sendo executadas na ordem esperada.
+
+Considere o seguinte código que calcula o fatorial de um número de forma recursiva, mas apresenta um comportamento inesperado:
+
+\begin{excode}
+    #include <stdio.h>
+
+    int fatorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return n * fatorial(n - 1);
+    }
+
+    int main() {
+        int resultado = fatorial(5);
+        printf("Fatorial de 5: \%d\n", resultado);
+        return 0;
+    }
+\end{excode}
 
 \section{Testes}
 \subsection{Implementando testes}
+
+\section{Manipulação de Arquivos}
+\input{manipulacao-de-arquivos.tex}
+
+\section{Manipulação de bits}
+\input{manipulacao-de-bits.tex}
 
 \chapter{Considerações finais}
 \clearpage % Define página isolada para novo capítulo

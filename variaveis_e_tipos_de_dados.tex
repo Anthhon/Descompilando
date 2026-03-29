@@ -57,28 +57,37 @@ com algumas informações adicionais:
         \hline
         \textbf{Tipo} & \textbf{Descrição} & \textbf{Tamanho (bits)} & \textbf{Formatador} & \textbf{Alcance} \\
         \hline
-        char & Utilizado para guardar letras em formato numérico. & 8 & \%c & -127 a +127 \\
+        char & Representa um byte de dados. Pode ser utilizado para caracteres ou valores numéricos pequenos. Pode ser \textit{signed} ou \textit{unsigned}. & 8 & \%c (ou \%d) & -128 a 127 (signed) ou 0 a 255 (unsigned) \\
         \hline
-        int & Capaz de guardar valores numéricos inteiros. & 32 & \%i (ou \%d) & -32.767 a +32.767 \\
+        int & Tipo inteiro padrão, utilizado para operações aritméticas gerais. & 32 & \%d (ou \%i) & aproximadamente $-2^{31}$ a $2^{31}-1$ \\
         \hline
-        float & Capaz de guardar números fracionados e inteiros. & 32 & \%f & \(1.175494 \times 10^{-38}\) a \(3.402823 \times 10^{38}\) \\
+        float & Representa números de ponto flutuante de precisão simples. & 32 & \%f & $\approx 1.17 \times 10^{-38}$ a $3.40 \times 10^{38}$ \\
         \hline
-        double & Similar ao tipo float, mas com maior precisão e alcance. & 64 & \%lf & \(2.225074 \times 10^{-308}\) a \(1.797693 \times 10^{308}\) \\
-        \hline
-        signed & Garante que a variável deve suportar valores negativos sem modificar o tamanho da variável. & & & \\
-        \hline
-        unsigned & Garante que a variável deve suportar apenas valores positivos sem modificar o tamanho da variável. & & & \\
-        \hline
-        short & Modifica o tipo int para guardar valores menores, usando metade do espaço na memória. & & & \\
-        \hline
-        long & Modifica o tipo int para guardar valores maiores, usando o dobro de espaço na memória. & & & \\
+        double & Representa números de ponto flutuante de dupla precisão. & 64 & \%lf & $\approx 2.22 \times 10^{-308}$ a $1.79 \times 10^{308}$ \\
         \hline
     \end{tabular}
 \end{center}
 
-\begin{postscript}
-    Para converter o tamanho de bits para bytes, basta dividir o valor do tamanho em bits por 8.
-\end{postscript}
+Além dos tipos de dados descritos acima, segue abaixo, uma descrição mais detalhada do que cada um dos 
+modificadores de tipo fazem:
+
+\begin{center}
+    \begin{tabular}{|c|p{11cm}|}
+        \hline
+        \textbf{Modificador} & \textbf{Descrição} \\
+        \hline
+        signed & Indica que o tipo suporta valores negativos (com sinal). Geralmente é o padrão para tipos inteiros. \\
+        \hline
+        unsigned & Indica que o tipo armazena apenas valores não negativos, dobrando o limite superior positivo. \\
+        \hline
+        short & Reduz o tamanho de um inteiro (ex: \texttt{short int}). Garante no mínimo 16 bits. \\
+        \hline
+        long & Aumenta o tamanho de um inteiro (ex: \texttt{long int}). Garante no mínimo 32 bits. \\
+        \hline
+        long long & Inteiro de maior capacidade, garantindo no mínimo 64 bits. \\
+        \hline
+    \end{tabular}
+\end{center}
 
 \clearpage
 
@@ -123,8 +132,8 @@ retângulo e exibe o resultado.
         float area;
 \end{excode}
 
-No trecho abaixo, declaramos três variáveis diferentes: \textbf{x} para a 
-altura, \textbf{y} para o comprimento e \textbf{area} para o resultado do 
+No trecho abaixo, declaramos três variáveis diferentes: \texttt{x} para a 
+altura, \texttt{y} para o comprimento e \texttt{area} para o resultado do 
 cálculo. Todas as três variáveis são do tipo \textbf{float}, pois nada impede 
 que as medidas do retângulo sejam números fracionados.
 
@@ -140,9 +149,9 @@ Aqui utilizamos a função \texttt{printf} para exibir texto na tela, assim
 como já feito antes, e em seguida, usamos uma nova função chamada 
 \texttt{scanf} para receber informações do usuário pelo terminal.
 
-Dentro de scanf, passamos dois parâmetros: o primeiro (\textbf{\%f}) 
+Dentro de scanf, passamos dois parâmetros: o primeiro (\texttt{\%f}) 
 é o formatador, que especifica o tipo de valor esperado para ser recebido, 
-neste caso, uma \textbf{float}. O segundo (\textbf{\&x}) é onde queremos 
+neste caso, uma \textbf{float}. O segundo (\texttt{\&x}) é onde queremos 
 armazenar o valor recebido; a variável vem com o sufixo \& porque estamos 
 passando o endereço da variável.
 
@@ -168,7 +177,7 @@ o resultado em \texttt{area} usando o operador de atribuição (\texttt{=}).
 Finalmente, exibimos o valor na tela usando a função \texttt{printf} e 
 retornamos o valor 0 para indicar que o programa foi encerrado com sucesso. 
 É importante lembrar que, ao exibir uma variável do tipo \textbf{float}, é 
-necessário utilizar o formatador \%f.
+necessário utilizar o formatador \texttt{\%f}.
 
 Entendendo bem o código acima, é possível praticar os conceitos de operadores 
 e variáveis sem muitas dificuldades.

@@ -1,0 +1,143 @@
+A manipulação de bits é uma técnica fundamental na programação em C que permite operar 
+diretamente nos bits individuais de variáveis. Essas operações são extremamente eficientes 
+e são amplamente utilizadas em sistemas embarcados, programação de baixo nível, criptografia, 
+compressão de dados e otimização de performance.
+
+Já que é possível complicar as coisas facilmente quando se trata de operações envolvendo manipulação 
+de valores em binários diretamente, vou tentar manter a explicação simples e direta com 
+alguns exemplos sobre o assunto:
+
+\subsection{Operadores Bitwise}
+
+C fornece seis operadores para manipulação de bits, que operam em cada bit individualmente:
+
+\begin{itemize}
+    \item \texttt{\~} (NOT) - Complemento de bits
+    \item \texttt{\&} (AND) - E bit a bit
+    \item \texttt{|} (OR) - OU bit a bit
+    \item \texttt{\^} (XOR) - OU exclusivo bit a bit
+    \item \texttt{<<} (Left Shift) - Deslocamento à esquerda
+    \item \texttt{>>} (Right Shift) - Deslocamento à direita
+\end{itemize}
+\begin{excode} #include <stdio.h>
+
+int main()
+{
+
+    // a = 5 (00000101 em binário)
+    // b = 9 (00001001 em binário)
+    unsigned int a = 5, b = 9;
+
+    // O resultado é 00000001
+    printf("a&b = %u\n", a & b);
+
+    // O resultado é 00001101
+    printf("a|b = %u\n", a | b);
+
+    // O resultado é 00001100
+    printf("a^b = %u\n", a ^ b);
+
+    // O resultado é 11111111111111111111111111111010
+    // (assumindo um inteiro de 32 bits)
+    printf("~a = %u\n", a = ~a);
+
+    // O resultado é 00010010
+    printf("b<<1 = %u\n", b << 1);
+
+    // O resultado é 00000100
+    printf("b>>1 = %u\n", b >> 1);
+    return 0;
+}
+\end{excode}
+
+\subsection{Truques úteis}
+
+\subsubsection{Definir/inverter/limpar um bit}
+
+Usando deslocamento bit-a-bit é possível definir/inverter/limpar bits facilmente.
+
+\begin{excode}
+    ...
+    // Definir um número com apenas o x-ésimo bit como 1.
+    int a = 1 << x;
+    // a = 16
+    int a = 1 << 4;
+
+    // Definir um número com todos os bits como 1, 
+    // exceto o x-ésimo bit.
+    int a = ~(1 << x);
+    // a = 4294967279
+    int a = ~(1 << x);
+    ...
+\end{excode}
+
+\subsubsection{Verificando um bit específico}
+
+O valor do x-ésimo bit pode ser verificado deslocando o número x posições para a 
+direita, em seguida, realizamos uma operação AND (\&) com 1.
+
+\begin{excode}
+    ...
+    bool checar_bit(unsigned int numero, int index)
+    {
+        return (number >> x) & 1;
+    }
+    ...
+\end{excode}
+
+\subsubsection{Verificando se o número é ímpar ou par}
+
+Usando uma simples verificação de AND (\&) é possível verificar se um número é ímpar 
+ou par sem precisar de nenhum outro tipo de verificação mais complexa.
+
+\begin{excode}
+    ...
+    bool divisivel_por_dois(int n)
+    {
+        return (n & 1);
+    }
+    ...
+\end{excode}
+
+\begin{postscript}
+    A vantagem de usar o operador de AND para verificar se um número é ímpar ou par ao invés de 
+    \texttt{return (n \% 2) == 0;} é que o compilador da linguagem C consegue otimizar o código muito mais, 
+    o que pode ser muito útil em sistemas críticos que necessitem do máximo de desempenho possível.
+
+    A nível de curiosidade, essa é a diferença entre ambos os códigos quando compilados pelo 
+    \texttt{x86-64 gcc 15.2} usando a flag \texttt{-O3}.
+
+    Usando o método do operador AND:
+    \begin{exterminal}
+        ...
+        div_by_2_bitwise:
+        mov     esi, edi
+        test    dil, 1
+        je      .L2
+        mov     edi, OFFSET FLAT:.LC0
+        xor     eax, eax
+        jmp     printf
+        ...
+    \end{exterminal}
+
+    Usando o método do operador AND:
+    \begin{exterminal}
+        ...
+        div_by_2_percent:
+        mov     edx, edi
+        mov     esi, edi
+        shr     edx, 31
+        lea     eax, [rdi+rdx]
+        and     eax, 1
+        sub     eax, edx
+        cmp     eax, 1
+        je      .L6
+        mov     edi, OFFSET FLAT:.LC1
+        xor     eax, eax
+        jmp     printf
+        ...
+    \end{exterminal}
+
+    Mesmo sem conhecimentos em Assembly é possível notar uma diferença gritante na 
+    quantidade de instruções para que a função seja executada corretamente.
+\end{postscript}

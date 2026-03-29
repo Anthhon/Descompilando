@@ -1,0 +1,442 @@
+
+A manipulação de arquivos em C envolve operações como criação, abertura, 
+leitura, escrita e fechamento de arquivos. Como discutido anteriormente na 
+seção \ref{o-que-sao-arquivos}, o terminal também se enquadra na definição de 
+arquivos, pois pode receber operações de escrita, leitura, entre outras.
+
+Em aplicações mais complexas, pode ser necessário armazenar algumas informações 
+fornecidas pelo usuário para reutilização pelo programa na próxima execução. 
+Por exemplo, seria impraticável e inconveniente ter que criar uma nova conta 
+ou reconfigurar todas as opções toda vez que um 
+jogo é iniciado.
+
+O uso da manipulação de arquivos é crucial devido às seguintes características:
+
+\begin{itemize}
+        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
+    \item \textbf{Reusabilidade:} As informações armazenadas em um arquivo 
+        podem ser acessadas, atualizadas e removidas conforme necessário.
+    \item \textbf{Portabilidade:} Como as informações são geralmente escritas 
+        seguindo algum padrão lógico, um arquivo de configurações pode ser 
+        facilmente transferido para outro computador sem complicações, 
+        reduzindo erros durante a transferência de dados.
+    \item \textbf{Eficiência:} Em muitas situações, é mais eficiente gerenciar 
+        um grande volume de informações do usuário com apenas algumas 
+        instruções, economizando tempo e reduzindo erros.
+    \item \textbf{Capacidade de Armazenamento:} Armazenar informações em 
+        arquivo elimina a necessidade de manter todas as informações de uma 
+        aplicação na memória RAM simultaneamente, evitando preocupações e erros 
+        relacionados à sobrecarga de memória.
+\end{itemize}
+
+\subsection{Tipos de arquivos}
+
+\subsubsection{Arquivos de texto}
+
+Esses arquivos contêm dados em formato de caracteres ASCII, podendo ser lidos e 
+editados por qualquer editor de texto. Geralmente, mas não obrigatoriamente, 
+esses arquivos possuem uma extensão '.txt' e todas as suas linhas terminam com 
+o caractere '\textbackslash n'.
+
+É comum encontrar esses tipos de arquivos sendo usados para guardar, por exemplo:
+
+\begin{itemize}
+        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
+    \item \textbf{Registro de logs:} Os arquivos de texto são comumente usados 
+        para registrar eventos e informações relevantes durante a execução de 
+        um programa. Por exemplo, um servidor web pode registrar todas as 
+        solicitações de página em um arquivo de log para fins de monitoramento 
+        e análise.
+    \item \textbf{Listas de contatos:} Arquivos de texto também podem ser usados 
+        para armazenar dados estruturados simples, como listas de contatos, 
+        configurações de aplicativos, ou até mesmo informações de configuração 
+        de rede.
+    \item \textbf{Arquivos de código fonte:} Embora não seja exclusivo de 
+        arquivos de texto, os arquivos de código-fonte em linguagens de 
+        programação são geralmente armazenados em formato de texto para 
+        facilidade de leitura e manipulação. Eles são editáveis por qualquer 
+        editor de texto e podem ser versionados facilmente por sistemas de 
+        controle de versão como Git.
+\end{itemize}
+
+\subsubsection{Arquivos binários}
+
+Diferentemente dos arquivos de texto, que têm o seu conteúdo em formato de 
+caracteres ASCII, os arquivos binários têm o seu conteúdo em um formato numérico, 
+que fora de contexto não podem ser interpretados por um ser humano, mas que, 
+quando corretamente interpretados por um programa, podem ser lidos e 
+transformados em informação útil. Por conta disso, os arquivos binários tendem 
+a ter uma maior segurança, pois mesmo que caiam em mãos de usuários maliciosos, 
+não podem ser facilmente interpretados e manipulados de maneira mal intencionada.
+
+Geralmente, esse tipo de arquivo é usado nas seguintes aplicações:
+
+\begin{itemize}
+        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
+    \item \textbf{Bancos de dados locais:} Muitos sistemas de gerenciamento de 
+        banco de dados usam arquivos binários para armazenar dados localmente. 
+        Embora os bancos de dados sejam mais comumente associados a servidores 
+        e sistemas de gerenciamento de dados complexos, eles também podem ser 
+        usados para aplicações simples de desktop.
+    \item \textbf{Guardar imagens e multimídias:} Arquivos binários são 
+        amplamente utilizados para armazenar imagens, vídeos, áudio e outros 
+        tipos de multimídia. Isso ocorre porque esses tipos de dados são melhor 
+        representados em formato binário, o que permite uma manipulação 
+        eficiente e compactação.
+    \item \textbf{Arquivos executáveis:} Os arquivos binários também incluem 
+        executáveis de programas. Quando você compila um programa em linguagem 
+        de máquina, o resultado é um arquivo binário que contém as instruções 
+        que o computador pode executar diretamente.
+\end{itemize}
+
+\subsection{fopen, fread, fwrite e fclose}
+
+\subsubsection{fopen}
+
+A função \texttt{fopen} é usada para abrir um arquivo existente ou criar um 
+novo arquivo. Ela retorna um ponteiro para o arquivo que pode ser usado em 
+outras operações de entrada e saída de arquivo. A assinatura da função é a 
+seguinte:
+
+\begin{excode}
+    FILE *fopen(const char *filename, const char *mode);
+\end{excode}
+
+O primeiro argumento \texttt{filename} é um vetor que contém o caminho do 
+arquivo a ser aberto ou criado. O segundo argumento \texttt{mode} especifica o 
+modo de abertura do arquivo, como leitura ("r"), escrita ("w"), anexação ("a"), 
+etc.
+
+\subsubsection{fread}
+
+A função \texttt{fread} é usada para ler blocos de dados de um arquivo. Ela 
+recebe quatro argumentos: um ponteiro para o vetor onde os dados lidos serão 
+armazenados, o tamanho em bytes de cada elemento a ser lido, o número de 
+elementos a serem lidos e um ponteiro para o arquivo a partir do qual os dados 
+serão lidos. A assinatura da função é a seguinte:
+
+\begin{excode}
+    size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+\end{excode}
+
+O retorno da função é o número total de elementos lidos com sucesso. Valor esse 
+que pode ser utilizado para identificar quando um arquivo foi lido por completo, 
+já que quando a função alcança o final do arquivo, 0 bytes são lidos do mesmo.
+
+\subsubsection{fwrite}
+
+A função \texttt{fwrite} é usada para escrever blocos de dados em um arquivo. 
+Ela recebe quatro argumentos: um ponteiro para um vetor de dados a ser escrito, 
+o tamanho em bytes de cada elemento a ser escrito, o número de elementos a 
+serem escritos e um ponteiro para o arquivo no qual os dados serão escritos. A 
+assinatura da função é a seguinte:
+
+\begin{excode}
+    size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+\end{excode}
+
+O retorno da função é o número total de elementos gravados com sucesso.
+
+\subsubsection{fclose}
+
+A função \texttt{fclose} é usada para fechar um arquivo previamente aberto. Ela 
+recebe um ponteiro para o arquivo a ser fechado como seu único argumento. 
+A assinatura da função é a seguinte:
+
+\begin{excode}
+    int fclose(FILE *stream);
+\end{excode}
+
+Se a operação for bem-sucedida, \texttt{fclose} retorna zero. Se ocorrer um 
+erro, retorna um valor diferente de zero.
+
+Essas funções são essenciais para manipular arquivos em C e são amplamente 
+utilizadas em programas que necessitam de entrada e saída de dados persistentes.
+
+\subsubsection{Exemplo prático}
+
+Após entender o que cada uma das funções acima faz, vamos tentar exemplificar um uso prático das mesmas:
+
+\begin{excode}
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main() {
+        // Abre o arquivo para leitura
+        FILE *arquivo_entrada = fopen("dados.txt", "r");
+        if (arquivo_entrada == NULL) {
+            perror("Erro ao abrir arquivo de entrada");
+            return EXIT_FAILURE;
+        }
+
+        // Abre um novo arquivo para escrita
+        FILE *arquivo_saida = fopen("dados_modificados.txt", "w");
+        if (arquivo_saida == NULL) {
+            perror("Erro ao criar arquivo de saída");
+            fclose(arquivo_entrada);
+            return EXIT_FAILURE;
+        }
+
+        // Lê o conteúdo do arquivo de entrada
+        char buffer[100];
+        size_t bytes_lidos = fread(buffer, sizeof(char), 100, arquivo_entrada);
+        if (bytes_lidos == 0) {
+            perror("Erro ao ler arquivo de entrada");
+            fclose(arquivo_entrada);
+            fclose(arquivo_saida);
+            return EXIT_FAILURE;
+        }
+
+        // Modifica os dados lidos (exemplo: converter para maiúsculas)
+        for (size_t i = 0; i < bytes_lidos; i++) {
+            buffer[i] = toupper(buffer[i]);
+        }
+
+        // Escreve os dados modificados no arquivo de saída
+        size_t bytes_escritos = fwrite(buffer, sizeof(char), bytes_lidos, arquivo_saida);
+        if (bytes_escritos != bytes_lidos) {
+            perror("Erro ao escrever no arquivo de saída");
+            fclose(arquivo_entrada);
+            fclose(arquivo_saida);
+            return EXIT_FAILURE;
+        }
+
+        // Fecha os arquivos abertos
+        if (fclose(arquivo_entrada) == EOF) {
+            perror("Erro ao fechar arquivo de entrada");
+            return EXIT_FAILURE;
+        }
+        if (fclose(arquivo_saida) == EOF) {
+            perror("Erro ao fechar arquivo de saída");
+            return EXIT_FAILURE;
+        }
+
+        printf("Arquivo modificado com sucesso!\n");
+
+        return EXIT_SUCCESS;
+    }
+\end{excode}
+
+Neste exemplo:
+
+\begin{itemize}
+        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
+    \item Abrimos um arquivo chamado \texttt{dados.txt} para leitura ("r") e 
+        outro chamado \\\texttt{dados\_modificados.txt} para escrita ("w").
+    \item Usamos \texttt{fread} para ler até 100 bytes do arquivo de entrada.
+    \item Modificamos os dados lidos (nesse caso, convertemos todas as letras para maiúsculas).
+    \item Usamos \texttt{fwrite} para escrever os dados modificados no arquivo de saída.
+    \item Finalmente, fechamos ambos os arquivos com \texttt{fclose}.
+\end{itemize}
+
+\begin{postscript}
+    \begin{quote}
+    "Dê um peixe a um homem e ele se alimentará por um dia. Ensine-o a pescar e ele se alimentará pelo resto da vida."
+    \end{quote}
+
+    Seria injusto que em um livro eu apenas ensinasse como usar as funções 
+    \texttt{fopen}, \texttt{fread}, \texttt{fwrite} e \texttt{fclose}, sem 
+    considerar a possibilidade de que novos padrões possam surgir no futuro, ou 
+    que você precise atualizar seus conhecimentos. Por isso, vou compartilhar 
+    um pequeno "truque" muito utilizado entre programadores em linguagem C, que 
+    pode ser útil para relembrar ou aprender como uma função funciona.
+
+    Para isso, vamos usar o comando Linux \texttt{man} (abreviação de manual), 
+    cujo nome por si só é autoexplicativo. Ele é usado para pesquisar o manual 
+    de utilização de alguma função ou comando. Felizmente, também é possível 
+    pesquisar por funções da biblioteca padrão da linguagem C, conhecida como 
+    \texttt{libc}. Para aqueles que não usam sistemas Linux, é possível usar o 
+    comando \texttt{man} para pesquisar sobre funções até mesmo pelo Google. 
+
+    Basta usar o comando:
+
+    \begin{textbox}
+        man nome_da_funcao_ou_comando
+    \end{textbox}
+
+    Com isso, você será capaz de encontrar o manual de qualquer função padrão 
+    da biblioteca \texttt{libc}, e até mesmo de algumas funções que estão fora 
+    das bibliotecas padrão.
+\end{postscript}
+
+\subsection{fseek, ftell e rewind}
+
+Essa seção aborda funções específicas para manipulação do ponteiro de posição 
+em arquivos, permitindo navegar por diferentes partes de um arquivo sem 
+necessariamente ler todo o seu conteúdo sequencialmente.
+
+\subsubsection{fseek}
+
+A função \texttt{fseek()} possui o seguinte protótipo:
+
+\begin{excode}
+int fseek(FILE *stream, long offset, int whence);
+\end{excode}
+
+A função \texttt{fseek} move o ponteiro de leitura/escrita do arquivo para uma 
+posição específica. Segue abaixo uma lista explicando os parâmetros da função:
+
+\begin{itemize}
+    \item \texttt{stream}: Ponteiro para o arquivo (obtido com \texttt{fopen()})
+    \item \texttt{offset}: Número de bytes de deslocamento (pode ser positivo ou negativo)
+    \item \texttt{whence}: Ponto de referência para o deslocamento que aceita os valores \texttt{SEEK\_SET}, \texttt{SEEK\_CUR} ou \texttt{SEEK\_END}.
+\end{itemize}
+
+Sendo \texttt{SEEK\_SET} o início do arquivo, \texttt{SEEK\_CUR} a posição atual do arquivo e \texttt{SEEK\_END} 
+o final do arquivo. Além disso, a função retorna 0 em caso de sucesso e um valor diferente de 0 em caso de erro.
+
+\subsubsection{Exemplos Práticos}
+
+\begin{excode}
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+    
+    // Abre o arquivo para leitura
+    fp = fopen("dados.txt", "r");
+    
+    if (fp == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return 1;
+    }
+    
+    // 1. Ir para o final do arquivo
+    fseek(fp, 0, SEEK_END);
+    
+    // 2. Retornar ao início do arquivo
+    fseek(fp, 0, SEEK_SET);
+    
+    // 3. Avançar 10 bytes a partir da posição atual
+    fseek(fp, 10, SEEK_CUR);
+    
+    // 4. Retroceder 5 bytes a partir da posição atual
+    fseek(fp, -5, SEEK_CUR);
+    
+    // 5. Posicionar 50 bytes antes do final do arquivo
+    fseek(fp, -50, SEEK_END);
+    
+    fclose(fp);
+    return 0;
+}
+\end{excode}
+
+\subsubsection{ftell}
+
+A função \texttt{ftell()} possui o seguinte protótipo:
+
+\begin{excode}
+long ftell(FILE *stream);
+\end{excode}
+
+A função funciona de forma bem simples, simplesmente retornando a posição atual do ponteiro no 
+arquivo relativa ao seu início (em bytes). Sendo assim, extremamente conveniente para calcular o 
+tamanho de um arquivo, como é mostrado no código abaixo:
+
+\begin{excode}
+#include <stdio.h>
+
+int main() {
+    FILE *fp = fopen("arquivo.txt", "r");
+    long tamanho, pos_atual;
+    
+    if (fp == NULL) {
+        printf("Erro ao abrir arquivo!\n");
+        return 1;
+    }
+    
+    // Vai para o final
+    fseek(fp, 0, SEEK_END);
+    
+    // Obtém o tamanho do arquivo
+    tamanho = ftell(fp);
+    printf("Tamanho do arquivo: %ld bytes\n", tamanho);
+    
+    // Retorna ao início
+    fseek(fp, 0, SEEK_SET);
+    
+    fclose(fp);
+    return 0;
+}
+\end{excode}
+
+\subsubsection{rewind}
+
+A função \texttt{rewind()} possui o seguinte protótipo:
+
+\begin{excode}
+void rewind(FILE *stream);
+\end{excode}
+
+Essa função reposiciona o ponteiro para o início do arquivo, sendo assim equivalente a:
+
+\begin{excode}
+fseek(fp, 0, SEEK_SET);
+\end{excode}
+
+Com um único porém que o indicador de erro é limpo.  O que pode também ser feito da 
+seguinte forma:
+
+\begin{excode}
+fseek(fp, 0, SEEK_SET);
+clearerr(fp);
+\end{excode}
+
+Segue abaixo um exemplo de como utilizar a função \texttt{rewind}:
+
+\begin{excode}
+#include <stdio.h>
+
+int main() {
+    FILE *fp = fopen("exemplo.txt", "r+");
+    char buffer[100];
+    
+    if (fp == NULL) {
+        printf("Erro ao abrir arquivo!\n");
+        return 1;
+    }
+    
+    // Lê uma linha do arquivo
+    fgets(buffer, 100, fp);
+    printf("Primeira leitura: %s", buffer);
+    
+    // Retorna ao início para ler novamente
+    rewind(fp);
+    
+    // Lê a mesma linha novamente
+    fgets(buffer, 100, fp);
+    printf("Leitura apos rewind: %s", buffer);
+    
+    fclose(fp);
+    return 0;
+}
+\end{excode}
+
+\begin{postscript}
+    O indicador de erro de um arquivo é um \textbf{sinalizador interno} (flag) associado 
+    ao ponteiro de arquivo \texttt{FILE} que indica se a última operação de entrada/saída 
+    teve sucesso ou falhou. Quando uma função como \texttt{fread()}, \texttt{fwrite()}, 
+    \texttt{fscanf()} falha, esse indicador é ativado.
+
+    Portanto, ao limpar o indicador de erro, é possível tentar fazer novamente a parte do 
+    processo que falhou tendo o benefício de poder usar o indicador de erro novamente.
+\end{postscript}
+
+\subsubsection{Considerações Importantes}
+
+\begin{itemize}
+    \item \textbf{Arquivos binários vs texto:} Em arquivos binários, \texttt{fseek()} com 
+        \texttt{SEEK\_END} funciona normalmente. Em arquivos de texto, alguns sistemas 
+        podem não suportar deslocamentos negativos.
+    
+    \item \textbf{Portabilidade:} Para arquivos muito grandes (mais de 2GB), use \texttt{fseeko()} 
+        e \texttt{ftello()} que utilizam \texttt{off\_t} em vez de \texttt{long}.
+    
+    \item \textbf{Verificação de erros:} Sempre verifique o retorno de \texttt{fseek()} 
+        em aplicações críticas:
+    \begin{excode}
+    if (fseek(fp, offset, SEEK_SET) != 0) {
+        printf("Erro ao reposicionar ponteiro!\n");
+    }
+    \end{excode}
+\end{itemize}
