@@ -1,0 +1,541 @@
+Em 1989, a já extremamente popular linguagem C alcançou níveis de popularidade 
+nunca antes vistos, sendo oficialmente reconhecida pelas organizações de 
+padronização ANSI (americana) e ISO (internacional). Esse processo culminou na 
+padronização conhecida como \texttt{C89} (ou ANSI C), que é o dialeto da 
+linguagem que mais reconhecemos atualmente.
+
+Atualizações e melhorias na padronização da linguagem são lançadas, geralmente, 
+a cada 10 anos. Atualmente, as versões mais conhecidas e utilizadas no mercado 
+são: \texttt{C89}, \texttt{C99}, \texttt{C11} e \texttt{C18}, sendo as versões 
+\texttt{C99} e \texttt{C11} as mais famosas entre elas.
+
+Apesar disso, há uma versão publicada em 31 de outubro de 2024 que trouxe 
+algumas funcionalidades bem úteis e simples de usar. Gostaria de mencioná-las 
+neste livro, pois de certa forma procuro trazer uma visão moderna da linguagem 
+para iniciantes.
+
+\subsubsection{Como ativar o padrão C23}
+
+Antes de mostrar qualquer funcionalidade do padrão \texttt{C23} (também chamado 
+de \texttt{C2X}), é necessário explicar como ativá-lo no compilador. 
+Diferentemente de linguagens modernas como JavaScript ou Python, onde 
+funcionalidades são adicionadas por meio de pacotes, podemos ativar as 
+funcionalidades do \texttt{C23} usando uma \texttt{flag} de compilação que 
+indica ao GCC/Clang qual padrão desejamos, da seguinte forma:
+
+\begin{textbox}
+    gcc -o main main.c -std=c2x
+    \\ ou
+    gcc -o main main.c -std=c23
+\end{textbox}
+
+O comando pode variar um pouco dependendo do compilador, mas no geral deve ser 
+como mostrado acima. A opção \texttt{-std=} também pode ser utilizada para 
+especificar qualquer outro padrão da linguagem. Portanto, seria possível usar 
+comandos como:
+
+\begin{textbox}
+    gcc -o main main.c -std=c18
+    gcc -o main main.c -std=c11
+    gcc -o main main.c -std=c99
+    gcc -o main main.c -std=c89
+\end{textbox}
+
+Qualquer um desses é válido como especificação do padrão a ser utilizado pelo 
+compilador. Isso é bastante útil em projetos mais antigos ou bem consolidados em 
+um padrão específico da linguagem, sendo necessário, nesses casos, indicar ao 
+compilador qual padrão utilizar.
+
+\subsubsection{Separador de dígitos}
+
+O separador de dígitos é apenas um recurso visual para melhorar a legibilidade 
+de números muito grandes, que dificilmente seriam lidos sem nenhum tipo de 
+separador. Trata-se de uma função meramente visual, sem qualquer implicação 
+lógica no código.
+
+\begin{excode}
+#include <limits.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int x = 19'251'916; // mesmo que 19251
+    long int y = 36'854'775'807'192; // mesmo que 36854775807
+
+    printf("int: %i\\n", x);
+    printf("long int: %li\\n", y);
+
+    return 0;
+}
+\end{excode}
+
+\subsubsection{Literais binários}
+
+Em algumas aplicações de baixo nível, por vezes é necessário declarar valores 
+explicitamente bit a bit. Anteriormente, isso precisava ser feito usando 
+hexadecimal ou octal, o que nem sempre era intuitivo.
+
+\begin{excode}
+...
+unsigned char mascara = 0b11000101;
+unsigned char verdadeiro = 0b1;
+unsigned char falso = 0b0;
+...
+\end{excode}
+
+Agora, utilizando o prefixo \texttt{0b} ou \texttt{0B} é possível definir 
+valores em binário explicitamente, assim como mostrado acima.
+
+\subsubsection{Ponteiro nulo}
+
+Esta é outra mudança que traz melhorias de legibilidade, porém com um aspecto 
+um pouco mais técnico. Desde a versão C89 da linguagem, a macro \texttt{NULL} 
+tem sido definida como:
+
+\begin{excode}
+...
+\#define NULL ((void*)0)
+...
+\end{excode}
+
+No geral, essa definição é satisfatória para o valor nulo. Porém, em algumas 
+plataformas essa mesma macro acaba sendo definida simplesmente como \texttt{0}, 
+o que gera problemas de portabilidade. Um código que depende fortemente da 
+definição de \texttt{NULL} pode quebrar em uma plataforma onde ela é definida 
+de maneira diferente.
+
+Um exemplo simples de como isso poderia acontecer é com a seguinte função:
+
+\begin{excode}
+...
+printf("\%p\n", NULL);  // possui comportamento indefinido
+...
+\end{excode}
+
+Caso \texttt{NULL} esteja definido como um inteiro de valor \texttt{0}, o 
+comportamento é indefinido e pode resultar em lixo de memória, o que é algo 
+certamente indesejado. Assim, a constante \texttt{nullptr} foi introduzida para 
+corrigir esse problema:
+
+\begin{excode}
+...
+int* x = nullptr;
+...
+\end{excode}
+
+Agora temos um ponteiro para inteiro recebendo um ponteiro nulo genérico de 
+maneira \textbf{explícita}. Dessa forma, o compilador consegue diferenciar 
+\texttt{nullptr} de \texttt{((void*)0)} ou de um inteiro de valor \texttt{0}. 
+Isso resolve o problema de forma explícita, forçando o programador a deixar 
+claro o que está sendo feito no código e também resolvendo questões de 
+compatibilidade com outros sistemas e de interoperabilidade com C++.
+
+\subsubsection{Formato de binário para saídas/entradas}
+
+Em programação de sistemas de baixo nível, é comum ter que lidar com 
+manipulação ou visualização de dados binários. Anteriormente, a linguagem C 
+necessitava de funções implementadas manualmente para realizar tais tarefas. 
+Agora, podemos usar o especificador \texttt{\%b} para exibir valores em binário 
+de forma nativa:
+
+\begin{excode}
+#include <stdio.h>
+
+int main(void) {
+    int i = 67;
+    printf("i: %b\n", i); // Exibe "i: 1000011"
+    int j = 240;
+    printf("j: %b\n", j); // Exibe "j: 11110000"
+    int k = 101;
+    printf("k: %b\n", k); // Exibe "k: 1100101"
+
+    return 0;
+}
+\end{excode}
+
+\subsubsection{True e False}
+
+Apesar de ser uma funcionalidade \textbf{muito} simples presente na maioria das 
+linguagens, C não suporta variáveis booleanas nativamente desde suas primeiras 
+versões. Por conta disso, sempre que era necessário implementar um sistema de 
+\texttt{flags} usando variáveis booleanas, era preciso incluir a biblioteca 
+\texttt{<stdbool.h>} para usar as palavras-chave \texttt{true}, \texttt{false} 
+e \texttt{bool}.
+
+Agora, com esse recurso nativo da linguagem, é possível fazer:
+
+\begin{excode}
+#include <stdio.h>
+
+int main(void) {
+    bool v = true;
+    bool f = false;
+
+    if (v == true)
+        printf("v: %i (em binário = %02b)\n", v, v);
+    if (f == false)\
+        printf("f: %i (em binário = %02b)\n", f, f);
+
+    return 0;
+}
+\end{excode}
+
+Tudo isso sem se preocupar com inconsistências ao incluir uma biblioteca para 
+algo tão fundamental.
+
+\subsubsection{\_BitInt(N)}
+
+Em algumas aplicações de baixo nível como protocolos de rede, \texttt{hardware}, 
+processamento de áudio, criptografia etc. É necessário trabalhar com tipos 
+inteiros cuja largura não é potência de dois (por exemplo, 7 bits, 13 bits). 
+Simular esses tipos com \texttt{structs} e máscaras era trabalhoso. Usando o 
+novo tipo \texttt{\_BitInt(N)} podemos fazer:
+
+\begin{excode}
+#include <stdio.h>
+
+int main(void) {
+    \_BitInt(5) i = 0;
+    i = 15;
+    printf("i: %08b\n", i);
+    i = -16;
+    printf("i: %08b\n", i);
+
+    return 0;
+}
+\end{excode}
+
+Neste exemplo, declaramos um inteiro de 5 bits com sinal. O bit mais 
+significativo é o bit de sinal, e os 4 bits restantes representam a magnitude 
+(em complemento para dois). Assim, o intervalo de valores representáveis vai de 
+-16 a 15.
+
+\subsubsection{typeof e typeof\_unqual}
+
+Ambos funcionam de forma bem semelhante, mas com uma diferença sutil que possui 
+aplicações práticas na implementação de macros. A palavra-chave \texttt{typeof} 
+é um operador que obtém o tipo de uma expressão em tempo de compilação. Isso 
+significa que é possível fazer algo como:
+
+\begin{excode}
+#include <stdio.h>
+
+int main(void) {
+    int i = 10;
+    typeof(i) j = i; // Mesmo que "int j = i;"
+
+    printf("i: %i\n", i); // Exibe "i: 10"
+    printf("j: %i\n", j); // Exibe "j: 10"
+
+    return 0;
+}
+\end{excode}
+
+O operador \texttt{typeof} sinaliza ao compilador que ele deve substituir 
+\texttt{typeof(i)} pelo tipo da variável passada como parâmetro.
+
+Porém, em alguns casos onde se deseja criar variáveis do mesmo tipo que outra, 
+pode ser indesejado trazer qualificadores como \texttt{const}, \texttt{volatile} 
+ou \texttt{restrict}. É aí que \texttt{typeof\_unqual} se mostra útil. Com ele 
+podemos fazer:
+
+\begin{excode}
+#include <stdio.h>
+
+int main() {
+    const int a = 10;
+    volatile double b = 3.14;
+
+    // typeof mantém os qualificadores
+    typeof(a) x = a;        // x é const int
+    typeof(b) y = b;        // y é volatile double
+
+    // typeof_unqual remove os qualificadores
+    typeof_unqual(a) u = a; // u é int (sem const)
+    typeof_unqual(b) v = b; // v é double (sem volatile)
+
+    // Possível modificar u e v sem problemas
+    u = 20;
+    v = 2.71;
+
+    printf("u = %d, v = %f\n", u, v);
+    return 0;
+}
+\end{excode}
+
+\begin{postscript}
+Com esses operadores é possível criar macros como:
+
+\begin{excode}
+...
+#define SWAP(a,b) { typeof(a) tmp = a; a=b; b=tmp; }
+...
+\end{excode}
+
+Essa macro recebe dois valores, utiliza \texttt{typeof} para criar uma variável 
+\texttt{tmp} e troca os valores entre \texttt{a} e \texttt{b}. O uso de 
+\texttt{typeof\_unqual} é desnecessário nesse caso, pois não é desejado tentar 
+modificar variáveis com qualificadores \texttt{const} ou \texttt{restrict}.
+\end{postscript}
+
+\subsubsection{deprecated e nodiscard}
+
+Os atributos \texttt{deprecated} e \texttt{nodiscard} têm usos focados 
+em legibilidade e documentação, sendo importantes principalmente para explicitar 
+o comportamento de funções e tipos. Vamos entender cada um.
+
+\texttt{deprecated} sinaliza que um elemento (função, variável, 
+\texttt{struct}, etc.) está obsoleto e não deve ser usado em novos código, 
+embora ainda funcione. Pode incluir uma mensagem opcional.
+
+\begin{excode}
+#include <stdio.h>
+
+[[deprecated("Use a função 'soma_nova()' em vez disso")]]
+int soma_antiga(int a, int b)
+{
+    return a + b;
+}
+
+[[deprecated]]
+int soma_velhaca(int a, int b)
+{
+    return a + b;
+}
+
+...
+
+int main(void) {
+    int a = 10;
+    int b = 15;
+
+    printf("soma: %i\n", soma_antiga(a, b));
+    printf("soma: %i\n", soma_velhaca(a, b));
+
+    return 0;
+}
+\end{excode}
+
+No código acima, temos duas funções obsoletas. Em bases de código antigas, é 
+comum sinalizar funções que ainda funcionam mas serão removidas futuramente por 
+meio de comentários. O atributo \texttt{deprecated} torna essa sinalização 
+explícita e gera \texttt{warnings} durante a compilação, incentivando a migração 
+para alternativas.
+
+Observe que o atributo pode ser usado com ou sem mensagem entre aspas. O 
+resultado da compilação do código acima exibe o seguinte:
+
+\begin{textbox}
+main.c: In function 'main\':                                                                                                                                                                       
+main.c:19:5: warning: 'soma_antiga' is deprecated: Use a função
+    'soma_nova()' em vez disso [-Wdeprecated-declarations]
+   19 |     printf("soma: %i\n", soma_antiga(a, b));
+      |     ^~~~~~
+main.c:4:5: note: declared here
+    4 | int soma_antiga(int a, int b)
+      |     ^~~~~~~~~~~
+main.c:20:5: warning: 'soma_velhaca' is deprecated
+    [-Wdeprecated-declarations]
+   20 |     printf("soma: %i\n", soma_velhaca(a, b));
+      |     ^~~~~~
+main.c:10:5: note: declared here                                                                                                                                                                  
+   10 | int soma_velhaca(int a, int b)
+      |     ^~~~~~~~~~~~
+\end{textbox}
+
+Já o atributo \texttt{nodiscard} indica que o valor retornado por uma 
+função não deve ser ignorado. Se o chamador descartar o valor, o compilador 
+emitirá um aviso. Isso é útil para funções que alocam recursos, retornam códigos 
+de erro ou produzem resultados essenciais.
+
+\begin{excode}
+#include <stdio.h>
+
+[[nodiscard]]
+int soma_nova(int a, int b)
+{
+    return a + b;
+}
+
+int main(void) {
+    int a = 10;
+    int b = 15;
+
+    soma_nova(a, b); // Valor não é atribuído a nenhuma variável
+
+    return 0;
+}
+\end{excode}
+
+No caso acima, a função \texttt{soma\_nova()} é chamada, mas o valor retornada 
+pela mesma não é atribuída a nenhuma ou usado de nenhuma forma, o que faz com 
+que o compilador retorne um erro como:
+
+\begin{textbox}
+main.c: In function 'main':
+main.c:12:5: warning: ignoring return value of 'soma_nova', declared with 
+    attribute 'nodiscard' [-Wunused-result]
+   12 |     soma_nova(a, b); // Valor não é atribuído a nenhuma variável
+      |     ^~~~~~~~~~~~~~~
+main.c:3:19: note: declared here
+    3 | [[nodiscard]] int soma_nova(int a, int b)
+      |                   ^~~~~~~~~
+\end{textbox}
+
+Dito isso, é notável como ambos os atributos ajudam a tornar o código mais 
+robusto e auto-documentado.
+
+\begin{postscript}
+É possível escrever mensagens de erro personalizadas da mesma forma que é feito 
+com o atributo \texttt{deprecated}.
+
+\begin{excode}
+[[nodiscard("O valor de soma_nova() foi descartado")]]
+\end{excode}
+
+Desta forma, caso o valor retornado pela função não seja usado devidamente, a 
+mensagem de erro personalizada deve aparecer como um erro durante o processo 
+de compilação.
+
+\end{postscript}
+
+\subsubsection{\#elifdef e \#elifndef}
+
+Essas duas diretivas foram introduzidas apenas para tornar a definição 
+condicional de macros mais conveniente. Antes, para escrever código que 
+dependesse do sistema operacional, por exemplo, era necessário algo como:
+
+\begin{excode}
+#include <stdio.h>
+
+int main(void)
+{
+    #ifdef _WIN32
+        printf("Executando no Windows\n");
+    #elif defined(__linux__)
+        printf("Executando no Linux\n");
+    #elif defined(__APPLE__)
+        printf("Executando no macOS\n");
+    #else
+        printf("Sistema operacional desconhecido\n");
+    #endif
+
+    return 0;
+}
+\end{excode}
+
+Com as novas diretivas, o mesmo código pode ser reescrito de forma mais limpa e 
+direta:
+
+\begin{excode}
+#include <stdio.h>
+
+int main(void)
+{
+    #ifdef _WIN32
+    printf("Executando no Windows\n");
+    #elifdef __linux__
+        printf("Executando no Linux\n");
+    #elifdef __APPLE__
+        printf("Executando no macOS\n");
+    #else
+        printf("Sistema operacional desconhecido\n");
+    #endif
+
+    return 0;
+}
+\end{excode}
+
+A diretiva \texttt{\#elifdef} é equivalente a \texttt{\#elif defined(...)}, e 
+\texttt{\#elifndef} equivale a \texttt{\#elif !defined(...)}. Elas tornam o código 
+mais legível, especialmente em cadeias longas de condições.
+
+\subsubsection{\#embed}
+
+Esta é, provavelmente, uma das funcionalidades mais úteis, pelo menos na minha 
+opinião, dentre todas as apresentadas. Trata-se de uma diretiva de 
+pré-processamento que permite incluir dados binários diretamente no executável 
+final gerado pela compilação.
+
+Antes, era comum usar ferramentas como \texttt{xxd}, \textit{scripts} para gerar 
+arrays em C ou até mesmo a função \texttt{fopen()} para ler arquivos durante a 
+execução. A nova diretiva, no entanto, resolve tudo em tempo de compilação, sem 
+custos de leitura em tempo de execução. Além disso, integra-se bem com sistemas 
+de \textit{build}, que podem detectar alterações no arquivo incorporado e 
+recompilar automaticamente. Tudo isso de forma bem simples, como no exemplo:
+
+\begin{excode}
+// Incluindo um arquivo de shaders que deve ser utilizado pelo programa
+static const char arquivo_shaders[] = {
+    #embed "shaders/vertex.glsl"
+    , '\0'  // garante terminação nula para o array de bytes do arquivo
+};
+\end{excode}
+
+O código acima incorpora o arquivo \texttt{"shaders/vertex.glsl"} no binário 
+gerado pelo compilador e adiciona um caractere nulo ao final do array para 
+garantir que a string seja terminada corretamente.
+
+\subsubsection{memset\_explicit()}
+
+Essa função foi adicionada para resolver problemas de segurança criados por uma 
+interação, um tanto contraditória, entre o compilador e a função 
+\texttt{memset()}. A função \texttt{memset()} é geralmente usada para limpar 
+áreas de memória que armazenaram informações sensíveis. Por exemplo:
+
+\begin{excode}
+#include <string.h>
+
+void processa_senha(const char *senha)
+{
+    char buffer[64];
+    strcpy(buffer, senha);
+    // ... usa a senha para algo (ex.: autenticar conta)
+
+    // Tenta limpar a senha da memória
+    memset(buffer, 0, sizeof(buffer));
+}
+\end{excode}
+
+Nesse exemplo, após a chamada de \texttt{memset()}, a variável \texttt{buffer} 
+não é mais usada. O compilador, ao otimizar o código com as flags \texttt{-O2} 
+ou \texttt{-O3}, pode remover completamente a chamada de \texttt{memset()}, pois 
+considera que escrever em uma variável que logo será descartada é redundante. 
+Com isso, a senha permanece na pilha até ser sobrescrita por outra função, o que 
+pode ser explorado por usuários mal-intencionados para recuperar dados sensíveis 
+que ainda estão na memória.
+
+A função \texttt{memset\_explicit()} resolve exatamente esse problema: ela foi 
+projetada para ser imune a otimizações do compilador, ou seja, será chamada 
+independentemente do nível de otimização usado. O resultado é um código mais 
+seguro. Basta substituir \texttt{memset()} por \texttt{memset\_explicit()}:
+
+\begin{excode}
+#include <string.h>
+
+void processa_senha(const char *senha)
+{
+    char buffer[64];
+    strcpy(buffer, senha);
+    // ... uso da senha
+
+    // Garante a limpeza do buffer da senha
+    memset_explicit(buffer, 0, sizeof(buffer));
+}
+\end{excode}
+
+\begin{postscript}
+No geral, estas são as adições mais relevantes trazidas pelo novo padrão C23. O 
+foco dessa padronização foi remover funcionalidades obsoletas, melhorar a 
+segurança, a portabilidade e a compatibilidade com C++.
+
+Dentro das limitações da linguagem e do que fazia sentido ser modificado ou 
+adicionado, é possível dizer que o novo padrão trouxe melhorias 
+significativamente boas para o C.
+
+No entanto, como já dito, aqui foram abordadas apenas as mudanças mais 
+relevantes. Caso você queira saber \textbf{tudo} o que foi adicionado, recomendo 
+fortemente procurar a lista completa de alterações e lê-la por conta própria. 
+Como programador C, é importante ter a capacidade de buscar fontes de 
+conhecimento e saber como se atualizar.
+\end{postscript}
