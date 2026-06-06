@@ -114,11 +114,11 @@ uma variável \texttt{static}, a variável é inicializada apenas na primeira ve
 que a função é chamada, e seu valor é preservado para chamadas subsequentes.
 
 Variáveis \texttt{static} são alocadas em uma área da memória do programa 
-conhecida como \texttt{data}, enquanto todas as outras variáveis que 
-aprendemos a declarar até agora são alocadas em uma área conhecida como 
-\texttt{stack}. Por isso, as variáveis \texttt{static} são inicializadas com o 
-valor \(0\) por padrão, a menos que o usuário as inicialize explicitamente com 
-um valor diferente.
+conhecida como \texttt{data}, enquanto todas as outras variáveis, com exceção 
+das variáveis globais comuns que aprendemos a declarar até agora são alocadas 
+em uma área conhecida como \texttt{stack}. Por isso, as variáveis \texttt{static} 
+são inicializadas com o valor \(0\) por padrão, a menos que o usuário as inicialize 
+explicitamente com um valor diferente.
 
 O código a seguir ilustra essa propriedade:
 
