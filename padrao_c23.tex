@@ -14,7 +14,7 @@ algumas funcionalidades bem úteis e simples de usar. Gostaria de mencioná-las
 neste livro, pois de certa forma procuro trazer uma visão moderna da linguagem 
 para iniciantes.
 
-\subsubsection{Como ativar o padrão C23}
+\subsection{Como ativar o padrão C23}
 
 Antes de mostrar qualquer funcionalidade do padrão \texttt{C23} (também chamado 
 de \texttt{C2X}), é necessário explicar como ativá-lo no compilador. 
@@ -46,7 +46,7 @@ compilador. Isso é bastante útil em projetos mais antigos ou bem consolidados 
 um padrão específico da linguagem, sendo necessário, nesses casos, indicar ao 
 compilador qual padrão utilizar.
 
-\subsubsection{Separador de dígitos}
+\subsection{Separador de dígitos}
 
 O separador de dígitos é apenas um recurso visual para melhorar a legibilidade 
 de números muito grandes, que dificilmente seriam lidos sem nenhum tipo de 
@@ -69,7 +69,7 @@ int main(void)
 }
 \end{excode}
 
-\subsubsection{Literais binários}
+\subsection{Literais binários}
 
 Em algumas aplicações de baixo nível, por vezes é necessário declarar valores 
 explicitamente bit a bit. Anteriormente, isso precisava ser feito usando 
@@ -86,7 +86,7 @@ unsigned char falso = 0b0;
 Agora, utilizando o prefixo \texttt{0b} ou \texttt{0B} é possível definir 
 valores em binário explicitamente, assim como mostrado acima.
 
-\subsubsection{Ponteiro nulo}
+\subsection{Ponteiro nulo}
 
 Esta é outra mudança que traz melhorias de legibilidade, porém com um aspecto 
 um pouco mais técnico. Desde a versão C89 da linguagem, a macro \texttt{NULL} 
@@ -130,7 +130,7 @@ Isso resolve o problema de forma explícita, forçando o programador a deixar
 claro o que está sendo feito no código e também resolvendo questões de 
 compatibilidade com outros sistemas e de interoperabilidade com C++.
 
-\subsubsection{Formato de binário para saídas/entradas}
+\subsection{Formato de binário para saídas/entradas}
 
 Em programação de sistemas de baixo nível, é comum ter que lidar com 
 manipulação ou visualização de dados binários. Anteriormente, a linguagem C 
@@ -153,7 +153,7 @@ int main(void) {
 }
 \end{excode}
 
-\subsubsection{True e False}
+\subsection{Valores booleanos}
 
 Apesar de ser uma funcionalidade \textbf{muito} simples presente na maioria das 
 linguagens, C não suporta variáveis booleanas nativamente desde suas primeiras 
@@ -183,7 +183,7 @@ int main(void) {
 Tudo isso sem se preocupar com inconsistências ao incluir uma biblioteca para 
 algo tão fundamental.
 
-\subsubsection{\_BitInt(N)}
+\subsection{\_BitInt(N)}
 
 Em algumas aplicações de baixo nível como protocolos de rede, \texttt{hardware}, 
 processamento de áudio, criptografia etc. É necessário trabalhar com tipos 
@@ -210,7 +210,7 @@ significativo é o bit de sinal, e os 4 bits restantes representam a magnitude
 (em complemento para dois). Assim, o intervalo de valores representáveis vai de 
 -16 a 15.
 
-\subsubsection{typeof e typeof\_unqual}
+\subsection{typeof e typeof\_unqual}
 
 Ambos funcionam de forma bem semelhante, mas com uma diferença sutil que possui 
 aplicações práticas na implementação de macros. A palavra-chave \texttt{typeof} 
@@ -278,7 +278,7 @@ Essa macro recebe dois valores, utiliza \texttt{typeof} para criar uma variável
 modificar variáveis com qualificadores \texttt{const} ou \texttt{restrict}.
 \end{postscript}
 
-\subsubsection{deprecated e nodiscard}
+\subsection{deprecated e nodiscard}
 
 Os atributos \texttt{deprecated} e \texttt{nodiscard} têm usos focados 
 em legibilidade e documentação, sendo importantes principalmente para explicitar 
@@ -399,7 +399,7 @@ de compilação.
 
 \end{postscript}
 
-\subsubsection{\#elifdef e \#elifndef}
+\subsection{\#elifdef e \#elifndef}
 
 Essas duas diretivas foram introduzidas apenas para tornar a definição 
 condicional de macros mais conveniente. Antes, para escrever código que 
@@ -450,7 +450,7 @@ A diretiva \texttt{\#elifdef} é equivalente a \texttt{\#elif defined(...)}, e
 \texttt{\#elifndef} equivale a \texttt{\#elif !defined(...)}. Elas tornam o código 
 mais legível, especialmente em cadeias longas de condições.
 
-\subsubsection{\#embed}
+\subsection{\#embed}
 
 Esta é, provavelmente, uma das funcionalidades mais úteis, pelo menos na minha 
 opinião, dentre todas as apresentadas. Trata-se de uma diretiva de 
@@ -476,7 +476,7 @@ O código acima incorpora o arquivo \texttt{"shaders/vertex.glsl"} no binário
 gerado pelo compilador e adiciona um caractere nulo ao final do array para 
 garantir que a string seja terminada corretamente.
 
-\subsubsection{memset\_explicit()}
+\subsection{memset\_explicit()}
 
 Essa função foi adicionada para resolver problemas de segurança criados por uma 
 interação, um tanto contraditória, entre o compilador e a função 
