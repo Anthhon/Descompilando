@@ -118,3 +118,30 @@ ao executar o programa, o valor de \(x\) também é alterado na função
 Esse exemplo demonstra como os ponteiros permitem acessar e modificar variáveis 
 fora do escopo atual de uma função, facilitando a manipulação de dados e a 
 comunicação entre diferentes partes de um programa.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
+
+\begin{enumerate}
+    \item {Escreva um programa que declare uma variável inteira \texttt{valor} e 
+        um ponteiro \texttt{ptr} que aponte para \texttt{valor}. Atribua um valor 
+        a \texttt{valor} usando o ponteiro (ou seja, através de \texttt{*ptr}). 
+        Imprima o conteúdo de \texttt{valor} e o endereço armazenado em 
+        \texttt{ptr} para verificar que ambos se referem ao mesmo local.}
+    \item {Crie uma função \texttt{incrementa(int *n)} que receba um ponteiro 
+        para inteiro e incremente o valor apontado em 1. Na função \texttt{main}, 
+        declare um inteiro \texttt{a} com valor 5, chame \texttt{incrementa(\&a)} 
+        e imprima \texttt{a} antes e depois. Explique por que a mudança persiste 
+        fora da função.}
+    \item {Escreva uma função \texttt{max\_min(int *a, int *b)} que receba dois 
+        ponteiros para inteiros e modifique o conteúdo de forma que, ao final, 
+        \texttt{*a} contenha o maior valor e \texttt{*b} o menor valor. Na 
+        \texttt{main}, leia dois números, chame a função e imprima os valores 
+        modificados.}
+    \item {O que acontece se você tentar desreferenciar um ponteiro que não foi 
+        inicializado (ponteiro selvagem)? Escreva um pequeno programa que declare 
+        um ponteiro \texttt{int *p} e tente imprimir \texttt{*p} sem atribuir 
+        nenhum endereço a ele. Compile e execute (se possível). Explique o 
+        comportamento observado e por que isso é perigoso.}
+\end{enumerate}

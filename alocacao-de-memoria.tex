@@ -153,3 +153,31 @@ Caso deseje aprender mais sobre o funcionamento das funções \texttt{malloc,
 realloc ou calloc}, é possível pesquisar utilizando o comando \texttt{`man 
 nome\_da\_funcao'} em um terminal Unix/Linux, ou no seu navegador web, para 
 acessar os manuais públicos relacionados a essas funções.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
+
+\begin{enumerate}
+    \item {Escreva um programa que pergunte ao usuário quantos números inteiros 
+        ele deseja armazenar, aloque dinamicamente um vetor com esse tamanho 
+        usando \texttt{malloc}, leia os números do usuário e, em seguida, 
+        exiba-os na ordem inversa. Não se esqueça de liberar a memória com 
+        \texttt{free} e verificar se a alocação foi bem-sucedida.}
+    \item {Crie um programa que aloque um vetor de \texttt{float} com 5 posições 
+        usando \texttt{calloc}. Imprima os valores logo após a alocação (antes 
+        de inicializá-los manualmente). O que você observa? Compare com o 
+        comportamento de \texttt{malloc} (alocando um vetor similar sem 
+        inicialização). Explique a diferença.}
+    \item {Faça um programa que simule um vetor dinâmico de inteiros. Inicialmente, 
+        aloque espaço para 2 elementos usando \texttt{malloc}. Em seguida, 
+        peça ao usuário para inserir números até que ele digite 0. A cada nova 
+        inserção, se o vetor estiver cheio, use \texttt{realloc} para dobrar a 
+        capacidade. Ao final, exiba todos os números inseridos (exceto o 0) e 
+        libere a memória.}
+    \item {O que acontece se você passar um ponteiro que não foi alocado com 
+        \texttt{malloc}, \texttt{calloc} ou \texttt{realloc} para a função 
+        \texttt{free}? E se você passar o ponteiro \texttt{NULL}? Escreva um 
+        pequeno programa para testar ambos os casos (compile e execute) e 
+        explique os resultados.}
+\end{enumerate}

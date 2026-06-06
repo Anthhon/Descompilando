@@ -195,3 +195,35 @@ utilização do carácter nulo em um vetor, é a seguinte:
 Aqui, declaramos manualmente um vetor com o tamanho de 5 caracteres e 
 inicializamos cada um dos itens com os caracteres desejados seguidos ao 
 carácter nulo especial no fim do vetor.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
+
+\begin{enumerate}
+    \item {Escreva um programa que declare um vetor de inteiros com 10 posições 
+        e inicialize-o com os valores de 1 a 10 usando um loop \texttt{for}. Em 
+        seguida, imprima todos os valores do vetor na ordem inversa (do último 
+        para o primeiro).}
+    \item {Crie um programa que leia 5 números inteiros do usuário e armazene-os 
+        em um vetor. Calcule e exiba a soma de todos os elementos, o maior valor 
+        e o menor valor presentes no vetor. Use loops para percorrer o vetor.}
+    \item {Explique, com um trecho de código, o que acontece se você tentar 
+        acessar um índice fora dos limites do vetor (por exemplo, 
+        \texttt{vetor[10]} em um vetor de tamanho 5). Compile e execute (se 
+        possível). Explique o que aconteceu, e por quê isso é perigoso.}
+    \item {Faça um programa que declare dois vetores de inteiros, cada um com 5 
+        elementos. Preencha o primeiro vetor com valores fornecidos pelo usuário 
+        e o segundo vetor com o dobro dos valores do primeiro. Em seguida, exiba 
+        os dois vetores lado a lado (ex.: \texttt{vetor1[0] = 3, vetor2[0] = 6}).}
+    \item {Teoricamente, todo vetor em C é armazenado de forma contígua na 
+        memória, escreva um programa que declare um vetor de 4 inteiros e imprima 
+        o endereço de cada elemento usando \texttt{\%p}. Verifique se a 
+        diferença entre os endereços é sempre \texttt{sizeof(int)}. O que isso 
+        confirma sobre a organização do vetor?}
+    \item {Utilizando aritmética de ponteiros (sem usar colchetes), percorra um 
+        vetor de 6 inteiros e atribua a cada posição o valor do seu índice ao 
+        quadrado. Exiba os valores usando a notação de vetor (com colchetes) 
+        para confirmar. Dica: use um ponteiro auxiliar que aponte para o início 
+        do vetor.}
+\end{enumerate}

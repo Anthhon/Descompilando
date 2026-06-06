@@ -129,3 +129,33 @@ pilha\footnote{também conhecido como Stack Overflow}, resultando em falha na
 execução do programa. Além disso, como a memória na \footnote{Stack} é alocada 
 de forma estática durante a compilação, não é possível alocar ou liberar memória 
 de forma dinâmica, como acontece na \texttt{Heap}.
+
+\subsubsection{Exercícios}
+
+\textbf{É de extrema importância que você realize os exercícios aqui elaborados para fixar o conteúdo.}
+
+\begin{enumerate}
+    \item {Escreva um programa que declare uma variável global inicializada, uma 
+        variável global não inicializada, uma variável local estática inicializada 
+        dentro de uma função e uma variável local automática (não estática). 
+        Dentro da função, modifique cada uma delas (se possível) e imprima seus 
+        valores e tente explicar em qual seção de memória (Text, Data, BSS, Stack, Heap) 
+        cada variável é armazenada}
+    \item {Analise o código a seguir e identifique quais variáveis serão alocadas na seção \texttt{Data} e quais na seção \texttt{BSS}. Justifique sua resposta considerando se são globais/estáticas e se são inicializadas ou não.}
+    \begin{excode}
+        int global_a = 10;
+        int global_b;
+        static float static_c = 3.14;
+        static double static_d;
+        
+        void func(void) {
+            static char static_e = 'A';
+            static long static_f;
+            int local_g;
+        }
+    \end{excode}
+    \item {Considerando a figura dos segmentos de memória, descreva o que 
+        acontece quando o programa solicita alocações dinâmicas muito grandes 
+        através de \texttt{malloc}. Em que direção a seção \texttt{Heap} cresce? O que 
+        pode ocorrer se a seção \texttt{Heap} e \texttt{Stack} se encontrarem?}
+\end{enumerate}
