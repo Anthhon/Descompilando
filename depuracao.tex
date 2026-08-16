@@ -261,8 +261,9 @@ Após identificar o erro, podemos encerrar a depuração com o comando \texttt{q
 
 Com a correção aplicada e o comportamento indefinido eliminado, ao executar o programa, obtemos o resultado esperado:
 
+\newpage
 \begin{exterminal}
-    \$ ./main
+    $ ./main
     X é menor que 10!
     X é menor que 10!
     X é menor que 10!
@@ -300,6 +301,7 @@ então executa o programa e gera um relatório final com informações sobre pos
 Para exemplificar o uso do Valgrind, continuaremos utilizando o código corrigido na seção anterior, como forma de 
 complementar as correções de erros que o GDB não nos alerta.
 
+\newpage
 \begin{excode}
     #include <stdio.h>
     #include <stdlib.h>
@@ -358,6 +360,7 @@ específicas. O Valgrind executará o programa e gerará um relatório ao final:
 
 Depois de executar o comando acima, o seguinte relatório é exibido no terminal:
 
+\newpage
 \begin{exterminal}
     ==4405== Memcheck, a memory error detector
     ==4405== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
@@ -395,6 +398,7 @@ Depois de executar o comando acima, o seguinte relatório é exibido no terminal
     ==4405== For lists of detected and suppressed errors, rerun with: -s
     ==4405== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 \end{exterminal}
+\newpage
 
 Pelas informações do relatório podemos ver facilmente que, foram perdidos 4 bytes em 1 bloco de memória, que foi alocado na função 
 \texttt{main}, especficicamente na linha 6. Portanto, tudo que devemos fazer é verificar na linha 6 em que variável foi guardada a 
@@ -436,6 +440,7 @@ de memória alocado para \texttt{x} quando ele não for mais ser utilizado pelo 
 Após fazer a correção exibida no código acima, é possível verificar o código novamente pelo Valgrind utilizando o mesmo comando, e 
 teremos o seguinte relatório:
 
+\newpage
 \begin{exterminal}
     ==4669== Memcheck, a memory error detector
     ==4669== Copyright (C) 2002-2022, and GNU GPL\'d, by Julian Seward et al.
@@ -509,6 +514,7 @@ O resultado pode variar entre execuções. Esse é um sinal claro de \textbf{und
 diretas do porquê disso, é possível utilizar o \texttt{printf}, antes de usar ferramentas mais avançadas como o GDB, 
 para inspecionar o que está acontecendo a cada iteração do laço:
 
+\newpage
 \begin{excode}
     #include <stdio.h>
 

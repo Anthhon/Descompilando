@@ -23,6 +23,7 @@ funcionalidades são adicionadas por meio de pacotes, podemos ativar as
 funcionalidades do \texttt{C23} usando uma \texttt{flag} de compilação que 
 indica ao GCC/Clang qual padrão desejamos, da seguinte forma:
 
+\newpage
 \begin{textbox}
     gcc -o main main.c -std=c2x
     \\ ou
@@ -325,6 +326,7 @@ para alternativas.
 Observe que o atributo pode ser usado com ou sem mensagem entre aspas. O 
 resultado da compilação do código acima exibe o seguinte:
 
+\newpage
 \begin{textbox}
 main.c: In function 'main\':                                                                                                                                                                       
 main.c:19:5: warning: 'soma_antiga' is deprecated: Use a função
@@ -371,6 +373,7 @@ No caso acima, a função \texttt{soma\_nova()} é chamada, mas o valor retornad
 pela mesma não é atribuída a nenhuma ou usado de nenhuma forma, o que faz com 
 que o compilador retorne um erro como:
 
+\newpage
 \begin{textbox}
 main.c: In function 'main':
 main.c:12:5: warning: ignoring return value of 'soma_nova', declared with 
@@ -405,6 +408,7 @@ Essas duas diretivas foram introduzidas apenas para tornar a definição
 condicional de macros mais conveniente. Antes, para escrever código que 
 dependesse do sistema operacional, por exemplo, era necessário algo como:
 
+\newpage
 \begin{excode}
 #include <stdio.h>
 
