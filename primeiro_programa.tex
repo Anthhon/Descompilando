@@ -54,7 +54,7 @@ passo a passo o que significa cada linha do código acima.
     #include <stdio.h>
 \end{excode}
 
-Na linha número 1, temos o ``include'', uma diretiva que inclui bibliotecas 
+Na linha número 1, temos o \texttt{include}, uma diretiva que inclui bibliotecas 
 externas no nosso programa. Aqui, estamos incluindo a biblioteca ``stdio.h''. 
 O conceito de bibliotecas ainda vai ser melhor explicado futuramente, mas você 
 pode entender como se cada biblioteca fosse um tipo de extensão com funções 
@@ -71,10 +71,10 @@ de quatro palavras/caracteres importantes:
         \renewcommand{\labelitemi}{\tiny$\blacksquare$}
     \item \textbf{"int":} Define o que a função deve retornar ao ser 
         finalizada, neste caso, um número inteiro.
-    \item \textbf{"main":} É o nome que foi escolhido para o bloco de código 
-        principal. Apesar de não ser necessariamente obrigatório usar o nome 
-        \textbf{main} para a sua função principal, acabar por ser uma boa 
-        prática a ser seguida.
+    \item \textbf{"main":} É o nome padrão escolhido para identificar o bloco 
+        de código a ser executado inicialmente. Apesar de que, em contextos como 
+        o de softwares embarcados é possível utilizar outros nomes, \textbf{mas 
+        isso não será relevante por enquanto!}
     \item \textbf{"(void)":} Define quais parâmetros/argumentos são 
         necessários para chamar a função. Neste caso, a palavra \textbf{void} 
         indica que a função não precisa de nenhum valor para ser chamada.
@@ -85,9 +85,9 @@ de quatro palavras/caracteres importantes:
     printf("Olá, mundo!\n");
 \end{excode}
 
-Na linha número 3, encontramos a função ``printf'', responsável por exibir 
+Na linha número 3, encontramos a função \texttt{printf}, responsável por exibir 
 informações no terminal. Esta diretiva na verdade não existe como uma 
-funcionalidade padrão na linguagem C, e está sendo implementada através da 
+funcionalidade padrão na linguagem C, e está sendo declarada através da 
 biblioteca ``stdio.h'', mencionada na linha 1.
 
 Neste caso a informação que está sendo passada para a função é o texto "Olá, 
@@ -101,12 +101,12 @@ da mensagem o terminal desça uma linha abaixo antes de continuar.
     return 0;
 \end{excode}
 
-Na linha número 4, encontramos o comando ``return''. Em uma função, essa 
+Na linha número 4, encontramos o comando \texttt{return}. Em uma função, essa 
 diretiva indica o valor que a função deve retornar quando terminar sua 
 execução e normalmente, mas nem sempre, é acompanhada de um valor que está 
 escrito como um sufixo da diretiva. 
 
-No caso da função ``main'', que é a função principal em um programa C, o 
+No caso da função \texttt{main}, que é a função principal em um programa C, o 
 valor 0 geralmente é usado como uma boa prática para indicar que o programa 
 foi finalizado sem erros.
 
@@ -115,7 +115,7 @@ foi finalizado sem erros.
 \end{excode}
 
 A linha número 5 é a chave de fechamento ``\}'', que indica o fim do bloco de 
-código da função ``main''. Tudo o que está contido entre as chaves forma o 
+código da função \texttt{main}. Tudo o que está contido entre as chaves forma o 
 corpo da função, o compilador (GCC) utiliza dessas chaves de abertura e 
 fechamento como uma forma de entender quando um código é pertencente a uma 
 função.
@@ -132,11 +132,11 @@ reler.
 elaborados para fixar o conteúdo.}
 
 \begin{enumerate}
-    \item{Modifique a mensagem exibida na tela pela função ``printf''.}
+    \item{Modifique a mensagem exibida na tela pela função \texttt{printf}}
     \item{Tente alterar a posição do caracter especial ``\textbackslash n'' e 
-        veja o que acontece.}
+        veja o que acontece}
     \item{Mudar o nome da função para qualquer outra coisa e veja qual o erro 
-        retornado.}
+        retornado}
     \item{Remova a linha de código que inclui a biblioteca ``stdio.h'' e veja 
-        qual o erro retornado.}
+        qual o erro retornado}
 \end{enumerate}

@@ -182,7 +182,7 @@ Isso ocorre porque a primeira condição já é avaliada como verdadeira, e as
 condições subsequentes dependem da falsidade das condições anteriores, o que 
 não ocorre neste caso.
 
-\subsubsection{Loops}
+\subsubsection{While}
 
 A estrutura de loop mais simples é criada com a diretiva \texttt{while}. Essa 
 estrutura é responsável por repetir uma seção de código enquanto uma expressão 
@@ -205,7 +205,7 @@ Vamos ilustrar um simples caso de uso para a estrutura while:
         int x = 0;
 
         while (x != 10) {
-            printf("x: \%d\n", x);
+            printf("x: %d\n", x);
             ++x; // Incrementa o valor de x em 1
         }
 
@@ -217,6 +217,27 @@ Neste exemplo, criamos uma estrutura \texttt{while} que verifica se \(x\) é
 diferente de 10. Enquanto o valor for diferente de 10, o código entre chaves é 
 repetido. Quando executado, este código produzirá a seguinte saída:
 
+\begin{postscript}
+    É importante mencionar que o loop \texttt{while} está verificando apenas se 
+    o valor é diferente de 10, o que poderia ocasionar em erros caso fosse 
+    possível o valor de \texttt{x} pular de 9 para 11, caso ele fosse 
+    incrementado de 2 em 2 por exemplo.
+
+    No caso acima isso não é possível mas deve se ficar atento a casos 
+    específicos como esse em aplicações reais que usem algum looping do tipo, 
+    em caso de dúvida vale sempre a pena usar comparações como:
+
+    \begin{excode}
+    while (x < 10) {
+        ...
+    }
+    \end{excode}
+
+    Assim, você garante a quebra do looping ao chegar no valor 10 e evita casos 
+    específicos em que seja possível pular de 9 para qualquer valor maior que 10.
+\end{postscript}
+
+\newpage
 \begin{textbox}
     x: 0
     x: 1
@@ -237,7 +258,6 @@ linhas de código.
 Um código equivalente, porém menos eficiente, do ponto de vista da criação, 
 seria:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
@@ -262,19 +282,27 @@ Imagine repetir essa estrutura para números maiores, como até 10000. Seria um
 processo extremamente tedioso e ineficiente ter que escrever tudo isso 
 manualmente, daí a utilidade das estruturas como \texttt{while}.
 
+\subsubsection{For}
+
 Outra estrutura de loop semelhante, mas um pouco mais complexa, é o 
 \texttt{for} (conhecido também como for loop). Esta estrutura segue o seguinte padrão:
 
 \begin{excode}
-    for (inicialização ; expressao; incremento) {
+    for (inicialização; condição; expressão) {
         // Código a ser executado
     }
 \end{excode}
 
-Dentro de uma única estrutura, há três seções com características únicas: a 
-inicialização, que é executada uma vez antes do looping começar; a expressão, 
-verificada a cada finalização do looping; e o incremento, executado antes de 
-reavaliar a expressão.
+Dentro de uma única estrutura, há três seções com características únicas:
+
+\begin{itemize}
+    \item \textbf{Inicialização}: uma expressão que é executada uma única vez 
+        antes do looping começar.
+    \item \textbf{Condição (de parada)}: verificada antes de cada execução do 
+        looping.
+    \item \textbf{Expressão}: geralmente é um incremento, mas pode ser qualquer 
+        tipo de expressão que precise ser executada ao fim do looping.
+\end{itemize}
 
 Para ilustrar, vamos usar essa estrutura para replicar o exemplo do \texttt{while}:
 
@@ -295,17 +323,16 @@ Para entender melhor o código acima, vamos explicar cada parâmetro
 individualmente:
 
 \begin{itemize}
-        \renewcommand{\labelitemi}{\tiny$\blacksquare$}
-    \item{\texttt{int x = 0} - Inicializa a variável \(x\) com o valor 0.}
-    \item{\texttt{x != 10} - Expressão avaliada no início de cada looping.}
-    \item{\texttt{++x} - Incrementa o valor de \(x\) ao final de cada looping.}
+    \item \texttt{int x = 0}: Inicializa a variável \(x\) com o valor 0.
+    \item \texttt{x != 10}: Expressão avaliada no início de cada looping.
+    \item \texttt{++x}: Incrementa o valor de \(x\) ao final de cada looping.
 \end{itemize}
 
 
 Ao executar o código, o resultado será idêntico ao exemplo utilizando 
 \texttt{while}.
 
-É importante notar que, em um \texttt{for loop}, é possível omitir qualquer 
+É importante notar que, em um \texttt{for} loop, é possível omitir qualquer 
 um desses parâmetros, embora seja contra-intuitivo. Por exemplo, podemos criar 
 um loop infinito da seguinte forma:
 
@@ -324,6 +351,28 @@ um loop infinito da seguinte forma:
         }
     }
 \end{excode}
+
+Sabendo que é possível emitir parâmetros de um \texttt{for}, é possível 
+também, imitar o funcionamento de um \texttt{while} loop usando um 
+\texttt{for} loop da seguinte forma:
+
+\begin{excode}
+    #include <stdio.h>
+
+    int main() {
+        int i = 0;
+        for (; i < 5; ) { // inicialização vazia, condição igual ao while, expressão vazia
+            printf("%d\n", i);
+            i++; // incremento feito no corpo
+        }
+        return 0;
+    }
+\end{excode}
+
+Fazendo um \texttt{for} com a inicialização e a expressão vazia, podemos 
+imitar perfeitamente o funcionamento de um \texttt{while}.
+
+\subsubsection{do while}
 
 Por fim, temos o menos utilizado loop da linguagem C, chamado 
 \texttt{do while}. A diferença fundamental deste loop é que ele executa o 
@@ -362,12 +411,28 @@ Caso executemos o código acima, veremos o seguinte resultado:
     Esse texto será impresso
 \end{textbox}
 
-Nota-se que o texto de \texttt{while}, ao contrário do texto de 
+Nota-se que o texto do looping \texttt{while}, ao contrário do texto do looping 
 \texttt{do while}, não foi impresso. Isso ocorre porque o \texttt{do while} 
 primeiro executa o código dentro do bloco e, em seguida, verifica a expressão. 
 Como ambas as expressões no código acima são falsas, o \texttt{do while} 
 executará o código uma vez e sairá do looping, enquanto o \texttt{while} 
 nunca executará seu bloco de código.
+
+Novamente, é possível imitar o funcionamento (não tão exato) de um \texttt{for} 
+loop usando o \texttt{do while}:
+
+\begin{excode}
+    do
+    {
+        //  Código a ser executado
+        printf( "%d ", i);   
+        // Expressão
+        i++;
+    }  while (i <= 10); // Checagem de condição 
+\end{excode}
+
+O código acima deve executar exatamente como um \texttt{for} loop, com a única exceção 
+de que a primeira iteração será executado antes da checagem da condição ser feita.
 
 \subsubsection{Exercícios}
 
