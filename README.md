@@ -49,9 +49,9 @@ Para manter o conteúdo organizado e facilitar a colaboração, optamos por divi
 ```
 
 ### Detalhes importantes sobre a estrutura do projeto
+
 - **Arquivos fracionados**: Cada seção do livro possui seu próprio arquivo `.tex`. Isso evita conflitos em pull requests e torna mais fácil localizar onde fazer uma alteração específica.
 - **Imagens**: Todas as imagens devem ser armazenadas na pasta `images/`, usando um endereço relativo ao tipo de imagem utilizada. (como o `images/illustrations` para ilustrações)
-- **PDF final**: O arquivo `descompilando.pdf` (gerado a partir do `descompilando.tex`) **deve** estar presente no repositório, pois é utilizado pelo site de apresentação para exibir a versão mais recente do livro.
 
 ## Política de Versionamento (Releases)
 
