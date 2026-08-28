@@ -99,14 +99,16 @@ valor passado entre colchetes.
     o valor relativo ao elemento do vetor:
 
     \begin{excode}
-        soma += *(idades + sizeof(int) * i)
+        soma += *(idades + i)
     \end{excode}
 
     Neste contexto, \texttt{idades} atua como um ponteiro para o endereço do primeiro 
-    elemento do vetor. A operação \texttt{sizeof(int) * i} calcula o deslocamento em 
-    bytes necessários para alcançar o elemento do vetor relativo ao valor de \(i\), considerando o 
-    tamanho de um inteiro (expresso por sizeof(int)). Somando este deslocamento ao 
-    endereço base armazenado em idades, obtemos o endereço do elemento \(i\). 
+    elemento do vetor. Ao somar \texttt{i} a \texttt{idades}, a aritmética de ponteiros
+    calcula automaticamente o deslocamento necessário para alcançar o elemento do vetor
+    relativo ao valor de \(i\), considerando o tamanho de um inteiro
+    (\texttt{sizeof(int)}). Assim, \texttt{idades + i} avança
+    \(i \times \texttt{sizeof(int)}\) bytes na memória, obtendo o endereço do elemento
+    \(i\).
     
     E em seguida usamos o operador de deferenciação * para acessar o valor 
     armazenado neste endereço específico, permitindo sua adição a soma.
@@ -135,8 +137,8 @@ conceito:
         // A linguagem C prevê a impressão de
         // vetores de caracteres com o formatador '%s'
         printf("1º Nome: %s\n", nome1);
-        printf("2º Nome: %s\n", nome1);
-        printf("3º Nome: %s\n", nome1);
+        printf("2º Nome: %s\n", nome2);
+        printf("3º Nome: %s\n", nome3);
 
         return 0;
     }
