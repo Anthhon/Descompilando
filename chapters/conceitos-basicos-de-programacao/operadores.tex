@@ -23,12 +23,25 @@ operadores aritméticos:
         \hline
         \% & módulo & 21 \% 10 & 1 \\
         \hline
-        ++ & incremento & ++10 é o mesmo que 10 + 1 & 11 \\
+        \texttt{++} & incremento & \texttt{x = 10; ++x} & 11 \\
         \hline
-        -- & decremento & --10 é o mesmo que 10 - 1 & 9 \\
+        \texttt{--} & decremento & \texttt{x = 10; --x} & 9 \\
         \hline
     \end{tabular}
 \end{center}
+
+Os operadores \texttt{++} e \texttt{--} exigem uma variável ou objeto
+modificável. Em \texttt{++x}, o valor já incrementado é retornado, enquanto
+\texttt{x++} retorna o valor anterior ao incremento. Quando usados
+isoladamente, ambos deixam a variável com o mesmo valor final.
+
+\begin{excode}
+    int x = 10;
+    int a = ++x; // x = 11, a = 11
+
+    int y = 10;
+    int b = y++; // y = 11, b = 10
+\end{excode}
 
 \begin{postscript}
     O operador de módulo realiza uma divisão entre os dois valores e retorna o 
