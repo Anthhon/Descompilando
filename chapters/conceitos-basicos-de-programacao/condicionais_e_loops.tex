@@ -1,13 +1,18 @@
-Através de condicionais e loops, é possível criar programas que executam 
+Por meio de condicionais e loops, é possível criar programas que executam 
 seções específicas de código com base em determinadas condições definidas 
 no próprio código.
 
 \subsubsection{Condicionais}
 
 Condicionais são estruturas de controle que direcionam o fluxo de execução 
-do programa. Este conceito pode ser exemplificado diretamente com um código:
+do programa. Logo abaixo, vamos explorar de maneira simples como esses 
+conceitos podem ser aplicados na criação de aplicações e por que eles são tão 
+fundamentais:
 
-A estrutura \texttt{if} geralmente segue o seguinte formato:
+\subsubsection{if}
+
+A condicional \texttt{if} é a mais simples de toda a linguagem C e sua estrutura 
+geralmente segue o seguinte formato:
 
 \begin{excode}
     if (condição) {
@@ -16,24 +21,26 @@ A estrutura \texttt{if} geralmente segue o seguinte formato:
 \end{excode}
 
 A condição fornecida entre parênteses para o \texttt{if} deve ser uma 
-expressão que resulta em verdadeiro ou falso. Dependendo do resultado da 
-expressão, o bloco de código entre chaves será executado ou ignorado.
+condição que resulta em verdadeiro ou falso. Dependendo do resultado da 
+condição, o bloco de código entre chaves será executado ou ignorado.
 
 É possível utilizar valores constantes como \(0\) ou \(1\) para representar 
-verdadeiro e falso, respectivamente. No entanto, é redundante utilizar uma expressão que sempre resulta em verdadeiro ou falso. Embora esse tipo de 
-operação seja raramente utilizado, segue um exemplo para ilustrar o conceito:
+verdadeiro e falso, respectivamente. No entanto, é redundante utilizar uma expressão 
+que sempre resulta em verdadeiro ou falso. Embora esse tipo de operação seja raramente 
+utilizado, segue um exemplo para ilustrar o conceito:
 
 \begin{excode}
     #include <stdio.h>
 
     int main(void)
     {
-        if (0) { // 0 representa falso printf("Esse texto nunca será impresso\n");
+        if (0) { // 0 representa falso
+            printf("Esse texto nunca será impresso\n");
         }
         if (1 > 2) { // 1 nunca será maior que 2
             printf("Esse texto nunca será impresso\n");
         }
-        if (1) { // Qualquer número que não seja 0 representa verdadeiro
+        if (1) { // Qualquer número diferente de 0 representa verdadeiro
             printf("Esse texto sempre será impresso\n");
         }
         if (10 > 0) { // 10 sempre será maior que 0
@@ -48,11 +55,12 @@ Neste exemplo, as verificações produzem resultados constantes, ou seja, o
 resultado não varia independentemente do número de vezes que o código é 
 executado.
 
-Outra diretiva importante de se entender é o \texttt{else}, que complementa o 
+\subsubsection{else}
+
+Outra palavra-chave importante de se entender é o \texttt{else}, que complementa o 
 \texttt{if}. O bloco de código dentro do \texttt{else} é executado se a 
 condição do \texttt{if} for falsa. Um exemplo prático ilustra sua utilização:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
@@ -81,7 +89,6 @@ Além disso, é possível criar fluxos de execução mais complexos utilizando
 Apesar de ser complexo de entender apenas com explicações textuais, um 
 exemplo de código esclarecerá o conceito:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
@@ -113,9 +120,8 @@ ressaltar que, ao utilizar \texttt{else if}, a expressão dentro dos
 parênteses só é avaliada se as condições anteriores forem falsas.
 
 Em situações em que é necessário avaliar cada condição individualmente, 
-vários \texttt{if} consecutivos são utilizados. Como por exemplo:
+vários \texttt{if} consecutivos são utilizados. Por exemplo:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
@@ -148,9 +154,10 @@ Ao executar o código acima, você deve ver algo como:
     Número é maior que 100
 \end{textbox}
 
-Isso ocorre porque cada bloco \texttt{if} é independente dos outros; portanto, todos são avaliados individualmente. Se fosse utilizado um \texttt{else} dentro dos \texttt{if}, como no exemplo a seguir:
+Isso ocorre porque cada bloco \texttt{if} é independente dos outros; portanto, 
+todos são avaliados individualmente. Se fosse utilizado um \texttt{else if}, como 
+no exemplo a seguir:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
@@ -182,11 +189,128 @@ Isso ocorre porque a primeira condição já é avaliada como verdadeira, e as
 condições subsequentes dependem da falsidade das condições anteriores, o que 
 não ocorre neste caso.
 
-\subsubsection{While}
+\subsubsection{switch}
 
-A estrutura de loop mais simples é criada com a diretiva \texttt{while}. Essa 
-estrutura é responsável por repetir uma seção de código enquanto uma expressão 
-for verdadeira.
+Semelhante ao \texttt{if} concatenando uma sequência de \texttt{else} e \texttt{if}. 
+O \texttt{switch} existe para executar um bloco de código específico em um cenário de 
+múltiplas possibilidades para uma expressão. Teorias à parte, a sua estrutura parece 
+algo como:
+
+\begin{excode}
+    switch (expressão) {
+        case valor1:  
+            // bloco de código 1
+            break;
+        case valor2:
+            // bloco de código 2
+            break;
+        default:
+            // código a rodar caso nenhuma das alternativas acima sejam válidas
+            // Geralmente 'default' é a última seção por padrão
+    }
+\end{excode}
+
+Neste caso, o código deve avaliar a expressão como algum valor inteiro ou até mesmo 
+um valor de caractere, esse valor então será comparado com cada um dos valores 
+especificados após os \texttt{case} que são, de forma simplificada, uma seção de 
+código que devem rodar em caso da expressão ser igual ao valor passado, e caso o 
+valor da expressão não seja igual a nenhum dos valores especificados a seção 
+definida por \texttt{default} executará por padrão. Após cair em uma seção em 
+específico, o código executará até que atinja um \texttt{break}, que é usado 
+justamente para delimitar todo o código que deve ser executado.
+
+Dito isso tudo, vamos para alguns exemplos práticos que podem ajudar a entender melhor como 
+isso tudo funciona:
+
+\begin{excode}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int dia = 5; // Mude à vontade
+
+        // Associa o valor do dia com os dias da semana
+        switch (dia) {
+            case 1:
+                printf("Segunda\n");
+                break;
+            case 2:
+                printf("Terça\n");
+                break;
+            case 3:
+                printf("Quarta\n");
+                break;
+            case 4:
+                printf("Quinta\n");
+                break;
+            case 5:
+                printf("Sexta\n");
+                break;
+            case 6:
+                printf("Sábado\n");
+                break;
+            case 7:
+                printf("Domingo\n");
+                break;
+            default:
+                printf("Dia inválido\n");
+        }
+
+        return 0;
+    }
+\end{excode}
+
+No caso acima temos um exemplo bem simples, de como usar o switch. Utilizamos o valor 
+\texttt{dia} como expressão e caso o seu valor seja igual a algum dos especificados ele 
+deve executar a sua respectiva seção. Nesse caso em específico, ao executar o código teremos 
+algo como:
+
+\begin{textbox}
+    Sexta
+\end{textbox}
+
+É notável também que a seção \texttt{default} é usada para especificar qual comportamento 
+deve ocorrer caso o valor \texttt{dia} não corresponda a nenhuma das outras seções, exibindo 
+nesse caso que não foi possível identificar o número.
+
+\begin{postscript}
+    Outro detalhe importante, é que é possível atribuir vários casos a uma mesma seção de 
+    código, sendo possível fazer algo como por exemplo:
+
+    \begin{excode}
+    #include <stdio.h>
+
+    int main(void)
+    {
+        int dia = 5; // Mude à vontade
+
+        switch (dia) {
+            case 1: case 2: case 3: case 4: case 5:
+                printf("Dia útil\n");
+                break;
+            case 6:
+            case 7:
+                printf("Fim de semana\n");
+                break;
+            default:
+                printf("Dia inválido\n");
+        }
+
+        return 0;
+    }
+    \end{excode}
+
+    Aqui, combinamos vários casos para verificar se o valor \texttt{dia} corresponde a um 
+    dia útil ou a um final de semana. Sendo possível dizer que o \texttt{switch} é semelhante 
+    a uma sequência de \texttt{if} e \texttt{else if}, usado quando há várias possibilidades 
+    para uma expressão.
+\end{postscript}
+
+\subsubsection{while}
+
+Essa palavra-chave, além de ser a estrutura de loop mais simples da linguagem, é 
+responsável por definir a estrutura de repetição de uma seção de código enquanto uma dada
+expressão for verdadeira.
 
 \begin{excode}
     while (expressão) {
@@ -196,7 +320,6 @@ for verdadeira.
 
 Vamos ilustrar um simples caso de uso para a estrutura while:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
@@ -219,12 +342,12 @@ repetido. Quando executado, este código produzirá a seguinte saída:
 
 \begin{postscript}
     É importante mencionar que o loop \texttt{while} está verificando apenas se 
-    o valor é diferente de 10, o que poderia ocasionar em erros caso fosse 
+    o valor é diferente de 10, o que poderia ocasionar erros caso fosse 
     possível o valor de \texttt{x} pular de 9 para 11, caso ele fosse 
     incrementado de 2 em 2 por exemplo.
 
-    No caso acima isso não é possível mas deve se ficar atento a casos 
-    específicos como esse em aplicações reais que usem algum looping do tipo, 
+    No caso acima isso não é possível, mas deve-se ficar atento a casos 
+    específicos como esse em aplicações reais que usem algum loop do tipo, 
     em caso de dúvida vale sempre a pena usar comparações como:
 
     \begin{excode}
@@ -233,11 +356,10 @@ repetido. Quando executado, este código produzirá a seguinte saída:
     }
     \end{excode}
 
-    Assim, você garante a quebra do looping ao chegar no valor 10 e evita casos 
-    específicos em que seja possível pular de 9 para qualquer valor maior que 10.
+    Assim, você garante a quebra do loop quando o valor de \texttt{x} for maior 
+    ou igual a 10.
 \end{postscript}
 
-\newpage
 \begin{textbox}
     x: 0
     x: 1
@@ -255,8 +377,7 @@ Essa funcionalidade pode ser usada para criar algoritmos mais complexos,
 repetindo um mesmo código várias vezes sem a necessidade de escrever mais 
 linhas de código.
 
-Um código equivalente, porém menos eficiente, do ponto de vista da criação, 
-seria:
+Um código equivalente, porém menos prático de se escrever e manter, seria:
 
 \begin{excode}
     #include <stdio.h>
@@ -282,7 +403,7 @@ Imagine repetir essa estrutura para números maiores, como até 10000. Seria um
 processo extremamente tedioso e ineficiente ter que escrever tudo isso 
 manualmente, daí a utilidade das estruturas como \texttt{while}.
 
-\subsubsection{For}
+\subsubsection{for}
 
 Outra estrutura de loop semelhante, mas um pouco mais complexa, é o 
 \texttt{for} (conhecido também como for loop). Esta estrutura segue o seguinte padrão:
@@ -297,11 +418,11 @@ Dentro de uma única estrutura, há três seções com características únicas:
 
 \begin{itemize}
     \item \textbf{Inicialização}: uma expressão que é executada uma única vez 
-        antes do looping começar.
+        antes do loop começar.
     \item \textbf{Condição (de parada)}: verificada antes de cada execução do 
-        looping.
+        loop.
     \item \textbf{Expressão}: geralmente é um incremento, mas pode ser qualquer 
-        tipo de expressão que precise ser executada ao fim do looping.
+        tipo de expressão que precise ser executada ao fim do loop.
 \end{itemize}
 
 Para ilustrar, vamos usar essa estrutura para replicar o exemplo do \texttt{while}:
@@ -324,8 +445,8 @@ individualmente:
 
 \begin{itemize}
     \item \texttt{int x = 0}: Inicializa a variável \(x\) com o valor 0.
-    \item \texttt{x != 10}: Expressão avaliada no início de cada looping.
-    \item \texttt{++x}: Incrementa o valor de \(x\) ao final de cada looping.
+    \item \texttt{x != 10}: Expressão avaliada no início de cada loop.
+    \item \texttt{++x}: Incrementa o valor de \(x\) ao final de cada loop.
 \end{itemize}
 
 
@@ -342,17 +463,19 @@ um loop infinito da seguinte forma:
     int main(void)
     {
         for (;;) {
-            // Esse looping deve continuar sendo executado indefinidamente 
+            // Esse loop deve continuar sendo executado indefinidamente 
         }
 
         while (1) {
-            // O while requer uma expressão constante verdadeira para 
-            // funcionar como um loop infinito
+            // O while requer uma expressão qualquer, desde que a mesma 
+            // diferente de zero para funcionar como um loop infinito
         }
+
+        return 0;
     }
 \end{excode}
 
-Sabendo que é possível emitir parâmetros de um \texttt{for}, é possível 
+Sabendo que é possível omitir parâmetros de um \texttt{for}, é possível 
 também, imitar o funcionamento de um \texttt{while} loop usando um 
 \texttt{for} loop da seguinte forma:
 
@@ -374,7 +497,7 @@ imitar perfeitamente o funcionamento de um \texttt{while}.
 
 \subsubsection{do while}
 
-Por fim, temos o menos utilizado loop da linguagem C, chamado 
+Também temos o loop menos utilizado da linguagem C, chamado 
 \texttt{do while}. A diferença fundamental deste loop é que ele executa o 
 bloco de código antes de verificar a expressão. A estrutura deste loop é a 
 seguinte:
@@ -385,20 +508,19 @@ seguinte:
     } while (expressão);
 \end{excode}
 
-Vamos demonstrar o funcionamento desse looping com um exemplo simples:
+Vamos demonstrar o funcionamento desse loop com um exemplo simples:
 
-\newpage
 \begin{excode}
     #include <stdio.h>
 
     int main(void)
     {
         do {
-            print("Esse texto será impresso\n");
+            printf("Esse texto será impresso\n");
         } while (0); // Verificação é feita após a execução
 
         while (0) { // Verificação é feita antes da execução
-            print("Esse texto não será impresso\n");
+            printf("Esse texto não será impresso\n");
         }
 
         return 0;
@@ -411,14 +533,14 @@ Caso executemos o código acima, veremos o seguinte resultado:
     Esse texto será impresso
 \end{textbox}
 
-Nota-se que o texto do looping \texttt{while}, ao contrário do texto do looping 
+Nota-se que o texto do loop \texttt{while}, ao contrário do texto do loop 
 \texttt{do while}, não foi impresso. Isso ocorre porque o \texttt{do while} 
 primeiro executa o código dentro do bloco e, em seguida, verifica a expressão. 
 Como ambas as expressões no código acima são falsas, o \texttt{do while} 
-executará o código uma vez e sairá do looping, enquanto o \texttt{while} 
+executará o código uma vez e sairá do loop, enquanto o \texttt{while} 
 nunca executará seu bloco de código.
 
-Novamente, é possível imitar o funcionamento (não tão exato) de um \texttt{for} 
+Novamente, é possível imitar o funcionamento de um \texttt{for} 
 loop usando o \texttt{do while}:
 
 \begin{excode}
@@ -431,18 +553,21 @@ loop usando o \texttt{do while}:
     }  while (i <= 10); // Checagem de condição 
 \end{excode}
 
-O código acima deve executar exatamente como um \texttt{for} loop, com a única exceção 
-de que a primeira iteração será executado antes da checagem da condição ser feita.
+O código acima deve executar de maneira quase equivalente ao \texttt{for} loop, com a 
+única exceção de que a primeira iteração será executada antes da checagem da condição 
+ser feita.
 
 \subsubsection{Exercícios}
 
-\textbf{É de extrema importância que você realize os exercícios aqui elaborados 
+\textbf{É de extrema importância realizar os exercícios aqui elaborados 
 para fixar o conteúdo.}
 
 \begin{enumerate}
-    \item {Escreva um programa que verifica se número inteiro e informe se ele é 
+    \item {Escreva um programa que verifica se um número inteiro e informe se ele é 
         positivo, negativo ou zero. Utilize as estruturas \texttt{if}, 
         \texttt{else if} e \texttt{else}.}
+    \item {Modifique o valor do dia nos códigos de exemplo do \texttt{switch} e 
+        observe o que acontece}
     \item {Crie um programa que imprima todos os números pares de 1 até 100 
         utilizando um loop \texttt{while}. Em seguida, refaça o mesmo programa 
         usando um loop \texttt{for}.}
