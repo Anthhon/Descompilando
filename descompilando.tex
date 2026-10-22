@@ -33,27 +33,27 @@
 
 \usepackage{hyperref} 
 \hypersetup{
-	pdfborder={0 0 0},      % Remove as caixas coloridas ao redor dos links
-	colorlinks=false,       % true: links coloridos; false: links com caixas coloridas
-	linkcolor=blue,        % Cor dos links internos (capítulos, seções)
-	filecolor=magenta,     % Cor para links de arquivos
-	urlcolor=cyan,         % Cor para links de sites (URLs)
+	pdfborder={0 0 0}, % Remove as caixas coloridas ao redor dos links
+	colorlinks=false,  % true: links coloridos; false: links com caixas coloridas
+	linkcolor=blue,    % Cor dos links internos (capítulos, seções)
+	filecolor=magenta, % Cor para links de arquivos
+	urlcolor=cyan,     % Cor para links de sites (URLs)
 }
 
 % Macros
 
 \usepackage{mdframed}
-% Define a new graybox environment
+% Define um novo ambiente personalizado para notas
 \newmdenv[
-  backgroundcolor=gray!12, % Background color (adjust as needed)
-  linewidth=0pt, % No frame line width
-  skipabove=20pt, % Space above the graybox
-  skipbelow=20pt, % Space below the graybox
-  innerleftmargin=22pt, % Left margin inside the graybox
-  innerrightmargin=22pt, % Right margin inside the graybox
-  innertopmargin=10pt, % Top margin inside the graybox
-  innerbottommargin=10pt, % Bottom margin inside the graybox
-  roundcorner=0pt, % Round corner radius
+  backgroundcolor=gray!12, % Cor de fundo
+  linewidth=0pt,           % Grossura da borda
+  skipabove=20pt,          % Margem abaixo
+  skipbelow=20pt,          % Margem acima
+  innerleftmargin=22pt,    % Margem a esquerda
+  innerrightmargin=22pt,   % Margem a direita
+  innertopmargin=10pt,     % Espaçamento interno acima
+  innerbottommargin=10pt,  % Espaçamento interno abaixo
+  roundcorner=0pt,         % Arredondamento das bordas
 ]{postscript}
 
 % Define o ambiente da caixa de observações
@@ -109,7 +109,7 @@
         frame=single,
         rulecolor=\color{black},
         basicstyle=\ttfamily,
-        language={},          % No language
+        language={}, % Sem linguagem definida
         keywordstyle={},
         stringstyle={},
         commentstyle={},
